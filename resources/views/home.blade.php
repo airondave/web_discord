@@ -748,6 +748,7 @@
                     </h3>
                     <p class="card-text text-center" style="font-size: 1.2rem;">
                         There are no mission, we play, talk, learn, and sleep.
+                        
                     </p>
                 </div>
             </div>
@@ -758,7 +759,7 @@
             <div class="mb-3">
                 <p class="text-center" style="color: var(--retro-yellow); font-family: 'Orbitron', monospace; font-size: 1.1rem; margin-bottom: 0.5rem; text-shadow: 0 0 10px var(--retro-yellow);">
                     <i class="bi bi-star-fill me-2"></i>
-                    Ready to Join Our Community?
+                    Ready to Join Our Community full of mid-highschoolers?
                 </p>
                 <p class="text-center" style="color: var(--text-secondary); font-size: 0.9rem;">
                     Request special roles and get verified access!
