@@ -86,7 +86,7 @@
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                                 </div>
                                                                 <div class="modal-body text-center">
-                                                                    <img src="{{ asset($submission->proof_path) }}" class="img-fluid" alt="Proof Image">
+                                                                    <img src="{{ url('public/' . $submission->proof_path) }}" class="img-fluid" alt="Proof Image">
                                                                 </div>
                                                             </div>
                                                         </div>
