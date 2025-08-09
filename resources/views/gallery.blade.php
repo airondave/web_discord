@@ -508,7 +508,7 @@
                     <div class="gallery-grid">
                         <!-- Gallery Item 1 -->
                         <div class="gallery-item">
-                            <img src="/image/gallery/mc1.jpg" alt="Minecraft Session 1" class="gallery-img">
+                            <img src="/public/image/gallery/mc1.jpg" alt="Minecraft Session 1" class="gallery-img">
                             <div class="gallery-overlay">
                                 <h4 class="gallery-title">Minecraft Survival</h4>
                                 <p class="gallery-desc">Epic building and exploration session with the community!</p>
@@ -517,7 +517,7 @@
 
                         <!-- Gallery Item 2 -->
                         <div class="gallery-item">
-                            <img src="/image/gallery/mc2.jpg" alt="Minecraft Session 2" class="gallery-img">
+                            <img src="/public/image/gallery/mc2.jpg" alt="Minecraft Session 2" class="gallery-img">
                             <div class="gallery-overlay">
                                 <h4 class="gallery-title">Minecraft Survival</h4>
                                 <p class="gallery-desc">Amazing collaborative building project by our creative members</p>
@@ -526,7 +526,7 @@
 
                         <!-- Gallery Item 3 -->
                         <div class="gallery-item">
-                            <img src="/image/gallery/ml.jpg" alt="Mobile Legends" class="gallery-img">
+                            <img src="/public/image/gallery/ml.jpg" alt="Mobile Legends" class="gallery-img">
                             <div class="gallery-overlay">
                                 <h4 class="gallery-title">Mobile Legends Ranked Party</h4>
                                 <p class="gallery-desc">Intense MOBA battles with epic teamwork and strategy</p>
@@ -535,7 +535,7 @@
 
                         <!-- Gallery Item 4 -->
                         <div class="gallery-item">
-                            <img src="/image/gallery/rb1.jpg" alt="Roblox Session 1" class="gallery-img">
+                            <img src="/public/image/gallery/rb1.jpg" alt="Roblox Session 1" class="gallery-img">
                             <div class="gallery-overlay">
                                 <h4 class="gallery-title">Roblox Fun Time</h4>
                                 <p class="gallery-desc">Exploring different worlds and having fun together in Roblox</p>
@@ -544,7 +544,7 @@
 
                         <!-- Gallery Item 5 -->
                         <div class="gallery-item">
-                            <img src="/image/gallery/val.jpg" alt="Valorant Match" class="gallery-img">
+                            <img src="/public/image/gallery/val.jpg" alt="Valorant Match" class="gallery-img">
                             <div class="gallery-overlay">
                                 <h4 class="gallery-title">Valorant Competitive</h4>
                                 <p class="gallery-desc">Tactical FPS action with amazing teamwork and clutch plays</p>
@@ -553,7 +553,7 @@
 
                         <!-- Gallery Item 6 -->
                         <div class="gallery-item">
-                            <img src="/image/gallery/rb2.jpg" alt="Roblox Session 2" class="gallery-img">
+                            <img src="/public/image/gallery/rb2.jpg" alt="Roblox Session 2" class="gallery-img">
                             <div class="gallery-overlay">
                                 <h4 class="gallery-title">Roblox Community Event</h4>
                                 <p class="gallery-desc">Special community event with games, challenges, and prizes</p>
