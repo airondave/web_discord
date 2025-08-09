@@ -16,6 +16,11 @@ Route::get('/gallery', function () {
     return view('gallery');
 });
 
+// Support page route
+Route::get('/support', function () {
+    return view('support');
+});
+
 // route untuk submit form
 Route::get('/submit', [SubmissionController::class, 'create']);
 Route::post('/submit', [SubmissionController::class, 'store']);
