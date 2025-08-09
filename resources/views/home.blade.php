@@ -784,6 +784,137 @@
             opacity: 1;
         }
 
+        /* Footer Buttons Layout */
+        .footer-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        /* Coffee Button Styles */
+        .retro-btn-coffee {
+            background: linear-gradient(135deg, var(--retro-orange) 0%, var(--retro-red) 50%, var(--retro-purple) 100%);
+            border: 3px solid var(--retro-orange);
+            font-size: 1rem;
+            padding: 1.5rem 3rem;
+            position: relative;
+            overflow: hidden;
+            animation: coffeeButtonGlow 2.5s ease-in-out infinite;
+            box-shadow: 
+                0 0 30px rgba(255, 107, 0, 0.6),
+                0 0 60px rgba(255, 107, 0, 0.4),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+            transform: perspective(1000px) rotateX(0deg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes coffeeButtonGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 30px rgba(255, 107, 0, 0.6),
+                    0 0 60px rgba(255, 107, 0, 0.4),
+                    inset 0 0 30px rgba(255, 255, 255, 0.1);
+                transform: perspective(1000px) rotateX(0deg) scale(1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 40px rgba(255, 0, 64, 0.8),
+                    0 0 80px rgba(255, 0, 64, 0.6),
+                    inset 0 0 40px rgba(255, 255, 255, 0.2);
+                transform: perspective(1000px) rotateX(3deg) scale(1.01);
+            }
+        }
+
+        .retro-btn-coffee:hover {
+            background: linear-gradient(135deg, var(--retro-red) 0%, var(--retro-purple) 50%, var(--retro-cyan) 100%);
+            border-color: var(--retro-red);
+            transform: perspective(1000px) rotateX(-8deg) translateY(-8px) scale(1.08);
+            box-shadow: 
+                0 15px 35px rgba(255, 0, 64, 0.8),
+                0 0 90px rgba(255, 0, 64, 0.6),
+                inset 0 0 45px rgba(255, 255, 255, 0.3);
+            animation: none;
+            color: white;
+        }
+
+        /* Coffee Steam Effects */
+        .coffee-steam {
+            position: absolute;
+            width: 2px;
+            height: 15px;
+            background: linear-gradient(to top, transparent, rgba(255, 255, 255, 0.8), transparent);
+            border-radius: 50%;
+            animation: steam 2s ease-in-out infinite;
+            top: -10px;
+        }
+
+        .coffee-steam:nth-child(2) {
+            left: 25%;
+            animation-delay: 0.3s;
+            height: 12px;
+        }
+
+        .coffee-steam:nth-child(3) {
+            left: 50%;
+            animation-delay: 0.6s;
+            height: 18px;
+        }
+
+        .coffee-steam:nth-child(4) {
+            right: 25%;
+            animation-delay: 0.9s;
+            height: 10px;
+        }
+
+        @keyframes steam {
+            0%, 100% { 
+                opacity: 0; 
+                transform: translateY(0px) scaleY(1);
+            }
+            50% { 
+                opacity: 1; 
+                transform: translateY(-8px) scaleY(1.5);
+            }
+        }
+
+        /* Coffee Button Special Effects */
+        .retro-btn-coffee::after {
+            content: '☕';
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            font-size: 1.3rem;
+            animation: coffeeFloat 3s ease-in-out infinite;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 5px rgba(255, 107, 0, 0.8));
+        }
+
+        @keyframes coffeeFloat {
+            0%, 100% { 
+                transform: rotate(0deg) scale(1) translateY(0px);
+            }
+            33% { 
+                transform: rotate(5deg) scale(1.1) translateY(-3px);
+            }
+            66% { 
+                transform: rotate(-5deg) scale(1.05) translateY(-1px);
+            }
+        }
+
+        .retro-btn-coffee:hover::after {
+            animation: coffeeFloat 0.8s ease-in-out infinite;
+            font-size: 1.8rem;
+            opacity: 1;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 64, 1));
+        }
+
+        .retro-btn-coffee:hover .coffee-steam {
+            animation-duration: 1s;
+            height: 20px;
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .glitch-title {
@@ -825,6 +956,13 @@
                 font-size: 0.9rem;
                 padding: 1.2rem 2.5rem;
             }
+            .retro-btn-coffee {
+                font-size: 0.9rem;
+                padding: 1.2rem 2.5rem;
+            }
+            .footer-buttons {
+                gap: 1.5rem;
+            }
         }
 
         @media (max-width: 576px) {
@@ -846,6 +984,14 @@
                 font-size: 1rem;
                 top: -6px;
                 right: -6px;
+            }
+            .retro-btn-coffee {
+                font-size: 0.8rem;
+                padding: 1rem 2rem;
+            }
+            .footer-buttons {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
@@ -1343,13 +1489,22 @@
                     <p class="footer-subtitle">
                         Check out amazing screenshots, memes, and memories from our community!
                     </p>
-                    <a href="/gallery" class="retro-btn retro-btn-gallery">
-                        <i class="bi bi-collection-play me-2"></i>
-                        View Gallery
-                        <span class="btn-sparkle"></span>
-                        <span class="btn-sparkle"></span>
-                        <span class="btn-sparkle"></span>
-                    </a>
+                    <div class="footer-buttons">
+                        <a href="/gallery" class="retro-btn retro-btn-gallery">
+                            <i class="bi bi-collection-play me-2"></i>
+                            View Gallery
+                            <span class="btn-sparkle"></span>
+                            <span class="btn-sparkle"></span>
+                            <span class="btn-sparkle"></span>
+                        </a>
+                        <a href="/support" class="retro-btn retro-btn-coffee">
+                            <i class="bi bi-cup-hot-fill me-2"></i>
+                            Buy Me Coffee
+                            <span class="coffee-steam"></span>
+                            <span class="coffee-steam"></span>
+                            <span class="coffee-steam"></span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
