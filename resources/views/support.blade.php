@@ -497,8 +497,8 @@
                         your support makes it all possible! ☕✨
                     </p>
                     
-                    <!-- Trakteer Button - Replace with your actual Trakteer.id link -->
-                    <a href="#" class="trakteer-btn" id="trakteerBtn">
+                    <!-- Trakteer Button -->
+                    <a href="https://trakteer.id/venla/tip" class="trakteer-btn" target="_blank">
                         <i class="bi bi-heart-fill me-2"></i>
                         Buy Me Coffee on Trakteer
                     </a>
@@ -560,13 +560,15 @@
             }
         }, 2000);
 
-        // Trakteer button click handler
-        const trakteerBtn = document.getElementById('trakteerBtn');
-        trakteerBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Replace with your actual Trakteer.id URL
-            alert('Please provide your Trakteer.id profile URL to complete the integration!');
-            // window.open('https://trakteer.id/your-username', '_blank');
+        // Trakteer button hover effects enhancement
+        const trakteerBtn = document.querySelector('.trakteer-btn');
+        trakteerBtn.addEventListener('mouseenter', function() {
+            // Add extra sparkle effect on hover
+            this.style.boxShadow = `
+                0 20px 40px rgba(255, 107, 0, 0.8),
+                0 0 100px rgba(255, 107, 0, 0.6),
+                inset 0 0 50px rgba(255, 255, 255, 0.3)
+            `;
         });
 
         // Add sparkle effects to support cards
