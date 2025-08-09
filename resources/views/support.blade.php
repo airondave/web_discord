@@ -475,7 +475,7 @@
                 BUY ME COFFEE
             </h1>
             <p class="support-subtitle">
-                Support the development and maintenance of Ranconnity Community!
+                Support the development and maintenance of Ranconnity Website Server!
             </p>
         </div>
 
@@ -488,7 +488,7 @@
                     </div>
                     <h2 class="coffee-title">Support Our Community</h2>
                     <p class="coffee-description">
-                        Hi! I'm <strong>Atthariq</strong>, the founder of Ranconnity. Running this Discord server and maintaining 
+                        Hi! I'm <strong>Layron</strong>, the co-founder of Ranconnity. Running this Discord server and maintaining 
                         our web platform takes time, effort, and resources. Your support helps me keep the community 
                         active, host events, maintain servers, and create new features for everyone to enjoy!
                         <br><br>
@@ -534,9 +534,8 @@
                 THANK YOU!
             </h3>
             <p class="thank-you-text">
-                Every contribution, no matter the size, means the world to me and our community. 
-                Your support helps keep Ranconnity alive and thriving. Together, we're building 
-                something amazing for gamers and friends to connect, share, and have fun!
+                "Every contribution, no matter the size, means the world to me and our community. 
+                Your support helps keep Ranconnity alive and thriving."
                 <br><br>
                 <strong>- Atthariq & The Ranconnity Team</strong> 💙
             </p>
