@@ -607,6 +607,183 @@
             box-shadow: 0 0 8px var(--retro-cyan);
         }
 
+        /* Footer Gallery Section */
+        .footer-section {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(10, 10, 58, 0.95) 50%, rgba(58, 10, 58, 0.95) 100%);
+            border-top: 3px solid var(--retro-purple);
+            padding: 4rem 0 3rem;
+            margin-top: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%);
+            animation: footerGlow 8s ease-in-out infinite;
+        }
+
+        @keyframes footerGlow {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .footer-gallery-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.8rem;
+            color: var(--retro-purple);
+            text-shadow: 
+                0 0 10px var(--retro-purple),
+                0 0 20px var(--retro-purple),
+                0 0 30px var(--retro-purple);
+            margin-bottom: 1.5rem;
+            animation: footerTitlePulse 3s ease-in-out infinite;
+        }
+
+        @keyframes footerTitlePulse {
+            0%, 100% { 
+                text-shadow: 
+                    0 0 10px var(--retro-purple),
+                    0 0 20px var(--retro-purple),
+                    0 0 30px var(--retro-purple);
+            }
+            50% { 
+                text-shadow: 
+                    0 0 15px var(--retro-purple),
+                    0 0 30px var(--retro-purple),
+                    0 0 45px var(--retro-purple);
+            }
+        }
+
+        .footer-subtitle {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        /* Special Gallery Button */
+        .retro-btn-gallery {
+            background: linear-gradient(135deg, var(--retro-purple) 0%, var(--retro-cyan) 50%, var(--retro-yellow) 100%);
+            border: 3px solid var(--retro-purple);
+            font-size: 1rem;
+            padding: 1.5rem 3rem;
+            position: relative;
+            overflow: hidden;
+            animation: galleryButtonGlow 2s ease-in-out infinite;
+            box-shadow: 
+                0 0 30px rgba(255, 0, 255, 0.6),
+                0 0 60px rgba(255, 0, 255, 0.4),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+            transform: perspective(1000px) rotateX(0deg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes galleryButtonGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 30px rgba(255, 0, 255, 0.6),
+                    0 0 60px rgba(255, 0, 255, 0.4),
+                    inset 0 0 30px rgba(255, 255, 255, 0.1);
+                transform: perspective(1000px) rotateX(0deg) scale(1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 40px rgba(0, 255, 255, 0.8),
+                    0 0 80px rgba(0, 255, 255, 0.6),
+                    inset 0 0 40px rgba(255, 255, 255, 0.2);
+                transform: perspective(1000px) rotateX(5deg) scale(1.02);
+            }
+        }
+
+        .retro-btn-gallery:hover {
+            background: linear-gradient(135deg, var(--retro-cyan) 0%, var(--retro-yellow) 50%, var(--retro-red) 100%);
+            border-color: var(--retro-cyan);
+            transform: perspective(1000px) rotateX(-10deg) translateY(-10px) scale(1.1);
+            box-shadow: 
+                0 20px 40px rgba(0, 255, 255, 0.8),
+                0 0 100px rgba(0, 255, 255, 0.6),
+                inset 0 0 50px rgba(255, 255, 255, 0.3);
+            animation: none;
+            color: white;
+        }
+
+        /* Sparkle Effects */
+        .btn-sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 2s linear infinite;
+        }
+
+        .btn-sparkle:nth-child(2) {
+            top: 20%;
+            left: 20%;
+            animation-delay: 0.3s;
+        }
+
+        .btn-sparkle:nth-child(3) {
+            top: 60%;
+            right: 25%;
+            animation-delay: 0.8s;
+        }
+
+        .btn-sparkle:nth-child(4) {
+            bottom: 25%;
+            left: 60%;
+            animation-delay: 1.2s;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { 
+                opacity: 0; 
+                transform: scale(0);
+            }
+            50% { 
+                opacity: 1; 
+                transform: scale(1);
+                box-shadow: 0 0 10px white;
+            }
+        }
+
+        /* Special Hover Effects */
+        .retro-btn-gallery::after {
+            content: '✨';
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            font-size: 1.5rem;
+            animation: sparkleRotate 3s linear infinite;
+            opacity: 0.8;
+        }
+
+        @keyframes sparkleRotate {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        .retro-btn-gallery:hover::after {
+            animation: sparkleRotate 0.5s linear infinite;
+            font-size: 2rem;
+            opacity: 1;
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .glitch-title {
@@ -637,6 +814,16 @@
             .ceo-img {
                 width: 150px;
                 height: 150px;
+            }
+            .footer-title {
+                font-size: 1.3rem;
+            }
+            .footer-subtitle {
+                font-size: 1rem;
+            }
+            .retro-btn-gallery {
+                font-size: 0.9rem;
+                padding: 1.2rem 2.5rem;
             }
         }
 
@@ -1137,6 +1324,32 @@
         }
     });
 </script>
+
+<!-- Footer Gallery Button -->
+<footer class="footer-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <div class="footer-gallery-container">
+                    <h3 class="footer-title">
+                        <i class="bi bi-images me-2"></i>
+                        Explore Our Gallery
+                    </h3>
+                    <p class="footer-subtitle">
+                        Check out amazing screenshots, memes, and memories from our community!
+                    </p>
+                    <a href="/gallery" class="retro-btn retro-btn-gallery">
+                        <i class="bi bi-collection-play me-2"></i>
+                        View Gallery
+                        <span class="btn-sparkle"></span>
+                        <span class="btn-sparkle"></span>
+                        <span class="btn-sparkle"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 </body>
 </html>
