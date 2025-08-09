@@ -999,9 +999,9 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <h4 style="color: var(--retro-cyan); font-family: 'Orbitron', monospace; margin-bottom: 1rem;">Kio - Founder & CEO</h4>
+                            <h4 style="color: var(--retro-cyan); font-family: 'Orbitron', monospace; margin-bottom: 1rem;">Atthariq - Founder & CEO</h4>
                             <p class="card-text" style="font-size: 1.1rem; line-height: 1.8;">
-                            Nama saya kio, saya salah satu pendiri dari server ini, awalnya saya membuat server ini hanya iseng iseng saja
+                            Nama saya Atthariq biasa dipanggil Attar, saya salah satu pendiri dari server ini, awalnya saya membuat server ini hanya iseng iseng saja
                              namun seminggu kemudian saya berubah pikiran untuk dijadikan sebuah server yang bisa berinteraksi satu sama lain dengan sangat jauh, bisa mensharing ilmu, mengobrol dengan teman baru, bermain bersama, bereskperimen bersama. 
                              yang saya harapkan dari server ini untuk seterusnya adalah, bisa menjadi sebuah server yang positif dan ramai dipakai untuk kalangan anak muda yang suka berinteraksi dengan banyak orang di dunia maya.
                             </p>
