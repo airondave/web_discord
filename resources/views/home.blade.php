@@ -807,7 +807,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-4 text-center mb-4 mb-md-0">
                             <div class="ceo-avatar-container">
-                                <img src="/image/avatars/ceo.jpg" alt="CEO Avatar" class="ceo-img">
+                                <img src="/public/image/avatars/ceo.jpg" alt="CEO Avatar" class="ceo-img">
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -843,7 +843,7 @@
                             <div class="testimonial-card">
                                 <div class="testimonial-content">
                                     <div class="testimonial-avatar">
-                                        <img src="/image/avatars/popothegamer.jpg" alt="@popothegamer Avatar" class="testimonial-img">
+                                        <img src="/public/image/avatars/popothegamer.jpg" alt="@popothegamer Avatar" class="testimonial-img">
                                     </div>
                                     <div class="testimonial-text">
                                         <p>"gw join server ini dan mendapatkan kemantapan yang sungguh mantap"</p>
@@ -859,7 +859,7 @@
                             <div class="testimonial-card">
                                 <div class="testimonial-content">
                                     <div class="testimonial-avatar">
-                                        <img src="/image/avatars/ciaooo0.jpg" alt="@ciaooo0 Avatar" class="testimonial-img">
+                                        <img src="/public/image/avatars/ciaooo0.jpg" alt="@ciaooo0 Avatar" class="testimonial-img">
                                     </div>
                                     <div class="testimonial-text">
                                         <p>"gw join server ini karena komunitas nya asik"</p>
@@ -875,7 +875,7 @@
                             <div class="testimonial-card">
                                 <div class="testimonial-content">
                                     <div class="testimonial-avatar">
-                                        <img src="/image/avatars/mellynhalim.jpg" alt="@mellynhalim Avatar" class="testimonial-img">
+                                        <img src="/public/image/avatars/mellynhalim.jpg" alt="@mellynhalim Avatar" class="testimonial-img">
                                     </div>
                                     <div class="testimonial-text">
                                         <p>"idk why i joined this server but i had fun with them in minecraft server events, 
@@ -892,7 +892,7 @@
                             <div class="testimonial-card">
                                 <div class="testimonial-content">
                                     <div class="testimonial-avatar">
-                                        <img src="/image/avatars/professional_stupid..jpg" alt="@professional_stupid. Avatar" class="testimonial-img">
+                                        <img src="/public/image/avatars/professional_stupid..jpg" alt="@professional_stupid. Avatar" class="testimonial-img">
                                     </div>
                                     <div class="testimonial-text">
                                         <p>"gw join ini server karena temen sekolah gw, servernya chill and member2nya asik diajak ngobrol"</p>
@@ -908,7 +908,7 @@
                             <div class="testimonial-card">
                                 <div class="testimonial-content">
                                     <div class="testimonial-avatar">
-                                        <img src="/image/avatars/daito_asakuraa.jpg" alt="@daito_asakuraa Avatar" class="testimonial-img">
+                                        <img src="/public/image/avatars/daito_asakuraa.jpg" alt="@daito_asakuraa Avatar" class="testimonial-img">
                                     </div>
                                     <div class="testimonial-text">
                                         <p>"Kepala di parut, kelapa di garuk"</p>
@@ -924,7 +924,7 @@
                             <div class="testimonial-card">
                                 <div class="testimonial-content">
                                     <div class="testimonial-avatar">
-                                        <img src="/image/avatars/leonidasxv.jpg" alt="@leonidasxv Avatar" class="testimonial-img">
+                                        <img src="/public/image/avatars/leonidasxv.jpg" alt="@leonidasxv Avatar" class="testimonial-img">
                                     </div>
                                     <div class="testimonial-text">
                                         <p>"server menkrepnya keren"</p>
@@ -940,7 +940,7 @@
                             <div class="testimonial-card">
                                 <div class="testimonial-content">
                                     <div class="testimonial-avatar">
-                                        <img src="/image/avatars/34kgdval.jpg" alt="@34kgdval Avatar" class="testimonial-img">
+                                        <img src="/public/image/avatars/34kgdval.jpg" alt="@34kgdval Avatar" class="testimonial-img">
                                     </div>
                                     <div class="testimonial-text">
                                         <p>"ネトフレのためにこのサバ来た草"</p>
@@ -956,7 +956,7 @@
                             <div class="testimonial-card">
                                 <div class="testimonial-content">
                                     <div class="testimonial-avatar">
-                                        <img src="/image/avatars/lemonlmao69.jpg" alt="@lemonlmao69 Avatar" class="testimonial-img">
+                                        <img src="/public/image/avatars/lemonlmao69.jpg" alt="@lemonlmao69 Avatar" class="testimonial-img">
                                     </div>
                                     <div class="testimonial-text">
                                         <p>"maybe this is great server for small talk abt ur pathetic life"</p>
