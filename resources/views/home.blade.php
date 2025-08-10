@@ -25,6 +25,7 @@
             --retro-cyan: #00ffff;
             --retro-yellow: #ffff00;
             --retro-red: #ff0040;
+            --retro-pink: #ff1493;
             --dark-bg: #0a0a0a;
             --card-bg: #1a1a1a;
             --text-primary: #ffffff;
@@ -915,6 +916,83 @@
             height: 20px;
         }
 
+        /* Critics & Advice Button Styles */
+        .retro-btn-critics {
+            background: linear-gradient(135deg, var(--retro-pink) 0%, var(--retro-purple) 50%, var(--retro-cyan) 100%);
+            border: 3px solid var(--retro-pink);
+            font-size: 1rem;
+            padding: 1.5rem 3rem;
+            position: relative;
+            overflow: hidden;
+            animation: criticsButtonGlow 2.5s ease-in-out infinite;
+            box-shadow: 
+                0 0 30px rgba(255, 20, 147, 0.6),
+                0 0 60px rgba(255, 20, 147, 0.4),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+            transform: perspective(1000px) rotateX(0deg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes criticsButtonGlow {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 30px rgba(255, 20, 147, 0.6),
+                    0 0 60px rgba(255, 20, 147, 0.4),
+                    inset 0 0 30px rgba(255, 255, 255, 0.1);
+                transform: perspective(1000px) rotateX(0deg) scale(1);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 40px rgba(138, 43, 226, 0.8),
+                    0 0 80px rgba(138, 43, 226, 0.6),
+                    inset 0 0 40px rgba(255, 255, 255, 0.2);
+                transform: perspective(1000px) rotateX(3deg) scale(1.01);
+            }
+        }
+
+        .retro-btn-critics:hover {
+            background: linear-gradient(135deg, var(--retro-purple) 0%, var(--retro-cyan) 50%, var(--retro-pink) 100%);
+            border-color: var(--retro-purple);
+            transform: perspective(1000px) rotateX(-8deg) translateY(-8px) scale(1.08);
+            box-shadow: 
+                0 15px 35px rgba(138, 43, 226, 0.8),
+                0 0 90px rgba(138, 43, 226, 0.6),
+                inset 0 0 45px rgba(255, 255, 255, 0.3);
+            animation: none;
+            color: white;
+        }
+
+        /* Critics Button Special Effects */
+        .retro-btn-critics::after {
+            content: '💝';
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            font-size: 1.3rem;
+            animation: heartFloat 3s ease-in-out infinite;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 5px rgba(255, 20, 147, 0.8));
+        }
+
+        @keyframes heartFloat {
+            0%, 100% { 
+                transform: rotate(0deg) scale(1) translateY(0px);
+            }
+            33% { 
+                transform: rotate(5deg) scale(1.1) translateY(-3px);
+            }
+            66% { 
+                transform: rotate(-5deg) scale(1.05) translateY(-1px);
+            }
+        }
+
+        .retro-btn-critics:hover::after {
+            animation: heartFloat 0.8s ease-in-out infinite;
+            font-size: 1.8rem;
+            opacity: 1;
+            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 1));
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .glitch-title {
@@ -957,6 +1035,10 @@
                 padding: 1.2rem 2.5rem;
             }
             .retro-btn-coffee {
+                font-size: 0.9rem;
+                padding: 1.2rem 2.5rem;
+            }
+            .retro-btn-critics {
                 font-size: 0.9rem;
                 padding: 1.2rem 2.5rem;
             }
@@ -1498,6 +1580,13 @@
                         <a href="/gallery" class="retro-btn retro-btn-gallery">
                             <i class="bi bi-collection-play me-2"></i>
                             View Gallery
+                            <span class="btn-sparkle"></span>
+                            <span class="btn-sparkle"></span>
+                            <span class="btn-sparkle"></span>
+                        </a>
+                        <a href="/critics-advice" class="retro-btn retro-btn-critics">
+                            <i class="bi bi-chat-heart me-2"></i>
+                            Critics & Advice
                             <span class="btn-sparkle"></span>
                             <span class="btn-sparkle"></span>
                             <span class="btn-sparkle"></span>
