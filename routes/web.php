@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\DiscordAuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CriticsAdviceController;
+use App\Http\Controllers\DiscordController;
 
 // Home page route
 Route::get('/', [HomeController::class, 'index']);
@@ -72,4 +73,12 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::get('/admin/critics-advice', [CriticsAdviceController::class, 'index'])->name('admin.critics.advice');
     Route::post('/admin/critics-advice/{id}/respond', [CriticsAdviceController::class, 'respond'])->name('admin.critics.advice.respond');
     Route::delete('/admin/critics-advice/{id}', [CriticsAdviceController::class, 'destroy'])->name('admin.critics.advice.destroy');
+});
+
+// Discord API routes
+Route::prefix('api/discord')->group(function () {
+    Route::get('/featured-member', [DiscordController::class, 'getFeaturedMember'])->name('discord.featured-member');
+    Route::get('/member-count', [DiscordController::class, 'getMemberCount'])->name('discord.member-count');
+    Route::get('/user/{userId}', [DiscordController::class, 'getUser'])->name('discord.user');
+    Route::get('/roles', [DiscordController::class, 'getRoles'])->name('discord.roles');
 });

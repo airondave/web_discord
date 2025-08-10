@@ -1325,6 +1325,169 @@
         body.overlay-active .start-overlay {
             backdrop-filter: blur(15px);
         }
+
+        /* Discord Members Styles */
+        .discord-stats {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(20, 20, 40, 0.4) 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--retro-cyan);
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--retro-cyan);
+            text-shadow: 0 0 15px var(--retro-cyan);
+        }
+
+        .stat-icon.online {
+            color: var(--retro-green);
+            text-shadow: 0 0 15px var(--retro-green);
+        }
+
+        .stat-info {
+            text-align: left;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--retro-cyan);
+            font-family: 'Orbitron', monospace;
+            text-shadow: 0 0 10px var(--retro-cyan);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--retro-green);
+            font-family: 'Orbitron', monospace;
+        }
+
+        .discord-member-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(20, 20, 40, 0.7) 100%);
+            border: 1px solid var(--retro-purple);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 0 auto;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            max-width: 500px;
+        }
+
+        .discord-member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(138, 43, 226, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .discord-member-card:hover::before {
+            left: 100%;
+        }
+
+        .discord-member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
+            border-color: var(--retro-cyan);
+        }
+
+        .member-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid var(--retro-cyan);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+
+        .member-info {
+            flex: 1;
+        }
+
+        .member-username {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .member-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--retro-green);
+            box-shadow: 0 0 10px var(--retro-green);
+        }
+
+        .status-indicator.offline {
+            background: #666;
+            box-shadow: 0 0 10px #666;
+        }
+
+        .status-text {
+            font-size: 0.9rem;
+            color: var(--retro-green);
+        }
+
+        .member-last-seen {
+            font-size: 0.8rem;
+            color: #888;
+            font-style: italic;
+        }
+
+        .member-roles {
+            margin-top: 0.5rem;
+        }
+
+        .role-tag {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--retro-purple), var(--retro-cyan));
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            margin-right: 0.3rem;
+            margin-bottom: 0.3rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 2rem;
+            color: var(--retro-cyan);
+        }
+
+        .loading-spinner i {
+            font-size: 2rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -1469,6 +1632,42 @@
         </div>
 
         <!-- Features Grid removed -->
+
+        <!-- Discord Member Section -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="retro-card">
+                    <h3 class="card-title text-center mb-4">
+                        <i class="bi bi-discord me-2"></i>
+                        Featured Discord Member
+                    </h3>
+                    <div class="discord-stats mb-4">
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <div class="stat-item">
+                                    <i class="bi bi-people-fill stat-icon"></i>
+                                    <div class="stat-info">
+                                        <span class="stat-number" id="totalMembers">-</span>
+                                        <span class="stat-label">Total Discord Members</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="discord-member-container">
+                        <div class="row justify-content-center" id="discordMember">
+                            <!-- Featured Discord member will be loaded here -->
+                        </div>
+                        <div class="text-center mt-3">
+                            <button id="refreshMember" class="retro-btn retro-btn-secondary">
+                                <i class="bi bi-arrow-clockwise me-2"></i>
+                                Refresh Member
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- About CEO Section -->
         <div class="row mt-5">
@@ -1841,6 +2040,129 @@
                 container.innerHTML = '<i class="bi bi-person-circle" style="font-size: 8rem; color: var(--retro-cyan); text-shadow: 0 0 10px var(--retro-cyan);"></i>';
             });
         }
+
+        // Discord Integration
+        class DiscordManager {
+            constructor() {
+                this.memberContainer = document.getElementById('discordMember');
+                this.totalMembersEl = document.getElementById('totalMembers');
+                this.refreshBtn = document.getElementById('refreshMember');
+                
+                if (this.refreshBtn) {
+                    this.refreshBtn.addEventListener('click', () => this.loadMember());
+                }
+                
+                this.init();
+            }
+
+            async init() {
+                await this.loadMemberCount();
+                await this.loadMember();
+            }
+
+            async loadMemberCount() {
+                try {
+                    const response = await fetch('/api/discord/member-count');
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        this.totalMembersEl.textContent = data.data.total;
+                    }
+                } catch (error) {
+                    console.error('Failed to load member count:', error);
+                    this.totalMembersEl.textContent = 'Error';
+                }
+            }
+
+            async loadMember() {
+                if (!this.memberContainer) return;
+
+                this.showLoading();
+                
+                try {
+                    const response = await fetch('/api/discord/featured-member');
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        this.displayMember(data.data);
+                    } else {
+                        this.showError('Failed to load Discord member');
+                    }
+                } catch (error) {
+                    console.error('Failed to load Discord member:', error);
+                    this.showError('Network error occurred');
+                }
+            }
+
+            displayMember(member) {
+                if (!this.memberContainer) return;
+
+                const memberHTML = this.createMemberCard(member);
+                this.memberContainer.innerHTML = memberHTML;
+            }
+
+            createMemberCard(member) {
+                const avatarUrl = member.avatar || '/public/image/avatars/default-avatar.jpg';
+                const displayName = member.nick || member.username;
+                const statusClass = member.status === 'online' ? '' : 'offline';
+                const statusText = member.status === 'online' ? 'Online' : 'Offline';
+                
+                const rolesHTML = member.roles && member.roles.length > 0 
+                    ? member.roles.slice(0, 3).map(role => `<span class="role-tag">${role}</span>`).join('')
+                    : '<span class="role-tag">Member</span>';
+
+                return `
+                    <div class="col-md-8 col-lg-6">
+                        <div class="discord-member-card d-flex align-items-start">
+                            <img src="${avatarUrl}" alt="${displayName}" class="member-avatar" 
+                                 onerror="this.src='/public/image/avatars/default-avatar.jpg'">
+                            <div class="member-info">
+                                <div class="member-username">${displayName}</div>
+                                <div class="member-status">
+                                    <div class="status-indicator ${statusClass}"></div>
+                                    <span class="status-text">${statusText}</span>
+                                </div>
+                                <div class="member-last-seen">${member.last_seen}</div>
+                                <div class="member-roles">
+                                    ${rolesHTML}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            showLoading() {
+                if (!this.memberContainer) return;
+                this.memberContainer.innerHTML = `
+                    <div class="col-12">
+                        <div class="loading-spinner">
+                            <i class="bi bi-arrow-clockwise"></i>
+                            <p>Loading Discord member...</p>
+                        </p>
+                    </div>
+                `;
+            }
+
+            showError(message) {
+                if (!this.memberContainer) return;
+                this.memberContainer.innerHTML = `
+                    <div class="col-12 text-center">
+                        <p style="color: #ff6b6b;">${message}</p>
+                        <button class="retro-btn retro-btn-secondary" onclick="discordManager.loadMember()">
+                            <i class="bi bi-arrow-clockwise me-2"></i>
+                            Try Again
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        // Initialize Discord manager when DOM is loaded
+        let discordManager;
+        document.addEventListener('DOMContentLoaded', function() {
+            discordManager = new DiscordManager();
+        });
     });
 </script>
 
