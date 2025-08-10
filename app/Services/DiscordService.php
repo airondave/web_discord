@@ -141,7 +141,7 @@ class DiscordService
     {
         $cacheKey = "discord_selected_members_{$this->guildId}_" . implode('_', $memberIds);
         
-        return Cache::remember($cacheKey, 300, function () use ($memberIds) { // Cache for 5 minutes
+        return Cache::remember($cacheKey, 30, function () use ($memberIds) { // Cache for 30 seconds
             $selectedMembers = [];
             
             \Log::info('DiscordService: Starting getSelectedMembers', [
@@ -158,7 +158,7 @@ class DiscordService
                 $count = 0;
                 
                 foreach ($members as $member) {
-                    if ($count >= 2) break;
+                                                if ($count >= 2) break;
                     
                     if (isset($member['user'])) {
                         $user = $this->getUser($member['user']['id']);
@@ -167,7 +167,7 @@ class DiscordService
                                 'id' => $user['id'],
                                 'username' => $user['username'],
                                 'discriminator' => $user['discriminator'] ?? '0',
-                                'avatar' => $user['avatar'] ? "https://cdn.discordapp.com/avatars/{$user['id']}/{$user['avatar']}.png" : null,
+                                'avatar' => $user['avatar'] ? "https://cdn.discordapp.com/avatars/{$user['id']}/{$user['avatar']}.png?t=" . time() : null,
                                 'roles' => $member['roles'] ?? [],
                                 'joined_at' => $member['joined_at'],
                                 'nick' => $member['nick'] ?? null,
@@ -204,7 +204,7 @@ class DiscordService
                                 'id' => $user['id'],
                                 'username' => $user['username'],
                                 'discriminator' => $user['discriminator'] ?? '0',
-                                'avatar' => $user['avatar'] ? "https://cdn.discordapp.com/avatars/{$user['id']}/{$user['avatar']}.png" : null,
+                                'avatar' => $user['avatar'] ? "https://cdn.discordapp.com/avatars/{$user['id']}/{$user['avatar']}.png?t=" . time() : null,
                                 'roles' => $member['roles'] ?? [],
                                 'joined_at' => $member['joined_at'],
                                 'nick' => $member['nick'] ?? null,
@@ -236,5 +236,21 @@ class DiscordService
             $members = $this->getGuildMembers(1000); // Get max members to count
             return count($members);
         });
+    }
+
+    /**
+     * Clear Discord cache for fresh data
+     */
+    public function clearCache()
+    {
+        $memberIds = ['904600598849159198', '750989836206342185'];
+        $cacheKey = "discord_selected_members_{$this->guildId}_" . implode('_', $memberIds);
+        
+        Cache::forget($cacheKey);
+        Cache::forget("discord_member_count_{$this->guildId}");
+        
+        \Log::info('Discord cache cleared manually');
+        
+        return true;
     }
 } 

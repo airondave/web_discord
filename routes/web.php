@@ -113,4 +113,22 @@ Route::prefix('api/discord')->group(function () {
             ], 500);
         }
     })->name('discord.debug-members');
+    
+    Route::get('/clear-cache', function() {
+        try {
+            $discordService = app(\App\Services\DiscordService::class);
+            $discordService->clearCache();
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Discord cache cleared successfully',
+                'timestamp' => now()
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    })->name('discord.clear-cache');
 });
