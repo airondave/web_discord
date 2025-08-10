@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminManagementController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\DiscordAuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CriticsAdviceController;
 
 // Home page route
 Route::get('/', [HomeController::class, 'index']);
@@ -28,6 +29,10 @@ Route::post('/submit', [SubmissionController::class, 'store']);
 // route untuk BUTUN submit form
 Route::get('/submit/butun', [SubmissionController::class, 'createButun']);
 Route::post('/submit/butun', [SubmissionController::class, 'store']);
+
+// Critics & Advice routes
+Route::get('/critics-advice', [CriticsAdviceController::class, 'showForm'])->name('critics.advice.form');
+Route::post('/critics-advice', [CriticsAdviceController::class, 'store'])->name('critics.advice.store');
 
 // Discord OAuth routes
 Route::get('/auth/discord', [DiscordAuthController::class, 'redirectToDiscord'])->name('discord.login');
@@ -62,4 +67,9 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::put('/admin/roles/{role}', [RoleController::class, 'update'])->name('admin.roles.update');
     Route::delete('/admin/roles/{role}', [RoleController::class, 'destroy'])->name('admin.roles.destroy');
     Route::patch('/admin/roles/{role}/toggle', [RoleController::class, 'toggleStatus'])->name('admin.roles.toggle-status');
+    
+    // Critics & Advice Management
+    Route::get('/admin/critics-advice', [CriticsAdviceController::class, 'index'])->name('admin.critics.advice');
+    Route::post('/admin/critics-advice/{id}/respond', [CriticsAdviceController::class, 'respond'])->name('admin.critics.advice.respond');
+    Route::delete('/admin/critics-advice/{id}', [CriticsAdviceController::class, 'destroy'])->name('admin.critics.advice.destroy');
 });

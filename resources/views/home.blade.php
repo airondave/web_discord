@@ -1033,6 +1033,11 @@
                         <i class="bi bi-cup-hot me-1"></i>Support
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/critics-advice">
+                        <i class="bi bi-chat-heart me-1"></i>Critics & Advice
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

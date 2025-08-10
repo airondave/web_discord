@@ -477,6 +477,12 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/gallery">Gallery</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/critics-advice">Critics & Advice</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/support">Support</a>
+                </li>
             </ul>
         </div>
     </div>

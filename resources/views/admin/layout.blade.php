@@ -123,6 +123,12 @@
                             Approval History
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('admin.critics.advice') ? 'active' : '' }}" href="{{ route('admin.critics.advice') }}">
+                            <i class="bi bi-chat-heart me-2"></i>
+                            Critics & Advice
+                        </a>
+                    </li>
                 </ul>
 
                 <!-- Users Section -->

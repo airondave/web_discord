@@ -460,6 +460,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/support">Support</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/critics-advice">Critics & Advice</a>
+                </li>
             </ul>
         </div>
     </div>
