@@ -117,10 +117,7 @@
             position: relative;
         }
 
-        .nav-link:hover, .nav-link.active {
-            color: var(--retro-cyan);
-            text-shadow: 0 0 5px var(--retro-cyan);
-        }
+        /* Hover effects removed */
 
         /* Hero Section */
         .hero-section {
@@ -204,12 +201,7 @@
             50% { opacity: 0.5; }
         }
 
-        .retro-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 
-                0 10px 40px rgba(0, 255, 65, 0.4),
-                inset 0 0 30px rgba(0, 255, 65, 0.2);
-        }
+        /* Hover effects removed */
 
         .card-title {
             font-family: 'Press Start 2P', monospace;
@@ -248,10 +240,7 @@
             animation: borderGlow 4s linear infinite;
         }
 
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.4);
-        }
+        /* Hover effects removed */
 
         .gallery-img {
             width: 100%;
@@ -260,10 +249,7 @@
             transition: all 0.3s ease;
         }
 
-        .gallery-item:hover .gallery-img {
-            transform: scale(1.1);
-            filter: brightness(1.2) saturate(1.2);
-        }
+        /* Hover effects removed */
 
         .gallery-overlay {
             position: absolute;
@@ -277,9 +263,7 @@
             transition: all 0.3s ease;
         }
 
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
-        }
+        /* Hover effects removed */
 
         .gallery-title {
             font-family: 'Orbitron', monospace;

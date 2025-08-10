@@ -118,10 +118,7 @@
             position: relative;
         }
 
-        .nav-link:hover {
-            color: var(--retro-cyan);
-            text-shadow: 0 0 5px var(--retro-cyan);
-        }
+        /* Hover effects removed */
 
         /* Main Content */
         .main-content {
@@ -202,12 +199,7 @@
             50% { opacity: 0.4; }
         }
 
-        .coffee-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 
-                0 20px 40px rgba(255, 107, 0, 0.5),
-                inset 0 0 30px rgba(255, 107, 0, 0.2);
-        }
+        /* Hover effects removed */
 
         .coffee-icon {
             font-size: 4rem;
@@ -287,21 +279,9 @@
             transition: left 0.5s ease;
         }
 
-        .trakteer-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 
-                0 15px 30px rgba(255, 107, 0, 0.8),
-                0 0 80px rgba(255, 107, 0, 0.6),
-                inset 0 0 40px rgba(255, 255, 255, 0.3);
-            color: white;
-            text-decoration: none;
-            animation: none;
-            background: linear-gradient(135deg, var(--retro-red) 0%, var(--retro-purple) 100%);
-        }
+        /* Hover effects removed */
 
-        .trakteer-btn:hover::before {
-            left: 100%;
-        }
+        /* Hover effects removed */
 
         .trakteer-btn::after {
             content: '☕';
@@ -318,10 +298,7 @@
             100% { transform: rotate(360deg) scale(1); }
         }
 
-        .trakteer-btn:hover::after {
-            animation: coffeeRotate 0.5s linear infinite;
-            font-size: 2rem;
-        }
+        /* Hover effects removed */
 
         /* Support Options */
         .support-options {

@@ -117,10 +117,7 @@
             position: relative;
         }
 
-        .nav-link:hover {
-            color: var(--retro-cyan);
-            text-shadow: 0 0 5px var(--retro-cyan);
-        }
+        /* Hover effects removed */
 
         /* Main Content */
         .main-content {
@@ -211,12 +208,7 @@
             50% { opacity: 0.5; }
         }
 
-        .retro-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 
-                0 10px 40px rgba(0, 255, 65, 0.4),
-                inset 0 0 30px rgba(0, 255, 65, 0.2);
-        }
+        /* Hover effects removed */
 
         .card-title {
             font-family: 'Press Start 2P', monospace;
@@ -306,18 +298,9 @@
             transition: left 0.5s ease;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 
-                0 10px 20px rgba(255, 0, 255, 0.4),
-                0 0 30px rgba(255, 0, 255, 0.3);
-            color: white;
-            text-decoration: none;
-        }
+        /* Hover effects removed */
 
-        .submit-btn:hover::before {
-            left: 100%;
-        }
+        /* Hover effects removed */
 
         /* Back Button */
         .back-btn {
@@ -337,16 +320,7 @@
             text-align: center;
         }
 
-        .back-btn:hover {
-            background: linear-gradient(135deg, var(--retro-yellow) 0%, var(--retro-purple) 100%);
-            border-color: var(--retro-yellow);
-            box-shadow: 
-                0 10px 20px rgba(255, 255, 0, 0.4),
-                0 0 30px rgba(255, 255, 0, 0.3);
-            color: white;
-            text-decoration: none;
-            transform: translateY(-3px);
-        }
+        /* Hover effects removed */
 
         /* Alert Styles */
         .alert {
