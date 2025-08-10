@@ -1639,7 +1639,7 @@
                 <div class="retro-card">
                     <h3 class="card-title text-center mb-4">
                         <i class="bi bi-discord me-2"></i>
-                        Featured Discord Member
+                        Admins
                     </h3>
                     <div class="discord-stats mb-4">
                         <div class="row text-center">
