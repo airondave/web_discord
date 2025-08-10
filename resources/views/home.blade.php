@@ -1223,17 +1223,133 @@
                 font-size: 0.7rem;
             }
         }
+
+        /* Start Overlay Styles */
+        .start-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(20, 20, 40, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.8s ease-in-out;
+        }
+
+        .start-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .start-content {
+            text-align: center;
+            color: white;
+            max-width: 500px;
+            padding: 2rem;
+        }
+
+        .start-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--retro-cyan);
+            text-shadow: 0 0 20px var(--retro-cyan);
+            margin-bottom: 1rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .start-subtitle {
+            font-size: 1.2rem;
+            color: var(--retro-green);
+            margin-bottom: 2rem;
+            font-family: 'Orbitron', monospace;
+        }
+
+        .start-button {
+            background: linear-gradient(45deg, var(--retro-purple), var(--retro-cyan));
+            border: 2px solid var(--retro-cyan);
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', monospace;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .start-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+            background: linear-gradient(45deg, var(--retro-cyan), var(--retro-purple));
+        }
+
+        .start-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .start-button:hover::before {
+            left: 100%;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px var(--retro-cyan);
+            }
+            to {
+                text-shadow: 0 0 30px var(--retro-cyan), 0 0 40px var(--retro-cyan);
+            }
+        }
+
+        /* Blur effect for main content when overlay is active */
+        body.overlay-active main,
+        body.overlay-active .floating-retro-icons,
+        body.overlay-active .navbar {
+            filter: blur(5px);
+            transition: filter 0.8s ease-in-out;
+        }
+
+        body.overlay-active .start-overlay {
+            backdrop-filter: blur(15px);
+        }
     </style>
 </head>
 <body>
-    <!-- Background Audio with Autoplay -->
-    <audio autoplay loop>
+    <!-- Background Audio (will be controlled by JavaScript) -->
+    <audio id="backgroundAudio" loop>
         <source src="https://r2.guns.lol/1c2551cf-e822-45b7-909a-91069175dd35.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
-<!-- Floating Retro Icons -->
-<div class="floating-retro-icons">
+    <!-- Click to Start Overlay -->
+    <div id="startOverlay" class="start-overlay">
+        <div class="start-content">
+            <h1 class="start-title">Welcome to Web Discord</h1>
+            <p class="start-subtitle">Click to enter and start your journey</p>
+            <button id="startButton" class="start-button">
+                <i class="bi bi-play-fill me-2"></i>
+                Click to Start
+            </button>
+        </div>
+    </div>
+
+<!-- Main Content Wrapper -->
+<main id="mainContent">
+    <!-- Floating Retro Icons -->
+    <div class="floating-retro-icons">
     <i class="bi bi-controller floating-retro-icon"></i>
     <i class="bi bi-joystick floating-retro-icon"></i>
     <i class="bi bi-cpu floating-retro-icon"></i>
@@ -1572,8 +1688,36 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // Add retro typing effect
+    // Start Overlay Functionality
     document.addEventListener('DOMContentLoaded', function() {
+        const startOverlay = document.getElementById('startOverlay');
+        const startButton = document.getElementById('startButton');
+        const backgroundAudio = document.getElementById('backgroundAudio');
+        const body = document.body;
+
+        // Add overlay-active class to body initially
+        body.classList.add('overlay-active');
+
+        // Handle start button click
+        startButton.addEventListener('click', function() {
+            // Fade out overlay
+            startOverlay.classList.add('fade-out');
+            
+            // Remove overlay-active class from body (removes blur)
+            body.classList.remove('overlay-active');
+            
+            // Start playing audio
+            backgroundAudio.play().catch(e => {
+                console.log('Audio autoplay failed:', e);
+            });
+            
+            // Remove overlay after animation
+            setTimeout(() => {
+                startOverlay.style.display = 'none';
+            }, 800);
+        });
+
+        // Add retro typing effect
         // Random glitch effect for title
         const title = document.querySelector('.glitch-title');
         setInterval(() => {
@@ -1699,6 +1843,8 @@
         }
     });
 </script>
+
+</main>
 
 <!-- Footer Gallery Button -->
 <footer class="footer-section">
