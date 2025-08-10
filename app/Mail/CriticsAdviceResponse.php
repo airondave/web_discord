@@ -30,7 +30,7 @@ class CriticsAdviceResponse extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Response to Your Feedback - Ranconnity Community',
+            subject: 'Response to Your Feedback - Ranconnity',
         );
     }
 

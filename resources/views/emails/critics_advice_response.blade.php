@@ -72,7 +72,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎮 Ranconnity Community</h1>
+            <h1>🎮 RANCONNITY</h1>
             <p>Response to Your Feedback</p>
         </div>
 
