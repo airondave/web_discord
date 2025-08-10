@@ -118,10 +118,7 @@
             position: relative;
         }
 
-        .nav-link:hover {
-            color: var(--retro-cyan);
-            text-shadow: 0 0 5px var(--retro-cyan);
-        }
+        /* Hover effects removed */
 
         /* Mobile Navigation Toggler */
         .navbar-toggler {
@@ -140,14 +137,7 @@
             filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
         }
 
-        .navbar-toggler:hover {
-            border-color: var(--retro-cyan);
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-        .navbar-toggler:hover .navbar-toggler-icon {
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 1));
-        }
+        /* Hover effects removed */
 
         /* Hero Section */
         .hero-section {
@@ -237,12 +227,7 @@
             50% { opacity: 0.5; }
         }
 
-        .retro-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 
-                0 10px 40px rgba(0, 255, 65, 0.4),
-                inset 0 0 30px rgba(0, 255, 65, 0.2);
-        }
+        /* Hover effects removed */
 
         .card-title {
             font-family: 'Press Start 2P', monospace;
@@ -334,18 +319,7 @@
             transition: left 0.5s ease;
         }
 
-        .retro-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 
-                0 10px 20px rgba(255, 0, 255, 0.4),
-                0 0 30px rgba(255, 0, 255, 0.3);
-            color: white;
-            text-decoration: none;
-        }
-
-        .retro-btn:hover::before {
-            left: 100%;
-        }
+        /* Hover effects removed */
 
         .retro-btn-secondary {
             background: linear-gradient(135deg, var(--retro-yellow) 0%, var(--retro-red) 100%);
@@ -377,16 +351,7 @@
             }
         }
 
-        .retro-btn-secondary:hover {
-            background: linear-gradient(135deg, var(--retro-yellow) 0%, var(--retro-purple) 100%);
-            border-color: var(--retro-yellow);
-            box-shadow: 
-                0 15px 30px rgba(255, 255, 0, 0.6),
-                0 0 50px rgba(255, 255, 0, 0.4),
-                inset 0 0 30px rgba(255, 255, 0, 0.2);
-            transform: translateY(-5px) scale(1.05);
-            animation: none;
-        }
+        /* Hover effects removed */
 
         .retro-btn-secondary::after {
             content: '🎯';
@@ -507,10 +472,7 @@
             background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
         }
 
-        .testimonial-img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 25px var(--retro-cyan);
-        }
+        /* Hover effects removed */
 
         /* Fallback for broken images */
         .testimonial-avatar {
@@ -556,13 +518,7 @@
             background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 255, 0.2));
         }
 
-        .ceo-img:hover {
-            transform: scale(1.05);
-            box-shadow: 
-                0 0 30px var(--retro-cyan),
-                0 0 60px rgba(0, 255, 255, 0.6),
-                inset 0 0 30px rgba(0, 255, 255, 0.2);
-        }
+        /* Hover effects removed */
 
         /* CEO Avatar Animated Border */
         .ceo-avatar-container::before {
@@ -628,11 +584,7 @@
             transform: scale(1.2);
         }
 
-        .testimonial-dot:hover {
-            background: var(--retro-cyan);
-            border-color: var(--retro-cyan);
-            box-shadow: 0 0 8px var(--retro-cyan);
-        }
+        /* Hover effects removed */
 
         /* Footer Gallery Section */
         .footer-section {
@@ -736,17 +688,7 @@
             }
         }
 
-        .retro-btn-gallery:hover {
-            background: linear-gradient(135deg, var(--retro-cyan) 0%, var(--retro-yellow) 50%, var(--retro-red) 100%);
-            border-color: var(--retro-cyan);
-            transform: perspective(1000px) rotateX(-10deg) translateY(-10px) scale(1.1);
-            box-shadow: 
-                0 20px 40px rgba(0, 255, 255, 0.8),
-                0 0 100px rgba(0, 255, 255, 0.6),
-                inset 0 0 50px rgba(255, 255, 255, 0.3);
-            animation: none;
-            color: white;
-        }
+        /* Hover effects removed */
 
         /* Sparkle Effects */
         .btn-sparkle {
@@ -805,11 +747,7 @@
             100% { transform: rotate(360deg) scale(1); }
         }
 
-        .retro-btn-gallery:hover::after {
-            animation: sparkleRotate 0.5s linear infinite;
-            font-size: 2rem;
-            opacity: 1;
-        }
+        /* Hover effects removed */
 
         /* Footer Buttons Layout */
         .footer-buttons {
@@ -854,17 +792,7 @@
             }
         }
 
-        .retro-btn-coffee:hover {
-            background: linear-gradient(135deg, var(--retro-red) 0%, var(--retro-purple) 50%, var(--retro-cyan) 100%);
-            border-color: var(--retro-red);
-            transform: perspective(1000px) rotateX(-8deg) translateY(-8px) scale(1.08);
-            box-shadow: 
-                0 15px 35px rgba(255, 0, 64, 0.8),
-                0 0 90px rgba(255, 0, 64, 0.6),
-                inset 0 0 45px rgba(255, 255, 255, 0.3);
-            animation: none;
-            color: white;
-        }
+        /* Hover effects removed */
 
         /* Coffee Steam Effects */
         .coffee-steam {
@@ -930,17 +858,7 @@
             }
         }
 
-        .retro-btn-coffee:hover::after {
-            animation: coffeeFloat 0.8s ease-in-out infinite;
-            font-size: 1.8rem;
-            opacity: 1;
-            filter: drop-shadow(0 0 10px rgba(255, 0, 64, 1));
-        }
-
-        .retro-btn-coffee:hover .coffee-steam {
-            animation-duration: 1s;
-            height: 20px;
-        }
+        /* Hover effects removed */
 
         /* Critics & Advice Button Styles */
         .retro-btn-critics {
@@ -976,17 +894,7 @@
             }
         }
 
-        .retro-btn-critics:hover {
-            background: linear-gradient(135deg, var(--retro-purple) 0%, var(--retro-cyan) 50%, var(--retro-pink) 100%);
-            border-color: var(--retro-purple);
-            transform: perspective(1000px) rotateX(-8deg) translateY(-8px) scale(1.08);
-            box-shadow: 
-                0 15px 35px rgba(138, 43, 226, 0.8),
-                0 0 90px rgba(138, 43, 226, 0.6),
-                inset 0 0 45px rgba(255, 255, 255, 0.3);
-            animation: none;
-            color: white;
-        }
+        /* Hover effects removed */
 
         /* Critics Button Special Effects */
         .retro-btn-critics::after {
@@ -1012,12 +920,7 @@
             }
         }
 
-        .retro-btn-critics:hover::after {
-            animation: heartFloat 0.8s ease-in-out infinite;
-            font-size: 1.8rem;
-            opacity: 1;
-            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 1));
-        }
+        /* Hover effects removed */
 
         /* Social Media Modal Styles */
         .social-links {
@@ -1055,9 +958,7 @@
             transition: left 0.5s ease;
         }
 
-        .social-link:hover::before {
-            left: 100%;
-        }
+        /* Hover effects removed */
 
         .social-link i {
             font-size: 1.5rem;
@@ -1076,17 +977,7 @@
             border-color: #ff0000;
         }
 
-        .youtube-link:hover {
-            background: linear-gradient(135deg, #cc0000 0%, #ff0000 100%);
-            border-color: #cc0000;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
-        }
-
-        .youtube-link:hover i {
-            transform: scale(1.2);
-            color: #ffcccc;
-        }
+        /* Hover effects removed */
 
         /* TikTok Link */
         .tiktok-link {
@@ -1094,17 +985,7 @@
             border-color: #25f4ee;
         }
 
-        .tiktok-link:hover {
-            background: linear-gradient(135deg, #fe2c55 0%, #25f4ee 50%, #000000 100%);
-            border-color: #fe2c55;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(37, 244, 238, 0.4);
-        }
-
-        .tiktok-link:hover i {
-            transform: scale(1.2);
-            color: #25f4ee;
-        }
+        /* Hover effects removed */
 
         /* Instagram Link */
         .instagram-link {
@@ -1112,17 +993,7 @@
             border-color: #dc2743;
         }
 
-        .instagram-link:hover {
-            background: linear-gradient(135deg, #bc1888 0%, #cc2366 25%, #dc2743 50%, #e6683c 75%, #f09433 100%);
-            border-color: #bc1888;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(220, 39, 67, 0.4);
-        }
-
-        .instagram-link:hover i {
-            transform: scale(1.2);
-            color: #f09433;
-        }
+        /* Hover effects removed */
 
         /* Inline Social Media Links for CEO Section */
         .ceo-social-links {
@@ -1166,9 +1037,7 @@
             transition: left 0.5s ease;
         }
 
-        .social-link-inline:hover::before {
-            left: 100%;
-        }
+        /* Hover effects removed */
 
         .social-link-inline i {
             font-size: 2rem;
@@ -1187,17 +1056,7 @@
             border-color: #ff0000;
         }
 
-        .youtube-link-inline:hover {
-            background: linear-gradient(135deg, #cc0000 0%, #ff0000 100%);
-            border-color: #cc0000;
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.4);
-        }
-
-        .youtube-link-inline:hover i {
-            transform: scale(1.3);
-            color: #ffcccc;
-        }
+        /* Hover effects removed */
 
         /* TikTok Link Inline */
         .tiktok-link-inline {
@@ -1205,17 +1064,7 @@
             border-color: #25f4ee;
         }
 
-        .tiktok-link-inline:hover {
-            background: linear-gradient(135deg, #fe2c55 0%, #25f4ee 50%, #000000 100%);
-            border-color: #fe2c55;
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(37, 244, 238, 0.4);
-        }
-
-        .tiktok-link-inline:hover i {
-            transform: scale(1.3);
-            color: #25f4ee;
-        }
+        /* Hover effects removed */
 
         /* Instagram Link Inline */
         .instagram-link-inline {
@@ -1223,17 +1072,7 @@
             border-color: #dc2743;
         }
 
-        .instagram-link-inline:hover {
-            background: linear-gradient(135deg, #bc1888 0%, #cc2366 25%, #dc2743 50%, #e6683c 75%, #f09433 100%);
-            border-color: #bc1888;
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(220, 39, 67, 0.4);
-        }
-
-        .instagram-link-inline:hover i {
-            transform: scale(1.3);
-            color: #f09433;
-        }
+        /* Hover effects removed */
 
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
@@ -1761,23 +1600,7 @@
             }
         }, 100);
 
-        // Retro card hover sound effect (visual)
-        const cards = document.querySelectorAll('.retro-card');
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.boxShadow = `
-                    0 10px 40px rgba(0, 255, 65, 0.6),
-                    inset 0 0 30px rgba(0, 255, 65, 0.3)
-                `;
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.boxShadow = `
-                    0 0 20px rgba(0, 255, 65, 0.3),
-                    inset 0 0 20px rgba(0, 255, 65, 0.1)
-                `;
-            });
-        });
+        // Hover effects removed from JavaScript
 
         // Animate stats on scroll
         const observerOptions = {
