@@ -123,6 +123,32 @@
             text-shadow: 0 0 5px var(--retro-cyan);
         }
 
+        /* Mobile Navigation Toggler */
+        .navbar-toggler {
+            border: 2px solid var(--retro-green);
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.25rem rgba(0, 255, 65, 0.25);
+            outline: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.8));
+        }
+
+        .navbar-toggler:hover {
+            border-color: var(--retro-cyan);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .navbar-toggler:hover .navbar-toggler-icon {
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 1));
+        }
+
         /* Hero Section */
         .hero-section {
             min-height: 100vh;
@@ -920,8 +946,8 @@
         .retro-btn-critics {
             background: linear-gradient(135deg, var(--retro-pink) 0%, var(--retro-purple) 50%, var(--retro-cyan) 100%);
             border: 3px solid var(--retro-pink);
-            font-size: 1rem;
-            padding: 1.5rem 3rem;
+            font-size: 0.9rem;
+            padding: 1.2rem 2.5rem;
             position: relative;
             overflow: hidden;
             animation: criticsButtonGlow 2.5s ease-in-out infinite;
@@ -993,6 +1019,222 @@
             filter: drop-shadow(0 0 10px rgba(138, 43, 226, 1));
         }
 
+        /* Social Media Modal Styles */
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            color: white;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            border: 2px solid transparent;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .social-link:hover::before {
+            left: 100%;
+        }
+
+        .social-link i {
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link span {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* YouTube Link */
+        .youtube-link {
+            background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+            border-color: #ff0000;
+        }
+
+        .youtube-link:hover {
+            background: linear-gradient(135deg, #cc0000 0%, #ff0000 100%);
+            border-color: #cc0000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.4);
+        }
+
+        .youtube-link:hover i {
+            transform: scale(1.2);
+            color: #ffcccc;
+        }
+
+        /* TikTok Link */
+        .tiktok-link {
+            background: linear-gradient(135deg, #000000 0%, #25f4ee 50%, #fe2c55 100%);
+            border-color: #25f4ee;
+        }
+
+        .tiktok-link:hover {
+            background: linear-gradient(135deg, #fe2c55 0%, #25f4ee 50%, #000000 100%);
+            border-color: #fe2c55;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(37, 244, 238, 0.4);
+        }
+
+        .tiktok-link:hover i {
+            transform: scale(1.2);
+            color: #25f4ee;
+        }
+
+        /* Instagram Link */
+        .instagram-link {
+            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            border-color: #dc2743;
+        }
+
+        .instagram-link:hover {
+            background: linear-gradient(135deg, #bc1888 0%, #cc2366 25%, #dc2743 50%, #e6683c 75%, #f09433 100%);
+            border-color: #bc1888;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(220, 39, 67, 0.4);
+        }
+
+        .instagram-link:hover i {
+            transform: scale(1.2);
+            color: #f09433;
+        }
+
+        /* Inline Social Media Links for CEO Section */
+        .ceo-social-links {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .social-links-inline {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link-inline {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: white;
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            border: 2px solid transparent;
+            border-radius: 0;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-width: 120px;
+        }
+
+        .social-link-inline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .social-link-inline:hover::before {
+            left: 100%;
+        }
+
+        .social-link-inline i {
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link-inline span {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* YouTube Link Inline */
+        .youtube-link-inline {
+            background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+            border-color: #ff0000;
+        }
+
+        .youtube-link-inline:hover {
+            background: linear-gradient(135deg, #cc0000 0%, #ff0000 100%);
+            border-color: #cc0000;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 0, 0, 0.4);
+        }
+
+        .youtube-link-inline:hover i {
+            transform: scale(1.3);
+            color: #ffcccc;
+        }
+
+        /* TikTok Link Inline */
+        .tiktok-link-inline {
+            background: linear-gradient(135deg, #000000 0%, #25f4ee 50%, #fe2c55 100%);
+            border-color: #25f4ee;
+        }
+
+        .tiktok-link-inline:hover {
+            background: linear-gradient(135deg, #fe2c55 0%, #25f4ee 50%, #000000 100%);
+            border-color: #fe2c55;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(37, 244, 238, 0.4);
+        }
+
+        .tiktok-link-inline:hover i {
+            transform: scale(1.3);
+            color: #25f4ee;
+        }
+
+        /* Instagram Link Inline */
+        .instagram-link-inline {
+            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            border-color: #dc2743;
+        }
+
+        .instagram-link-inline:hover {
+            background: linear-gradient(135deg, #bc1888 0%, #cc2366 25%, #dc2743 50%, #e6683c 75%, #f09433 100%);
+            border-color: #bc1888;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(220, 39, 67, 0.4);
+        }
+
+        .instagram-link-inline:hover i {
+            transform: scale(1.3);
+            color: #f09433;
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .glitch-title {
@@ -1045,6 +1287,39 @@
             .footer-buttons {
                 gap: 1.5rem;
             }
+            .navbar-toggler {
+                padding: 0.4rem;
+                border-width: 1.5px;
+            }
+            .navbar-toggler-icon {
+                width: 1.2em;
+                height: 1.2em;
+            }
+            .social-links {
+                gap: 0.8rem;
+            }
+            .social-link {
+                padding: 0.8rem 1.5rem;
+            }
+            .social-link i {
+                font-size: 1.3rem;
+            }
+            .social-link span {
+                font-size: 0.9rem;
+            }
+            .social-links-inline {
+                gap: 1rem;
+            }
+            .social-link-inline {
+                padding: 0.8rem 1.2rem;
+                min-width: 100px;
+            }
+            .social-link-inline i {
+                font-size: 1.5rem;
+            }
+            .social-link-inline span {
+                font-size: 0.8rem;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1074,6 +1349,39 @@
             .footer-buttons {
                 flex-direction: column;
                 gap: 1rem;
+            }
+            .navbar-toggler {
+                padding: 0.3rem;
+                border-width: 1px;
+            }
+            .navbar-toggler-icon {
+                width: 1em;
+                height: 1em;
+            }
+            .social-links {
+                gap: 0.6rem;
+            }
+            .social-link {
+                padding: 0.6rem 1.2rem;
+            }
+            .social-link i {
+                font-size: 1.1rem;
+            }
+            .social-link span {
+                font-size: 0.8rem;
+            }
+            .social-links-inline {
+                gap: 0.8rem;
+            }
+            .social-link-inline {
+                padding: 0.6rem 1rem;
+                min-width: 90px;
+            }
+            .social-link-inline i {
+                font-size: 1.3rem;
+            }
+            .social-link-inline span {
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -1241,13 +1549,34 @@
                             <p class="card-text" style="font-size: 1.1rem; line-height: 1.8;">
                             Nama saya Atthariq biasa dipanggil Attar, saya salah satu pendiri dari server ini, awalnya saya membuat server ini hanya iseng iseng saja
                              namun seminggu kemudian saya berubah pikiran untuk dijadikan sebuah server yang bisa berinteraksi satu sama lain dengan sangat jauh, bisa mensharing ilmu, mengobrol dengan teman baru, bermain bersama, bereskperimen bersama. 
-                             yang saya harapkan dari server ini untuk seterusnya adalah, bisa menjadi sebuah server yang positif dan ramai dipakai untuk kalangan anak muda yang suka berinteraksi dengan banyak orang di dunia maya.
+                             yang saya harapkan dari server ini untuk seterusnya adalah, bisa menjadi sebuah server yang positif dan ramai dipakai untuk kalangan anak muda yang suka berinteraksi dengan banyak orang di dunia maya.
                             </p>
                             <p class="card-text" style="font-size: 1rem; color: var(--retro-green);">
                                 <i class="bi bi-quote me-2"></i>
                                 "Gaming isn't just about playing - it's about building communities, creating memories, and 
                                 forming friendships that last a lifetime."
                             </p>
+                            
+                            <!-- Social Media Links -->
+                            <div class="ceo-social-links mt-4">
+                                <h5 style="color: var(--retro-yellow); font-family: 'Orbitron', monospace; margin-bottom: 1.5rem; text-align: center;">
+                                    <i class="bi bi-star-fill me-2"></i>Follow Me on Social Media
+                                </h5>
+                                <div class="social-links-inline">
+                                    <a href="https://www.youtube.com/@natus1768" target="_blank" class="social-link-inline youtube-link-inline">
+                                        <i class="bi bi-youtube"></i>
+                                        <span>YouTube</span>
+                                    </a>
+                                    <a href="https://www.tiktok.com/@kioxel" target="_blank" class="social-link-inline tiktok-link-inline">
+                                        <i class="bi bi-tiktok"></i>
+                                        <span>TikTok</span>
+                                    </a>
+                                    <a href="https://www.instagram.com/anndaxl?igsh=YmgxbG5teWFucG5m" target="_blank" class="social-link-inline instagram-link-inline">
+                                        <i class="bi bi-instagram"></i>
+                                        <span>Instagram</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1272,7 +1601,7 @@
                                         <img src="/public/image/avatars/popothegamer.jpg" alt="@popothegamer Avatar" class="testimonial-img">
                                     </div>
                                     <div class="testimonial-text">
-                                        <p>"gw join server ini dan mendapatkan kemantapan yang sungguh mantap"</p>
+                                        <p>"gw join server ini dan mendapatkan kemantapan yang sungguh mantap"</p>
                                         <div class="testimonial-author">
                                             <strong>- @popothegamer</strong>
                                             <span>Active Member</span>
@@ -1288,7 +1617,7 @@
                                         <img src="/public/image/avatars/ciaooo0.jpg" alt="@ciaooo0 Avatar" class="testimonial-img">
                                     </div>
                                     <div class="testimonial-text">
-                                        <p>"gw join server ini karena komunitas nya asik"</p>
+                                        <p>"gw join server ini karena komunitas nya asik"</p>
                                         <div class="testimonial-author">
                                             <strong>- @ciaooo0</strong>
                                             <span>Active Member</span>
@@ -1321,7 +1650,7 @@
                                         <img src="/public/image/avatars/professional_stupid..jpg" alt="@professional_stupid. Avatar" class="testimonial-img">
                                     </div>
                                     <div class="testimonial-text">
-                                        <p>"gw join ini server karena temen sekolah gw, servernya chill and member2nya asik diajak ngobrol"</p>
+                                        <p>"gw join ini server karena temen sekolah gw, servernya chill and member2nya asik diajak ngobrol"</p>
                                         <div class="testimonial-author">
                                             <strong>- @professional_stupid.</strong>
                                             <span>Active Member</span>
