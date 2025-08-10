@@ -573,7 +573,7 @@
                                 <div class="timeline-date">2022 - Beginning</div>
                                 <h4 class="timeline-title">Server Creation</h4>
                                 <p class="timeline-desc">
-                                    Kio membuat server ini hanya iseng-iseng saja, tidak menyangka akan berkembang menjadi komunitas yang luar biasa.
+                                    Attar membuat server ini hanya iseng-iseng saja, tidak menyangka akan berkembang menjadi komunitas yang luar biasa.
                                 </p>
                             </div>
                             <div class="timeline-dot"></div>

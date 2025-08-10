@@ -479,8 +479,7 @@
                 Feedback Form
             </h3>
             <p class="card-text text-center mb-4">
-                We value your opinion! Share your thoughts, suggestions, or any feedback you have about our community. 
-                Your input helps us improve and create a better experience for everyone.
+                Beri kami kritikan tanpa takut dihilangkan :)
             </p>
 
             <form action="{{ route('critics.advice.store') }}" method="POST">
