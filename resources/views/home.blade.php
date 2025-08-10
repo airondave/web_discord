@@ -2198,6 +2198,7 @@
             discordManager = new DiscordManager();
             console.log('Discord manager initialized:', discordManager);
         });
+    }); // Close the main DOMContentLoaded function
 </script>
 
 </main>
