@@ -16,11 +16,10 @@ class CriticsAdvice extends Model
         'sender_email',
         'messages',
         'response',
-        'send_date'
     ];
 
     protected $casts = [
-        'send_date' => 'datetime'
+        // send_date cast removed as column no longer exists
     ];
 
     public function scopeUnresponded($query)
