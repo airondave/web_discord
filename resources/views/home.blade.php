@@ -2042,36 +2042,48 @@
 
         // Discord Integration
         class DiscordManager {
-            constructor() {
-                this.membersContainer = document.getElementById('discordMembers');
-                this.totalMembersEl = document.getElementById('totalMembers');
-                this.refreshBtn = document.getElementById('refreshMembers');
-                
-                if (this.refreshBtn) {
-                    this.refreshBtn.addEventListener('click', () => this.loadMembers());
-                }
-                
-                this.init();
-            }
-
-            async init() {
-                await this.loadMemberCount();
-                await this.loadMembers();
-            }
-
-            async loadMemberCount() {
-                try {
-                    const response = await fetch('/api/discord/member-count');
-                    const data = await response.json();
+                            constructor() {
+                    console.log('DiscordManager constructor called');
                     
-                    if (data.success) {
-                        this.totalMembersEl.textContent = data.data.total;
+                    this.membersContainer = document.getElementById('discordMembers');
+                    this.totalMembersEl = document.getElementById('totalMembers');
+                    this.refreshBtn = document.getElementById('refreshMembers');
+
+                    console.log('DiscordManager elements found:', {
+                        membersContainer: this.membersContainer,
+                        totalMembersEl: this.totalMembersEl,
+                        refreshBtn: this.refreshBtn
+                    });
+
+                    if (this.refreshBtn) {
+                        this.refreshBtn.addEventListener('click', () => this.loadMembers());
                     }
-                } catch (error) {
-                    console.error('Failed to load member count:', error);
-                    this.totalMembersEl.textContent = 'Error';
+
+                    this.init();
                 }
-            }
+
+                            async init() {
+                    console.log('DiscordManager init called');
+                    await this.loadMemberCount();
+                    await this.loadMembers();
+                }
+
+                            async loadMemberCount() {
+                    console.log('Loading member count...');
+                    try {
+                        const response = await fetch('/api/discord/member-count');
+                        const data = await response.json();
+                        console.log('Member count response:', data);
+
+                        if (data.success) {
+                            this.totalMembersEl.textContent = data.data.total;
+                            console.log('Member count set to:', data.data.total);
+                        }
+                    } catch (error) {
+                        console.error('Failed to load member count:', error);
+                        this.totalMembersEl.textContent = 'Error';
+                    }
+                }
 
             async loadMembers() {
                 if (!this.membersContainer) return;
@@ -2099,21 +2111,28 @@
                 }
             }
 
-            displayMembers(members) {
-                if (!this.membersContainer) return;
+                            displayMembers(members) {
+                    console.log('Displaying members:', members);
+                    if (!this.membersContainer) {
+                        console.error('Members container not found!');
+                        return;
+                    }
 
-                if (members.length === 0) {
-                    this.membersContainer.innerHTML = `
-                        <div class="col-12 text-center">
-                            <p style="color: var(--retro-green);">No members found</p>
-                        </div>
-                    `;
-                    return;
+                    if (members.length === 0) {
+                        console.log('No members to display');
+                        this.membersContainer.innerHTML = `
+                            <div class="col-12 text-center">
+                                <p style="color: var(--retro-green);">No members found</p>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    const membersHTML = members.map(member => this.createMemberCard(member)).join('');
+                    console.log('Generated HTML:', membersHTML);
+                    this.membersContainer.innerHTML = membersHTML;
+                    console.log('Members displayed successfully');
                 }
-
-                const membersHTML = members.map(member => this.createMemberCard(member)).join('');
-                this.membersContainer.innerHTML = membersHTML;
-            }
 
             createMemberCard(member) {
                 const avatarUrl = member.avatar || '/public/image/avatars/default-avatar.jpg';
@@ -2172,11 +2191,13 @@
             }
         }
 
-        // Initialize Discord manager when DOM is loaded
-        let discordManager;
-        document.addEventListener('DOMContentLoaded', function() {
-            discordManager = new DiscordManager();
-        });
+                        // Initialize Discord manager when DOM is loaded
+                let discordManager;
+                document.addEventListener('DOMContentLoaded', function() {
+                    console.log('DOM loaded, initializing Discord manager...');
+                    discordManager = new DiscordManager();
+                    console.log('Discord manager initialized:', discordManager);
+                });
     });
 </script>
 
