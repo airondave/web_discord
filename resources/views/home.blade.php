@@ -1888,6 +1888,8 @@
 <script>
     // Start Overlay Functionality
     document.addEventListener('DOMContentLoaded', function() {
+        console.log('=== MAIN SCRIPT LOADED ===');
+        
         const startOverlay = document.getElementById('startOverlay');
         const startButton = document.getElementById('startButton');
         const backgroundAudio = document.getElementById('backgroundAudio');
@@ -2041,6 +2043,17 @@
         }
 
         // Discord Integration
+        console.log('=== DISCORD INTEGRATION STARTING ===');
+        
+        // Test if Discord elements exist
+        const testElements = {
+            membersContainer: document.getElementById('discordMembers'),
+            totalMembersEl: document.getElementById('totalMembers'),
+            refreshBtn: document.getElementById('refreshMembers')
+        };
+        
+        console.log('Discord elements test:', testElements);
+        
         class DiscordManager {
             constructor() {
                 console.log('DiscordManager constructor called');
@@ -2195,10 +2208,58 @@
         let discordManager;
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOM loaded, initializing Discord manager...');
-            discordManager = new DiscordManager();
-            console.log('Discord manager initialized:', discordManager);
+            
+            // Manual test - try to create DiscordManager
+            try {
+                discordManager = new DiscordManager();
+                console.log('Discord manager initialized:', discordManager);
+            } catch (error) {
+                console.error('Failed to initialize Discord manager:', error);
+            }
         });
-    }); // Close the main DOMContentLoaded function
+            }); // Close the main DOMContentLoaded function
+        
+        // Manual test after a delay
+        setTimeout(() => {
+            console.log('=== MANUAL TEST AFTER 2 SECONDS ===');
+            console.log('Testing Discord API manually...');
+            
+            fetch('/api/discord/selected-members?ids=904600598849159198,750989836206342185')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Manual API test result:', data);
+                    
+                    // Try to manually display the members
+                    const membersContainer = document.getElementById('discordMembers');
+                    if (membersContainer && data.success && data.data.length > 0) {
+                        console.log('Manually displaying members...');
+                        const membersHTML = data.data.map(member => `
+                            <div class="col-md-6 col-lg-4 mb-3">
+                                <div class="discord-member-card d-flex align-items-start">
+                                    <img src="${member.avatar || '/public/image/avatars/default-avatar.jpg'}" alt="${member.nick || member.username}" class="member-avatar">
+                                    <div class="member-info">
+                                        <div class="member-username">${member.nick || member.username}</div>
+                                        <div class="member-status">
+                                            <div class="status-indicator ${member.status === 'online' ? 'online' : 'offline'}"></div>
+                                            <span class="status-text">${member.status === 'online' ? 'Online' : 'Offline'}</span>
+                                        </div>
+                                        <div class="member-last-seen">${member.last_seen}</div>
+                                        <div class="member-roles">
+                                            <span class="role-tag">Member</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('');
+                        
+                        membersContainer.innerHTML = membersHTML;
+                        console.log('Members manually displayed!');
+                    }
+                })
+                .catch(error => {
+                    console.error('Manual API test failed:', error);
+                });
+        }, 2000);
 </script>
 
 </main>
