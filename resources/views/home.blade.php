@@ -1347,27 +1347,7 @@
             </a>
         </div>
 
-        <!-- Features Grid -->
-        <div class="row mt-5 justify-content-center">
-            <div class="col-md-4 mb-4">
-                <div class="retro-card text-center">
-                    <i class="bi bi-shield-check" style="font-size: 3rem; color: var(--retro-green); margin-bottom: 1rem;"></i>
-                    <h4 class="card-title">Verified Members</h4>
-                    <p class="card-text">
-                        Our verification system ensures a safe and trusted community environment for all members.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="retro-card text-center">
-                    <i class="bi bi-gem" style="font-size: 3rem; color: var(--retro-purple); margin-bottom: 1rem;"></i>
-                    <h4 class="card-title">Exclusive Roles</h4>
-                    <p class="card-text">
-                        Earn unique roles and privileges based on your gaming achievements and community contributions.
-                    </p>
-                </div>
-            </div>
-        </div>
+        <!-- Features Grid removed -->
 
         <!-- About CEO Section -->
         <div class="row mt-5">
