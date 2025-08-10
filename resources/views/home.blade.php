@@ -1503,7 +1503,7 @@
             <p class="start-subtitle">Click to enter...</p>
             <button id="startButton" class="start-button">
                 <i class="bi bi-play-fill me-2"></i>
-                INITIALIZING...
+                INITIALIZE NOW
             </button>
         </div>
     </div>
@@ -1640,28 +1640,10 @@
                         <i class="bi bi-discord me-2"></i>
                         Admins
                     </h3>
-                    <div class="discord-stats mb-4">
-                        <div class="row text-center">
-                            <div class="col-md-12">
-                                <div class="stat-item">
-                                    <i class="bi bi-people-fill stat-icon"></i>
-                                    <div class="stat-info">
-                                        <span class="stat-number" id="totalMembers">-</span>
-                                        <span class="stat-label">Total Discord Members</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="discord-members-container">
                         <div class="row justify-content-center" id="discordMembers">
                             <!-- 2 Discord members will be loaded here -->
-                        </div>
-                        <div class="text-center mt-3">
-                            <button id="refreshMembers" class="retro-btn retro-btn-secondary">
-                                <i class="bi bi-arrow-clockwise me-2"></i>
-                                Refresh Members
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -2047,9 +2029,7 @@
         
         // Test if Discord elements exist
         const testElements = {
-            membersContainer: document.getElementById('discordMembers'),
-            totalMembersEl: document.getElementById('totalMembers'),
-            refreshBtn: document.getElementById('refreshMembers')
+            membersContainer: document.getElementById('discordMembers')
         };
         
         console.log('Discord elements test:', testElements);
@@ -2059,44 +2039,20 @@
                 console.log('DiscordManager constructor called');
                 
                 this.membersContainer = document.getElementById('discordMembers');
-                this.totalMembersEl = document.getElementById('totalMembers');
-                this.refreshBtn = document.getElementById('refreshMembers');
 
                 console.log('DiscordManager elements found:', {
-                    membersContainer: this.membersContainer,
-                    totalMembersEl: this.totalMembersEl,
-                    refreshBtn: this.refreshBtn
+                    membersContainer: this.membersContainer
                 });
-
-                if (this.refreshBtn) {
-                    this.refreshBtn.addEventListener('click', () => this.loadMembers());
-                }
 
                 this.init();
             }
 
             async init() {
                 console.log('DiscordManager init called');
-                await this.loadMemberCount();
                 await this.loadMembers();
             }
 
-            async loadMemberCount() {
-                console.log('Loading member count...');
-                try {
-                    const response = await fetch('/api/discord/member-count');
-                    const data = await response.json();
-                    console.log('Member count response:', data);
 
-                    if (data.success) {
-                        this.totalMembersEl.textContent = data.data.total;
-                        console.log('Member count set to:', data.data.total);
-                    }
-                } catch (error) {
-                    console.error('Failed to load member count:', error);
-                    this.totalMembersEl.textContent = 'Error';
-                }
-            }
 
             async loadMembers() {
                 if (!this.membersContainer) return;
@@ -2153,9 +2109,9 @@
                 const statusClass = member.status === 'online' ? 'online' : 'offline';
                 const statusText = member.status === 'online' ? 'Online' : 'Offline';
                 
-                const rolesHTML = member.roles && member.roles.length > 0 
-                    ? member.roles.slice(0, 3).map(role => `<span class="role-tag">${role}</span>`).join('')
-                    : '<span class="role-tag">Member</span>';
+                                           const rolesHTML = member.roles && member.roles.length > 0 
+                               ? member.roles.slice(0, 3).map(role => `<span class="role-tag">${role}</span>`).join('')
+                               : '<span class="role-tag">Admin</span>';
 
                 return `
                     <div class="col-md-6 col-lg-4 mb-3">
@@ -2190,18 +2146,14 @@
                 `;
             }
 
-            showError(message) {
-                if (!this.membersContainer) return;
-                this.membersContainer.innerHTML = `
-                    <div class="col-12 text-center">
-                        <p style="color: #ff6b6b;">${message}</p>
-                        <button class="retro-btn retro-btn-secondary" onclick="discordManager.loadMembers()">
-                            <i class="bi bi-arrow-clockwise me-2"></i>
-                            Try Again
-                        </button>
-                    </div>
-                `;
-            }
+                                   showError(message) {
+                           if (!this.membersContainer) return;
+                           this.membersContainer.innerHTML = `
+                               <div class="col-12 text-center">
+                                   <p style="color: #ff6b6b;">${message}</p>
+                               </div>
+                           `;
+                       }
         }
 
         // Initialize Discord manager when DOM is loaded
@@ -2233,24 +2185,24 @@
                     const membersContainer = document.getElementById('discordMembers');
                     if (membersContainer && data.success && data.data.length > 0) {
                         console.log('Manually displaying members...');
-                        const membersHTML = data.data.map(member => `
-                            <div class="col-md-6 col-lg-4 mb-3">
-                                <div class="discord-member-card d-flex align-items-start">
-                                    <img src="${member.avatar || '/public/image/avatars/default-avatar.jpg'}" alt="${member.nick || member.username}" class="member-avatar">
-                                    <div class="member-info">
-                                        <div class="member-username">${member.nick || member.username}</div>
-                                        <div class="member-status">
-                                            <div class="status-indicator ${member.status === 'online' ? 'online' : 'offline'}"></div>
-                                            <span class="status-text">${member.status === 'online' ? 'Online' : 'Offline'}</span>
-                                        </div>
-                                        <div class="member-last-seen">${member.last_seen}</div>
-                                        <div class="member-roles">
-                                            <span class="role-tag">Member</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        `).join('');
+                                                       const membersHTML = data.data.map(member => `
+                                   <div class="col-md-6 col-lg-4 mb-3">
+                                       <div class="discord-member-card d-flex align-items-start">
+                                           <img src="${member.avatar || '/public/image/avatars/default-avatar.jpg'}" alt="${member.nick || member.username}" class="member-avatar">
+                                           <div class="member-info">
+                                               <div class="member-username">${member.nick || member.username}</div>
+                                               <div class="member-status">
+                                                   <div class="status-indicator ${member.status === 'online' ? 'online' : 'offline'}"></div>
+                                                   <span class="status-text">${member.status === 'online' ? 'Online' : 'Offline'}</span>
+                                               </div>
+                                               <div class="member-last-seen">${member.last_seen}</div>
+                                               <div class="member-roles">
+                                                   <span class="role-tag">Admin</span>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div>
+                               `).join('');
                         
                         membersContainer.innerHTML = membersHTML;
                         console.log('Members manually displayed!');
