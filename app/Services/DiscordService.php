@@ -253,4 +253,80 @@ class DiscordService
         
         return true;
     }
+
+    /**
+     * Get guild channels
+     */
+    public function getGuildChannels()
+    {
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bot ' . $this->botToken,
+            ])->get("{$this->baseUrl}/guilds/{$this->guildId}/channels");
+
+            if ($response->successful()) {
+                $channels = $response->json();
+                // Filter only text channels
+                return array_filter($channels, function($channel) {
+                    return $channel['type'] == 0; // 0 = text channel
+                });
+            }
+
+            return [];
+        } catch (Exception $e) {
+            \Log::error('Discord API Error getting channels: ' . $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
+     * Send message to a Discord channel
+     */
+    public function sendMessage($channelId, $message, $embed = null)
+    {
+        try {
+            $payload = [
+                'content' => $message
+            ];
+
+            if ($embed) {
+                $payload['embeds'] = [$embed];
+            }
+
+            $response = Http::withHeaders([
+                'Authorization' => 'Bot ' . $this->botToken,
+                'Content-Type' => 'application/json',
+            ])->post("{$this->baseUrl}/channels/{$channelId}/messages", $payload);
+
+            if ($response->successful()) {
+                \Log::info('Discord message sent successfully', [
+                    'channel_id' => $channelId,
+                    'message' => $message
+                ]);
+                return [
+                    'success' => true,
+                    'data' => $response->json()
+                ];
+            }
+
+            \Log::error('Discord API Error sending message', [
+                'channel_id' => $channelId,
+                'status' => $response->status(),
+                'response' => $response->body()
+            ]);
+
+            return [
+                'success' => false,
+                'error' => 'Failed to send message: ' . $response->status(),
+                'details' => $response->body()
+            ];
+
+        } catch (Exception $e) {
+            \Log::error('Discord API Exception sending message: ' . $e->getMessage());
+            return [
+                'success' => false,
+                'error' => 'Exception: ' . $e->getMessage()
+            ];
+        }
+    }
 } 

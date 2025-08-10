@@ -162,6 +162,19 @@
                         </a>
                     </li>
                 </ul>
+
+                <!-- Discord Section -->
+                <div class="nav-section">
+                    <i class="bi bi-discord me-1"></i> Discord
+                </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('admin.discord.chat') ? 'active' : '' }}" href="{{ route('admin.discord.chat') }}">
+                            <i class="bi bi-chat-dots me-2"></i>
+                            Discord Chat
+                        </a>
+                    </li>
+                </ul>
             </div>
         </nav>
 
