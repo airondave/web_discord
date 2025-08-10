@@ -224,13 +224,12 @@
     <div class="channel-info mt-4">
         <h6 class="mb-2">
             <i class="bi bi-info-circle me-2"></i>
-            About Discord Bot Messages
+            Tentang Discord Chat by Venla
         </h6>
         <ul class="mb-0">
-            <li><strong>Text Messages:</strong> Simple text that appears directly in the channel</li>
-            <li><strong>Rich Embeds:</strong> Formatted messages with title, description, and styling</li>
-            <li><strong>Character Limit:</strong> Maximum 2000 characters per message</li>
-            <li><strong>Bot Permissions:</strong> Your bot needs "Send Messages" permission in the selected channel</li>
+            <li><strong>Text Messages:</strong> Langsung kirim pesan ke channel</li>
+            <li><strong>Rich Embeds:</strong> Embed biasa dengan style yang kaya</li>
+            <li><strong>Character Limit:</strong> Maksimal 2000 karakter pesan</li>
         </ul>
     </div>
 </div>
