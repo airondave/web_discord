@@ -49,8 +49,8 @@
                                     <tr>
                                         <td>
                                             <small class="text-muted">
-                                                {{ $feedback->send_date->format('M j, Y') }}<br>
-                                                <span class="badge bg-secondary">{{ $feedback->send_date->format('g:i A') }}</span>
+                                                {{ $feedback->created_at->format('M j, Y') }}<br>
+                                                <span class="badge bg-secondary">{{ $feedback->created_at->format('g:i A') }}</span>
                                             </small>
                                         </td>
                                         <td>
@@ -101,7 +101,7 @@
                                                         <strong>From:</strong> {{ $feedback->sender_name }} ({{ $feedback->sender_email }})
                                                     </div>
                                                     <div class="mb-3">
-                                                        <strong>Date:</strong> {{ $feedback->send_date->format('F j, Y \a\t g:i A') }}
+                                                        <strong>Date:</strong> {{ $feedback->created_at->format('F j, Y \a\t g:i A') }}
                                                     </div>
                                                     <div class="mb-3">
                                                         <strong>Message:</strong>
@@ -208,8 +208,8 @@
                                     <tr>
                                         <td>
                                             <small class="text-muted">
-                                                {{ $feedback->send_date->format('M j, Y') }}<br>
-                                                <span class="badge bg-secondary">{{ $feedback->send_date->format('g:i A') }}</span>
+                                                {{ $feedback->created_at->format('M j, Y') }}<br>
+                                                <span class="badge bg-secondary">{{ $feedback->created_at->format('g:i A') }}</span>
                                             </small>
                                         </td>
                                         <td>
@@ -265,7 +265,7 @@
                                                         <strong>From:</strong> {{ $feedback->sender_name }} ({{ $feedback->sender_email }})
                                                     </div>
                                                     <div class="mb-3">
-                                                        <strong>Date:</strong> {{ $feedback->send_date->format('F j, Y \a\t g:i A') }}
+                                                        <strong>Date:</strong> {{ $feedback->created_at->format('F j, Y \a\t g:i A') }}
                                                     </div>
                                                     <div class="mb-3">
                                                         <strong>Message:</strong>

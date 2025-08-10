@@ -26,7 +26,6 @@ class CriticsAdviceController extends Controller
             'sender_name' => $request->sender_name,
             'sender_email' => $request->sender_email,
             'messages' => $request->messages,
-            'send_date' => now(),
         ]);
 
         return redirect()->back()->with('success', 'Thank you for your feedback! We will review and respond to your message soon.');
@@ -34,8 +33,8 @@ class CriticsAdviceController extends Controller
 
     public function index()
     {
-        $unresponded = CriticsAdvice::unresponded()->orderBy('send_date', 'desc')->get();
-        $responded = CriticsAdvice::responded()->orderBy('send_date', 'desc')->get();
+        $unresponded = CriticsAdvice::unresponded()->orderBy('created_at', 'desc')->get();
+        $responded = CriticsAdvice::responded()->orderBy('created_at', 'desc')->get();
 
         return view('admin.critics_advice.index', compact('unresponded', 'responded'));
     }

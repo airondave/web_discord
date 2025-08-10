@@ -84,7 +84,7 @@
             <div class="feedback-section">
                 <h3>📝 Your Original Message:</h3>
                 <p><em>"{{ $criticsAdvice->messages }}"</em></p>
-                <small>Sent on: {{ $criticsAdvice->send_date->format('F j, Y \a\t g:i A') }}</small>
+                <small>Sent on: {{ $criticsAdvice->created_at->format('F j, Y \a\t g:i A') }}</small>
             </div>
 
             <div class="response-section">
