@@ -1226,6 +1226,11 @@
     </style>
 </head>
 <body>
+    <!-- Background Audio with Autoplay -->
+    <audio autoplay loop>
+        <source src="https://r2.guns.lol/1c2551cf-e822-45b7-909a-91069175dd35.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
 <!-- Floating Retro Icons -->
 <div class="floating-retro-icons">
