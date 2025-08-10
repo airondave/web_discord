@@ -1645,12 +1645,6 @@
                         <div class="row justify-content-center" id="discordMembers">
                             <!-- 2 Discord members will be loaded here -->
                         </div>
-                        <div class="text-center mt-3">
-                            <button id="refreshMembers" class="retro-btn retro-btn-secondary" style="font-size: 0.9rem; padding: 0.5rem 1rem;">
-                                <i class="bi bi-arrow-clockwise me-2"></i>
-                                Refresh Profile Data
-                            </button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -2035,8 +2029,7 @@
         
         // Test if Discord elements exist
         const testElements = {
-            membersContainer: document.getElementById('discordMembers'),
-            refreshBtn: document.getElementById('refreshMembers')
+            membersContainer: document.getElementById('discordMembers')
         };
         
         console.log('Discord elements test:', testElements);
@@ -2046,16 +2039,10 @@
                 console.log('DiscordManager constructor called');
                 
                 this.membersContainer = document.getElementById('discordMembers');
-                this.refreshBtn = document.getElementById('refreshMembers');
 
                 console.log('DiscordManager elements found:', {
-                    membersContainer: this.membersContainer,
-                    refreshBtn: this.refreshBtn
+                    membersContainer: this.membersContainer
                 });
-
-                if (this.refreshBtn) {
-                    this.refreshBtn.addEventListener('click', () => this.refreshMembers());
-                }
 
                 this.init();
             }
@@ -2093,37 +2080,7 @@
                 }
             }
 
-            async refreshMembers() {
-                if (!this.membersContainer) return;
-                
-                console.log('Refreshing Discord members...');
-                this.refreshBtn.disabled = true;
-                this.refreshBtn.innerHTML = '<i class="bi bi-arrow-clockwise me-2"></i>Refreshing...';
-                
-                try {
-                    // First clear the cache
-                    await fetch('/api/discord/clear-cache');
-                    console.log('Cache cleared, now loading fresh data...');
-                    
-                    // Then load fresh members
-                    await this.loadMembers();
-                    
-                    // Show success message briefly
-                    setTimeout(() => {
-                        this.refreshBtn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Refreshed!';
-                        setTimeout(() => {
-                            this.refreshBtn.disabled = false;
-                            this.refreshBtn.innerHTML = '<i class="bi bi-arrow-clockwise me-2"></i>Refresh Profile Data';
-                        }, 1000);
-                    }, 500);
-                    
-                } catch (error) {
-                    console.error('Failed to refresh members:', error);
-                    this.refreshBtn.disabled = false;
-                    this.refreshBtn.innerHTML = '<i class="bi bi-arrow-clockwise me-2"></i>Refresh Profile Data';
-                    this.showError('Failed to refresh profile data');
-                }
-            }
+
 
             displayMembers(members) {
                 console.log('Displaying members:', members);
