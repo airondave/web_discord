@@ -1375,12 +1375,11 @@
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(20, 20, 40, 0.7) 100%);
             border: 1px solid var(--retro-purple);
             border-radius: 15px;
-            padding: 2rem;
-            margin: 0 auto;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            max-width: 500px;
         }
 
         .discord-member-card::before {
@@ -1654,14 +1653,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="discord-member-container">
-                        <div class="row justify-content-center" id="discordMember">
-                            <!-- Featured Discord member will be loaded here -->
+                    <div class="discord-members-container">
+                        <div class="row justify-content-center" id="discordMembers">
+                            <!-- 2 Discord members will be loaded here -->
                         </div>
                         <div class="text-center mt-3">
-                            <button id="refreshMember" class="retro-btn retro-btn-secondary">
+                            <button id="refreshMembers" class="retro-btn retro-btn-secondary">
                                 <i class="bi bi-arrow-clockwise me-2"></i>
-                                Refresh Member
+                                Refresh Members
                             </button>
                         </div>
                     </div>
@@ -2044,12 +2043,12 @@
         // Discord Integration
         class DiscordManager {
             constructor() {
-                this.memberContainer = document.getElementById('discordMember');
+                this.membersContainer = document.getElementById('discordMembers');
                 this.totalMembersEl = document.getElementById('totalMembers');
-                this.refreshBtn = document.getElementById('refreshMember');
+                this.refreshBtn = document.getElementById('refreshMembers');
                 
                 if (this.refreshBtn) {
-                    this.refreshBtn.addEventListener('click', () => this.loadMember());
+                    this.refreshBtn.addEventListener('click', () => this.loadMembers());
                 }
                 
                 this.init();
@@ -2057,7 +2056,7 @@
 
             async init() {
                 await this.loadMemberCount();
-                await this.loadMember();
+                await this.loadMembers();
             }
 
             async loadMemberCount() {
@@ -2074,31 +2073,46 @@
                 }
             }
 
-            async loadMember() {
-                if (!this.memberContainer) return;
+            async loadMembers() {
+                if (!this.membersContainer) return;
 
                 this.showLoading();
                 
                 try {
-                    const response = await fetch('/api/discord/featured-member');
+                    // Fetch specific Discord members by their IDs
+                    const memberIds = '904600598849159198,750989836206342185';
+                    console.log('Fetching Discord members with IDs:', memberIds);
+                    
+                    const response = await fetch(`/api/discord/selected-members?ids=${memberIds}`);
                     const data = await response.json();
                     
+                    console.log('Discord API response:', data);
+                    
                     if (data.success) {
-                        this.displayMember(data.data);
+                        this.displayMembers(data.data);
                     } else {
-                        this.showError('Failed to load Discord member');
+                        this.showError('Failed to load Discord members: ' + (data.message || 'Unknown error'));
                     }
                 } catch (error) {
-                    console.error('Failed to load Discord member:', error);
+                    console.error('Failed to load Discord members:', error);
                     this.showError('Network error occurred');
                 }
             }
 
-            displayMember(member) {
-                if (!this.memberContainer) return;
+            displayMembers(members) {
+                if (!this.membersContainer) return;
 
-                const memberHTML = this.createMemberCard(member);
-                this.memberContainer.innerHTML = memberHTML;
+                if (members.length === 0) {
+                    this.membersContainer.innerHTML = `
+                        <div class="col-12 text-center">
+                            <p style="color: var(--retro-green);">No members found</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const membersHTML = members.map(member => this.createMemberCard(member)).join('');
+                this.membersContainer.innerHTML = membersHTML;
             }
 
             createMemberCard(member) {
@@ -2112,7 +2126,7 @@
                     : '<span class="role-tag">Member</span>';
 
                 return `
-                    <div class="col-md-8 col-lg-6">
+                    <div class="col-md-6 col-lg-4 mb-3">
                         <div class="discord-member-card d-flex align-items-start">
                             <img src="${avatarUrl}" alt="${displayName}" class="member-avatar" 
                                  onerror="this.src='/public/image/avatars/default-avatar.jpg'">
@@ -2133,27 +2147,27 @@
             }
 
             showLoading() {
-                if (!this.memberContainer) return;
-                this.memberContainer.innerHTML = `
+                if (!this.membersContainer) return;
+                this.membersContainer.innerHTML = `
                     <div class="col-12">
                         <div class="loading-spinner">
                             <i class="bi bi-arrow-clockwise"></i>
-                            <p>Loading Discord member...</p>
-                        </p>
+                            <p>Loading Discord members...</p>
+                        </div>
                     </div>
                 `;
             }
 
             showError(message) {
-                if (!this.memberContainer) return;
-                this.memberContainer.innerHTML = `
+                if (!this.membersContainer) return;
+                this.membersContainer.innerHTML = `
                     <div class="col-12 text-center">
                         <p style="color: #ff6b6b;">${message}</p>
-                        <button class="retro-btn retro-btn-secondary" onclick="discordManager.loadMember()">
+                        <button class="retro-btn retro-btn-secondary" onclick="discordManager.loadMembers()">
                             <i class="bi bi-arrow-clockwise me-2"></i>
                             Try Again
                         </button>
-                    </div>
+                    </button>
                 `;
             }
         }

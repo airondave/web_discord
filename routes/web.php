@@ -77,8 +77,16 @@ Route::middleware(['admin.auth'])->group(function () {
 
 // Discord API routes
 Route::prefix('api/discord')->group(function () {
-    Route::get('/featured-member', [DiscordController::class, 'getFeaturedMember'])->name('discord.featured-member');
+    Route::get('/selected-members', [DiscordController::class, 'getSelectedMembers'])->name('discord.selected-members');
     Route::get('/member-count', [DiscordController::class, 'getMemberCount'])->name('discord.member-count');
     Route::get('/user/{userId}', [DiscordController::class, 'getUser'])->name('discord.user');
     Route::get('/roles', [DiscordController::class, 'getRoles'])->name('discord.roles');
+    Route::get('/test', function() {
+        return response()->json([
+            'status' => 'Discord API is working',
+            'bot_token_set' => !empty(config('services.discord.bot_token')),
+            'guild_id_set' => !empty(config('services.discord.guild_id')),
+            'timestamp' => now()
+        ]);
+    })->name('discord.test');
 });

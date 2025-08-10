@@ -16,6 +16,11 @@ class DiscordService
     {
         $this->botToken = config('services.discord.bot_token');
         $this->guildId = config('services.discord.guild_id');
+        
+        if (!$this->botToken || !$this->guildId) {
+            \Log::error('Discord Service: Missing bot_token or guild_id in configuration');
+            throw new \Exception('Discord configuration is incomplete. Please check your .env file.');
+        }
     }
 
     /**
@@ -130,58 +135,65 @@ class DiscordService
     }
 
     /**
-     * Get one featured Discord member
+     * Get 2 specific Discord members by their IDs
      */
-    public function getFeaturedMember()
+    public function getSelectedMembers($memberIds = [])
     {
-        $cacheKey = "discord_featured_member_{$this->guildId}";
+        $cacheKey = "discord_selected_members_{$this->guildId}_" . implode('_', $memberIds);
         
-        return Cache::remember($cacheKey, 300, function () { // Cache for 5 minutes
-            $members = $this->getGuildMembers(100); // Get up to 100 members to find a good one
+        return Cache::remember($cacheKey, 300, function () use ($memberIds) { // Cache for 5 minutes
+            $selectedMembers = [];
             
-            if (empty($members)) {
-                return null;
-            }
-            
-            // Get the first member with an avatar (or just the first one)
-            foreach ($members as $member) {
-                if (isset($member['user']) && isset($member['user']['avatar'])) {
-                    $user = $this->getUser($member['user']['id']);
-                    if ($user) {
-                        return [
-                            'id' => $user['id'],
-                            'username' => $user['username'],
-                            'discriminator' => $user['discriminator'] ?? '0',
-                            'avatar' => "https://cdn.discordapp.com/avatars/{$user['id']}/{$user['avatar']}.png",
-                            'roles' => $member['roles'] ?? [],
-                            'joined_at' => $member['joined_at'],
-                            'nick' => $member['nick'] ?? null,
-                            'status' => 'online',
-                            'last_seen' => 'Recently active'
-                        ];
+            // If no specific IDs provided, get first 2 members with avatars
+            if (empty($memberIds)) {
+                $members = $this->getGuildMembers(100);
+                $count = 0;
+                
+                foreach ($members as $member) {
+                    if ($count >= 2) break;
+                    
+                    if (isset($member['user'])) {
+                        $user = $this->getUser($member['user']['id']);
+                        if ($user) {
+                            $selectedMembers[] = [
+                                'id' => $user['id'],
+                                'username' => $user['username'],
+                                'discriminator' => $user['discriminator'] ?? '0',
+                                'avatar' => $user['avatar'] ? "https://cdn.discordapp.com/avatars/{$user['id']}/{$user['avatar']}.png" : null,
+                                'roles' => $member['roles'] ?? [],
+                                'joined_at' => $member['joined_at'],
+                                'nick' => $member['nick'] ?? null,
+                                'status' => 'online',
+                                'last_seen' => 'Recently active'
+                            ];
+                            $count++;
+                        }
+                    }
+                }
+            } else {
+                // Get specific members by ID
+                foreach ($memberIds as $memberId) {
+                    $member = $this->getGuildMember($memberId);
+                    if ($member && isset($member['user'])) {
+                        $user = $this->getUser($member['user']['id']);
+                        if ($user) {
+                            $selectedMembers[] = [
+                                'id' => $user['id'],
+                                'username' => $user['username'],
+                                'discriminator' => $user['discriminator'] ?? '0',
+                                'avatar' => $user['avatar'] ? "https://cdn.discordapp.com/avatars/{$user['id']}/{$user['avatar']}.png" : null,
+                                'roles' => $member['roles'] ?? [],
+                                'joined_at' => $member['joined_at'],
+                                'nick' => $member['nick'] ?? null,
+                                'status' => 'online',
+                                'last_seen' => 'Recently active'
+                            ];
+                        }
                     }
                 }
             }
             
-            // Fallback to first member without avatar
-            if (isset($members[0]['user'])) {
-                $user = $this->getUser($members[0]['user']['id']);
-                if ($user) {
-                    return [
-                        'id' => $user['id'],
-                        'username' => $user['username'],
-                        'discriminator' => $user['discriminator'] ?? '0',
-                        'avatar' => null, // No avatar
-                        'roles' => $members[0]['roles'] ?? [],
-                        'joined_at' => $members[0]['joined_at'],
-                        'nick' => $members[0]['nick'] ?? null,
-                        'status' => 'online',
-                        'last_seen' => 'Recently active'
-                    ];
-                }
-            }
-            
-            return null;
+            return $selectedMembers;
         });
     }
 

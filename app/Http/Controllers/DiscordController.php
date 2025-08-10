@@ -16,14 +16,20 @@ class DiscordController extends Controller
     }
 
     /**
-     * Get featured Discord member
+     * Get selected Discord members (2 members)
      */
-    public function getFeaturedMember(): JsonResponse
+    public function getSelectedMembers(Request $request): JsonResponse
     {
         try {
-            $member = $this->discordService->getFeaturedMember();
+            // Get member IDs from query parameters if provided
+            $memberIds = $request->get('ids', []);
+            if (is_string($memberIds)) {
+                $memberIds = explode(',', $memberIds);
+            }
             
-            if (!$member) {
+            $members = $this->discordService->getSelectedMembers($memberIds);
+            
+            if (empty($members)) {
                 return response()->json([
                     'success' => false,
                     'message' => 'No Discord members found'
@@ -32,12 +38,13 @@ class DiscordController extends Controller
             
             return response()->json([
                 'success' => true,
-                'data' => $member
+                'data' => $members,
+                'count' => count($members)
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to fetch Discord member',
+                'message' => 'Failed to fetch Discord members',
                 'error' => $e->getMessage()
             ], 500);
         }
