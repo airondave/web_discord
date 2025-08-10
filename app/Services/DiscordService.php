@@ -144,9 +144,17 @@ class DiscordService
         return Cache::remember($cacheKey, 300, function () use ($memberIds) { // Cache for 5 minutes
             $selectedMembers = [];
             
+            \Log::info('DiscordService: Starting getSelectedMembers', [
+                'memberIds' => $memberIds,
+                'guildId' => $this->guildId
+            ]);
+            
             // If no specific IDs provided, get first 2 members with avatars
             if (empty($memberIds)) {
+                \Log::info('DiscordService: No specific IDs provided, getting first 2 members');
                 $members = $this->getGuildMembers(100);
+                \Log::info('DiscordService: Retrieved guild members', ['count' => count($members)]);
+                
                 $count = 0;
                 
                 foreach ($members as $member) {
@@ -171,11 +179,26 @@ class DiscordService
                     }
                 }
             } else {
+                \Log::info('DiscordService: Getting specific members by ID', ['memberIds' => $memberIds]);
+                
                 // Get specific members by ID
                 foreach ($memberIds as $memberId) {
+                    \Log::info('DiscordService: Fetching member', ['memberId' => $memberId]);
+                    
                     $member = $this->getGuildMember($memberId);
+                    \Log::info('DiscordService: Guild member response', [
+                        'memberId' => $memberId,
+                        'memberFound' => !empty($member),
+                        'hasUser' => isset($member['user'])
+                    ]);
+                    
                     if ($member && isset($member['user'])) {
                         $user = $this->getUser($member['user']['id']);
+                        \Log::info('DiscordService: User response', [
+                            'memberId' => $memberId,
+                            'userFound' => !empty($user)
+                        ]);
+                        
                         if ($user) {
                             $selectedMembers[] = [
                                 'id' => $user['id'],
@@ -192,6 +215,11 @@ class DiscordService
                     }
                 }
             }
+            
+            \Log::info('DiscordService: Final result', [
+                'selectedMembersCount' => count($selectedMembers),
+                'selectedMembers' => $selectedMembers
+            ]);
             
             return $selectedMembers;
         });

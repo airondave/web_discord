@@ -89,4 +89,28 @@ Route::prefix('api/discord')->group(function () {
             'timestamp' => now()
         ]);
     })->name('discord.test');
+    
+    Route::get('/debug-members', function() {
+        try {
+            $discordService = app(\App\Services\DiscordService::class);
+            $members = $discordService->getSelectedMembers(['904600598849159198', '750989836206342185']);
+            
+            return response()->json([
+                'success' => true,
+                'members_found' => count($members),
+                'members' => $members,
+                'debug_info' => [
+                    'guild_id' => config('services.discord.guild_id'),
+                    'bot_token_length' => strlen(config('services.discord.bot_token')),
+                    'timestamp' => now()
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ], 500);
+        }
+    })->name('discord.debug-members');
 });
