@@ -1337,11 +1337,11 @@
     <!-- Click to Start Overlay -->
     <div id="startOverlay" class="start-overlay">
         <div class="start-content">
-            <h1 class="start-title">Welcome to Web Discord</h1>
-            <p class="start-subtitle">Click to enter and start your journey</p>
+            <h1 class="start-title">Welcome to Ranconnity</h1>
+            <p class="start-subtitle">Click to enter...</p>
             <button id="startButton" class="start-button">
                 <i class="bi bi-play-fill me-2"></i>
-                Click to Start
+                INITIALIZING...
             </button>
         </div>
     </div>
