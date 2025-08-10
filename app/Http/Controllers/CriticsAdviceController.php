@@ -26,7 +26,7 @@ class CriticsAdviceController extends Controller
             'sender_name' => $request->sender_name,
             'sender_email' => $request->sender_email,
             'messages' => $request->messages,
-            'response' => null,
+            'response' => $request->response,
         ]);
 
         return redirect()->back()->with('success', 'Thank you for your feedback! We will review and respond to your message soon.');
