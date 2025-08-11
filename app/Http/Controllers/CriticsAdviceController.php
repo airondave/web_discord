@@ -135,8 +135,8 @@ class CriticsAdviceController extends Controller
             $notificationChannelId = config('services.discord.notification_channel_id');
             
             if ($notificationChannelId) {
-                $message = "🔔 **Discord Notification for {$criticsAdvice->discord_username}**\n\n" .
-                          "We have responded to your feedback! Check your email for the full response.";
+                $message = "🔔 **Discord Notification**\n\n" .
+                          "Hey {$criticsAdvice->discord_username}! We have responded to your feedback! Check your email for the full response.";
                 
                 $discordService->sendMessage($notificationChannelId, $message, $embed);
             }
