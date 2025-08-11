@@ -41,6 +41,7 @@ return [
         'redirect' => env('DISCORD_REDIRECT_URI'),
         'bot_token' => env('DISCORD_BOT_TOKEN'),
         'guild_id' => env('DISCORD_GUILD_ID'),
+        'notification_channel_id' => env('DISCORD_NOTIFICATION_CHANNEL_ID'),
     ],
 
 ];

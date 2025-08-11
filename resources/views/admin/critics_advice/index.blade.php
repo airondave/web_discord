@@ -3,6 +3,14 @@
 @section('title', 'Critics & Advice Management')
 
 @section('content')
+<style>
+    .bg-discord {
+        background-color: #5865F2 !important;
+    }
+    .bg-discord:hover {
+        background-color: #4752C4 !important;
+    }
+</style>
 <div class="container-fluid">
     <div class="row mb-4">
         <div class="col-12">
@@ -40,6 +48,7 @@
                                         <th>Date</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Discord</th>
                                         <th>Message</th>
                                         <th>Actions</th>
                                     </tr>
@@ -60,6 +69,16 @@
                                             <a href="mailto:{{ $feedback->sender_email }}" class="text-decoration-none">
                                                 {{ $feedback->sender_email }}
                                             </a>
+                                        </td>
+                                        <td>
+                                            @if($feedback->discord_username)
+                                                <span class="badge bg-discord text-white">
+                                                    <i class="bi bi-discord me-1"></i>
+                                                    {{ $feedback->discord_username }}
+                                                </span>
+                                            @else
+                                                <span class="text-muted">-</span>
+                                            @endif
                                         </td>
                                         <td>
                                             <div class="message-preview">
@@ -100,6 +119,15 @@
                                                     <div class="mb-3">
                                                         <strong>From:</strong> {{ $feedback->sender_name }} ({{ $feedback->sender_email }})
                                                     </div>
+                                                    @if($feedback->discord_username)
+                                                    <div class="mb-3">
+                                                        <strong>Discord:</strong> 
+                                                        <span class="badge bg-discord text-white">
+                                                            <i class="bi bi-discord me-1"></i>
+                                                            {{ $feedback->discord_username }}
+                                                        </span>
+                                                    </div>
+                                                    @endif
                                                     <div class="mb-3">
                                                         <strong>Date:</strong> {{ $feedback->created_at->format('F j, Y \a\t g:i A') }}
                                                     </div>
@@ -150,6 +178,9 @@
                                                                       required></textarea>
                                                             <div class="form-text">
                                                                 This response will be sent via email to {{ $feedback->sender_email }}
+                                                                @if($feedback->discord_username)
+                                                                    <br><i class="bi bi-discord me-1"></i>Discord notification will also be sent to {{ $feedback->discord_username }}
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
@@ -198,6 +229,7 @@
                                         <th>Date</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Discord</th>
                                         <th>Message</th>
                                         <th>Response</th>
                                         <th>Actions</th>
@@ -219,6 +251,16 @@
                                             <a href="mailto:{{ $feedback->sender_email }}" class="text-decoration-none">
                                                 {{ $feedback->sender_email }}
                                             </a>
+                                        </td>
+                                        <td>
+                                            @if($feedback->discord_username)
+                                                <span class="badge bg-discord text-white">
+                                                    <i class="bi bi-discord me-1"></i>
+                                                    {{ $feedback->discord_username }}
+                                                </span>
+                                            @else
+                                                <span class="text-muted">-</span>
+                                            @endif
                                         </td>
                                         <td>
                                             <div class="message-preview">

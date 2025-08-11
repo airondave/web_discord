@@ -513,6 +513,20 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="discord_username" class="form-label">
+                        <i class="bi bi-discord me-2"></i>Your Discord Username (Optional)
+                    </label>
+                    <input type="text" 
+                           class="form-control @error('discord_username') is-invalid @enderror" 
+                           id="discord_username" 
+                           name="discord_username" 
+                           value="{{ old('discord_username') }}"
+                           placeholder="e.g., username#1234 or username"
+                           maxlength="100">
+                    <small class="text-muted">Optional: We'll also notify you on Discord when we respond</small>
+                </div>
+
+                <div class="form-group">
                     <label for="messages" class="form-label">
                         <i class="bi bi-chat-text me-2"></i>Your Message
                     </label>

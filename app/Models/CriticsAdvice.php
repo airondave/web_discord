@@ -14,6 +14,7 @@ class CriticsAdvice extends Model
     protected $fillable = [
         'sender_name',
         'sender_email',
+        'discord_username',
         'messages',
         'response',
     ];
