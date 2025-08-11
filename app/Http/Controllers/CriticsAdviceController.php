@@ -36,10 +36,43 @@ class CriticsAdviceController extends Controller
         return redirect()->back()->with('success', 'Thank you for your feedback! We will review and respond to your message soon.');
     }
 
+    /**
+     * Mask email address for privacy (e.g., j*******m@example.com)
+     */
+    private function maskEmail($email)
+    {
+        if (empty($email)) return '';
+        
+        $parts = explode('@', $email);
+        if (count($parts) !== 2) return $email;
+        
+        $username = $parts[0];
+        $domain = $parts[1];
+        
+        if (strlen($username) <= 2) {
+            $maskedUsername = $username;
+        } else {
+            $first = substr($username, 0, 1);
+            $last = substr($username, -1);
+            $maskedUsername = $first . str_repeat('*', strlen($username) - 2) . $last;
+        }
+        
+        return $maskedUsername . '@' . $domain;
+    }
+
     public function index()
     {
         $unresponded = CriticsAdvice::unresponded()->orderBy('created_at', 'desc')->get();
         $responded = CriticsAdvice::responded()->orderBy('created_at', 'desc')->get();
+
+        // Mask emails for privacy
+        $unresponded->each(function ($item) {
+            $item->masked_email = $this->maskEmail($item->sender_email);
+        });
+        
+        $responded->each(function ($item) {
+            $item->masked_email = $this->maskEmail($item->sender_email);
+        });
 
         return view('admin.critics_advice.index', compact('unresponded', 'responded'));
     }
@@ -88,20 +121,8 @@ class CriticsAdviceController extends Controller
             // Create embed message for Discord
             $embed = [
                 'title' => '🎯 Response to Your Feedback',
-                'description' => 'We have responded to your feedback!',
+                'description' => 'We have responded to your feedback! Check your email for the full response.',
                 'color' => 0x00ff41, // Retro green color
-                'fields' => [
-                    [
-                        'name' => '📝 Your Original Message',
-                        'value' => Str::limit($criticsAdvice->messages, 1024),
-                        'inline' => false
-                    ],
-                    [
-                        'name' => '💬 Our Response',
-                        'value' => Str::limit($criticsAdvice->response, 1024),
-                        'inline' => false
-                    ]
-                ],
                 'footer' => [
                     'text' => 'Ranconnity Gaming Community'
                 ],
@@ -115,7 +136,7 @@ class CriticsAdviceController extends Controller
             
             if ($notificationChannelId) {
                 $message = "🔔 **Discord Notification for {$criticsAdvice->discord_username}**\n\n" .
-                          "We have responded to your feedback! Check your email at {$criticsAdvice->sender_email} for the full response.";
+                          "We have responded to your feedback! Check your email for the full response.";
                 
                 $discordService->sendMessage($notificationChannelId, $message, $embed);
             }
