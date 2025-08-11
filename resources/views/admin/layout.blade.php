@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,10 +16,46 @@
     <!-- Bootstrap Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
+        :root {
+            /* Light theme variables */
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-sidebar: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --border-color: #e9ecef;
+            --shadow: 0 0 20px rgba(0,0,0,0.1);
+            --card-bg: #ffffff;
+            --table-bg: #ffffff;
+            --table-header-bg: #343a40;
+            --table-header-text: #ffffff;
+        }
+
+        [data-bs-theme="dark"] {
+            /* Dark theme variables */
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --bg-sidebar: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: #404040;
+            --shadow: 0 0 20px rgba(0,0,0,0.3);
+            --card-bg: #2d2d2d;
+            --table-bg: #2d2d2d;
+            --table-header-bg: #404040;
+            --table-header-text: #ffffff;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
         .sidebar {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            background: var(--bg-sidebar);
             min-height: 100vh;
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
         }
         .sidebar .nav-link {
             color: rgba(255,255,255,0.8);
@@ -50,13 +86,13 @@
             margin-top: 20px;
         }
         .main-content {
-            background: #f8f9fa;
+            background: var(--bg-primary);
             min-height: 100vh;
         }
         .top-navbar {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            border-bottom: 1px solid #e9ecef;
+            background: var(--bg-secondary);
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid var(--border-color);
         }
         .sidebar-brand {
             background: rgba(0,0,0,0.2);
@@ -68,8 +104,32 @@
         }
         .card {
             border: none;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
             border-radius: 10px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+        }
+        .card-header {
+            background: var(--bg-secondary) !important;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .table {
+            background: var(--table-bg);
+            color: var(--text-primary);
+        }
+        .table thead th {
+            background: var(--table-header-bg);
+            color: var(--table-header-text);
+            border-color: var(--border-color);
+        }
+        .table tbody tr {
+            background: var(--table-bg);
+        }
+        .table tbody tr:hover {
+            background: var(--bg-primary);
+        }
+        .table td, .table th {
+            border-color: var(--border-color);
         }
         .btn-primary {
             background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
@@ -79,6 +139,114 @@
             background: linear-gradient(135deg, #2980b9 0%, #1f618d 100%);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Dark mode toggle button styles */
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 8px 16px;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            min-width: 100px;
+            justify-content: center;
+        }
+        .theme-toggle:hover {
+            background: var(--bg-primary);
+            border-color: var(--text-secondary);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .theme-toggle:active {
+            transform: translateY(0);
+        }
+        .theme-toggle.active {
+            background: var(--bg-primary);
+            border-color: #3498db;
+            color: #3498db;
+        }
+        .theme-toggle .icon {
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+        .theme-toggle:hover .icon {
+            transform: rotate(15deg);
+        }
+
+        /* Alert styles for dark mode */
+        .alert {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        /* Dropdown styles for dark mode */
+        .dropdown-menu {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+        }
+        .dropdown-item {
+            color: var(--text-primary);
+        }
+        .dropdown-item:hover {
+            background: var(--bg-primary);
+        }
+        .dropdown-header {
+            color: var(--text-secondary);
+        }
+        
+        /* Additional dark mode improvements */
+        .navbar-light .navbar-nav .nav-link {
+            color: var(--text-primary);
+        }
+        
+        .navbar-light .navbar-nav .nav-link:hover {
+            color: var(--text-secondary);
+        }
+        
+        .navbar-light .navbar-toggler {
+            border-color: var(--border-color);
+        }
+        
+        .navbar-light .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        
+        [data-bs-theme="dark"] .navbar-light .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        
+        /* Smooth transitions for all elements */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* Form elements dark mode support */
+        .form-control, .form-select {
+            background-color: var(--bg-secondary);
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+        
+        .form-control:focus, .form-select:focus {
+            background-color: var(--bg-secondary);
+            border-color: #3498db;
+            color: var(--text-primary);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .form-label {
+            color: var(--text-primary);
+        }
+        
+        .form-text {
+            color: var(--text-secondary);
         }
     </style>
     @stack('styles')
@@ -187,7 +355,13 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     
-                    <div class="navbar-nav ms-auto">
+                    <div class="navbar-nav ms-auto d-flex align-items-center">
+                        <!-- Dark Mode Toggle -->
+                        <button class="theme-toggle me-3" id="themeToggle" title="Toggle dark mode">
+                            <i class="bi bi-sun-fill icon" id="themeIcon"></i>
+                            <span id="themeText">Light</span>
+                        </button>
+                        
                         <div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
                                 <i class="bi bi-person-circle me-2"></i>
@@ -243,6 +417,10 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Admin Theme Manager -->
+<script src="{{ asset('js/admin-theme.js') }}"></script>
+
 @stack('scripts')
 </body>
 </html>
