@@ -121,10 +121,10 @@ class CriticsAdviceController extends Controller
             // Create embed message for Discord
             $embed = [
                 'title' => '🎯 Response to Your Feedback',
-                'description' => 'We have responded to your feedback! Check your email for the full response.',
+                'description' => 'Kami sudah membalas feedback anda! Silahkan cek email anda untuk melihat balasan kami.',
                 'color' => 0x00ff41, // Retro green color
                 'footer' => [
-                    'text' => 'Ranconnity Gaming Community'
+                    'text' => 'Ranconnity'
                 ],
                 'timestamp' => now()->toISOString()
             ];
