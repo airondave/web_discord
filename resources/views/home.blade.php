@@ -1487,6 +1487,121 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+
+        /* Volume Control Styles */
+        .volume-control-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1050;
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--retro-green);
+            border-radius: 25px;
+            padding: 10px 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .volume-control-container:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.5);
+            transform: scale(1.05);
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 200px;
+        }
+
+        .volume-icon {
+            color: var(--retro-green);
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px var(--retro-green);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .volume-icon:hover {
+            color: var(--retro-cyan);
+            text-shadow: 0 0 8px var(--retro-cyan);
+        }
+
+        .volume-slider {
+            flex: 1;
+            height: 6px;
+            border-radius: 3px;
+            background: #333;
+            outline: none;
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--retro-green);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            background: var(--retro-cyan);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.8);
+            transform: scale(1.2);
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--retro-green);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .volume-slider::-moz-range-thumb:hover {
+            background: var(--retro-cyan);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.8);
+            transform: scale(1.2);
+        }
+
+        .volume-value {
+            color: var(--retro-green);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-shadow: 0 0 5px var(--retro-green);
+            min-width: 35px;
+            text-align: center;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .volume-control-container {
+                top: 10px;
+                left: 10px;
+                padding: 8px 12px;
+            }
+            
+            .volume-control {
+                min-width: 160px;
+                gap: 8px;
+            }
+            
+            .volume-value {
+                font-size: 0.8rem;
+                min-width: 30px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1495,6 +1610,15 @@
         <source src="https://r2.guns.lol/1c2551cf-e822-45b7-909a-91069175dd35.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+
+    <!-- Volume Control Bar -->
+    <div class="volume-control-container">
+        <div class="volume-control">
+            <i class="bi bi-volume-up volume-icon" id="volumeIcon"></i>
+            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="50">
+            <span class="volume-value" id="volumeValue">50%</span>
+        </div>
+    </div>
 
     <!-- Click to Start Overlay -->
     <div id="startOverlay" class="start-overlay">
@@ -1877,6 +2001,11 @@
         const backgroundAudio = document.getElementById('backgroundAudio');
         const body = document.body;
 
+        // Volume Control Elements
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeValue = document.getElementById('volumeValue');
+        const volumeIcon = document.getElementById('volumeIcon');
+
         // Add overlay-active class to body initially
         body.classList.add('overlay-active');
 
@@ -1897,6 +2026,43 @@
             setTimeout(() => {
                 startOverlay.style.display = 'none';
             }, 800);
+        });
+
+        // Volume Control Functionality
+        function updateVolume() {
+            const volume = volumeSlider.value / 100;
+            backgroundAudio.volume = volume;
+            volumeValue.textContent = volumeSlider.value + '%';
+            
+            // Update volume icon based on level
+            if (volumeSlider.value == 0) {
+                volumeIcon.className = 'bi bi-volume-mute volume-icon';
+            } else if (volumeSlider.value < 50) {
+                volumeIcon.className = 'bi bi-volume-down volume-icon';
+            } else {
+                volumeIcon.className = 'bi bi-volume-up volume-icon';
+            }
+        }
+
+        // Initialize volume control
+        updateVolume();
+
+        // Volume slider event listener
+        volumeSlider.addEventListener('input', updateVolume);
+
+        // Volume icon click to mute/unmute
+        volumeIcon.addEventListener('click', function() {
+            if (backgroundAudio.volume > 0) {
+                // Store current volume and mute
+                volumeSlider.dataset.previousVolume = volumeSlider.value;
+                volumeSlider.value = 0;
+                updateVolume();
+            } else {
+                // Restore previous volume or set to 50% if none stored
+                const previousVolume = volumeSlider.dataset.previousVolume || 50;
+                volumeSlider.value = previousVolume;
+                updateVolume();
+            }
         });
 
         // Add retro typing effect
