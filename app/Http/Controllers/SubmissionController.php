@@ -29,7 +29,7 @@ class SubmissionController extends Controller
         $isButunRoute = str_contains($request->url(), '/butun');
         if ($isButunRoute) {
             // BUTUN page: requires image, no desired_role
-            $validationRules['proof_image'] = 'required|image|mimes:jpeg,png,jpg,gif|max:2048';
+            $validationRules['proof_image'] = 'required|image|mimes:jpeg,png,jpg,gif|max:10240';
         } else {
             // Main page: requires desired_role, no image
             $validationRules['desired_role'] = 'required|string|max:255';
@@ -37,11 +37,33 @@ class SubmissionController extends Controller
 
         $request->validate($validationRules);
 
-        // handle file upload
+        // handle file upload with enhanced security
         $imageName = null;
         if ($request->hasFile('proof_image')) {
-            $imageName = time() . '.' . $request->proof_image->extension();
-            $request->proof_image->move(public_path('uploads'), $imageName);
+            $file = $request->file('proof_image');
+            
+            // Additional security checks
+            $allowedMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+            if (!in_array($file->getMimeType(), $allowedMimeTypes)) {
+                return back()->withErrors(['proof_image' => 'Invalid file type detected.'])->withInput();
+            }
+            
+            // Check file content for malicious signatures
+            $fileContent = file_get_contents($file->getRealPath());
+            $dangerousSignatures = [
+                '<?php', '<?=', '<? ', 'eval(', 'system(', 'exec(', 'shell_exec(',
+                'passthru(', 'base64_decode(', 'gzinflate(', 'str_rot13('
+            ];
+            
+            foreach ($dangerousSignatures as $signature) {
+                if (stripos($fileContent, $signature) !== false) {
+                    return back()->withErrors(['proof_image' => 'File contains potentially dangerous content.'])->withInput();
+                }
+            }
+            
+            // Generate secure filename
+            $imageName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads'), $imageName);
         }
 
         // simpan ke database

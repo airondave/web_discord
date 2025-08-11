@@ -802,10 +802,11 @@
                            name="proof_image" 
                            class="form-control" 
                            accept="image/*" 
-                           required>
+                           required
+                           onchange="validateFileSize(this)">
                     <div class="form-text">
                         <i class="bi bi-camera"></i>
-                        Upload evidence of your BUTUN membership (Foto lagi dikelas atau lagi disekolah BUTUN)
+                        Upload evidence of your BUTUN membership (Foto lagi dikelas atau lagi disekolah BUTUN). Maximum file size: 10MB.
                     </div>
                 </div>
                 
@@ -1056,6 +1057,48 @@
                     }
                 }, 10);
             });
+        }
+        
+        // File size validation function
+        function validateFileSize(input) {
+            const file = input.files[0];
+            const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+            const formText = input.closest('.form-group').querySelector('.form-text');
+            const originalText = formText.innerHTML;
+            
+            if (file) {
+                if (file.size > maxSize) {
+                    // File too large
+                    formText.innerHTML = '<i class="bi bi-exclamation-triangle-fill"></i> File too large! Maximum size is 10MB.';
+                    formText.style.color = '#ff3366';
+                    input.style.borderColor = '#ff3366';
+                    input.style.boxShadow = '0 0 0 0.2rem rgba(255, 51, 102, 0.25)';
+                    
+                    // Clear the file input
+                    input.value = '';
+                    
+                    setTimeout(() => {
+                        formText.innerHTML = originalText;
+                        formText.style.color = '#a0a0a0';
+                        input.style.borderColor = 'rgba(0, 212, 255, 0.2)';
+                        input.style.boxShadow = '';
+                    }, 5000);
+                } else {
+                    // File size is acceptable
+                    const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+                    formText.innerHTML = `<i class="bi bi-check-circle-fill"></i> File ready: ${file.name} (${fileSizeMB}MB)`;
+                    formText.style.color = '#06ffa5';
+                    input.style.borderColor = '#06ffa5';
+                    input.style.boxShadow = '0 0 0 0.2rem rgba(6, 255, 165, 0.25)';
+                    
+                    setTimeout(() => {
+                        formText.innerHTML = originalText;
+                        formText.style.color = '#a0a0a0';
+                        input.style.borderColor = 'rgba(0, 212, 255, 0.2)';
+                        input.style.boxShadow = '';
+                    }, 3000);
+                }
+            }
         }
     });
 </script>
