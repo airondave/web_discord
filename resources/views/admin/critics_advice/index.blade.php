@@ -11,11 +11,6 @@
         background-color: #4752C4 !important;
     }
     
-    .masked-email {
-        font-family: 'Courier New', monospace;
-        letter-spacing: 0.5px;
-    }
-    
     .email-link {
         color: #007bff;
         text-decoration: none;
@@ -24,6 +19,23 @@
     .email-link:hover {
         color: #0056b3;
         text-decoration: underline;
+    }
+    
+    /* Dark mode compatible message display */
+    .message-content {
+        background-color: #f8f9fa;
+        color: #212529;
+        border: 1px solid #dee2e6;
+        border-radius: 0.375rem;
+        padding: 1rem;
+        margin-top: 0.5rem;
+    }
+    
+    /* Dark mode override */
+    [data-bs-theme="dark"] .message-content {
+        background-color: #343a40;
+        color: #f8f9fa;
+        border-color: #495057;
     }
 </style>
 <div class="container-fluid">
@@ -81,8 +93,8 @@
                                             <strong>{{ $feedback->sender_name }}</strong>
                                         </td>
                                         <td>
-                                            <a href="mailto:{{ $feedback->sender_email }}" class="email-link masked-email" title="{{ $feedback->sender_email }}">
-                                                {{ $feedback->masked_email }}
+                                            <a href="mailto:{{ $feedback->sender_email }}" class="email-link">
+                                                {{ $feedback->sender_email }}
                                             </a>
                                         </td>
                                         <td>
@@ -132,7 +144,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="mb-3">
-                                                        <strong>From:</strong> {{ $feedback->sender_name }} ({{ $feedback->masked_email }})
+                                                        <strong>From:</strong> {{ $feedback->sender_name }} ({{ $feedback->sender_email }})
                                                     </div>
                                                     @if($feedback->discord_username)
                                                     <div class="mb-3">
@@ -148,7 +160,7 @@
                                                     </div>
                                                     <div class="mb-3">
                                                         <strong>Message:</strong>
-                                                        <div class="border rounded p-3 bg-light mt-2">
+                                                        <div class="message-content">
                                                             {{ $feedback->messages }}
                                                         </div>
                                                     </div>
@@ -179,7 +191,7 @@
                                                     <div class="modal-body">
                                                         <div class="mb-3">
                                                             <label class="form-label">Original Message:</label>
-                                                            <div class="border rounded p-3 bg-light">
+                                                            <div class="message-content">
                                                                 {{ $feedback->messages }}
                                                             </div>
                                                         </div>
@@ -191,12 +203,12 @@
                                                                       rows="6" 
                                                                       placeholder="Type your response here..."
                                                                       required></textarea>
-                                                                                                            <div class="form-text">
-                                                    This response will be sent via email to {{ $feedback->masked_email }}
-                                                    @if($feedback->discord_username)
-                                                        <br><i class="bi bi-discord me-1"></i>Discord notification will also be sent to {{ $feedback->discord_username }}
-                                                    @endif
-                                                </div>
+                                                            <div class="form-text">
+                                                                This response will be sent via email to {{ $feedback->sender_email }}
+                                                                @if($feedback->discord_username)
+                                                                    <br><i class="bi bi-discord me-1"></i>Discord notification will also be sent to {{ $feedback->discord_username }}
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
@@ -263,8 +275,8 @@
                                             <strong>{{ $feedback->sender_name }}</strong>
                                         </td>
                                         <td>
-                                            <a href="mailto:{{ $feedback->sender_email }}" class="email-link masked-email" title="{{ $feedback->sender_email }}">
-                                                {{ $feedback->masked_email }}
+                                            <a href="mailto:{{ $feedback->sender_email }}" class="email-link">
+                                                {{ $feedback->sender_email }}
                                             </a>
                                         </td>
                                         <td>
@@ -319,14 +331,14 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div class="mb-3">
-                                                        <strong>From:</strong> {{ $feedback->sender_name }} ({{ $feedback->masked_email }})
+                                                        <strong>From:</strong> {{ $feedback->sender_name }} ({{ $feedback->sender_email }})
                                                     </div>
                                                     <div class="mb-3">
                                                         <strong>Date:</strong> {{ $feedback->created_at->format('F j, Y \a\t g:i A') }}
                                                     </div>
                                                     <div class="mb-3">
                                                         <strong>Message:</strong>
-                                                        <div class="border rounded p-3 bg-light mt-2">
+                                                        <div class="message-content">
                                                             {{ $feedback->messages }}
                                                         </div>
                                                     </div>
@@ -349,7 +361,7 @@
                                                 <div class="modal-body">
                                                     <div class="mb-3">
                                                         <strong>Response:</strong>
-                                                        <div class="border rounded p-3 bg-success bg-opacity-10 mt-2">
+                                                        <div class="message-content">
                                                             {{ $feedback->response }}
                                                         </div>
                                                     </div>
