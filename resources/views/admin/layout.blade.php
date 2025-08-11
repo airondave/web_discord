@@ -33,17 +33,17 @@
 
         [data-bs-theme="dark"] {
             /* Dark theme variables */
-            --bg-primary: #1a1a1a;
-            --bg-secondary: #2d2d2d;
-            --bg-sidebar: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --border-color: #404040;
-            --shadow: 0 0 20px rgba(0,0,0,0.3);
-            --card-bg: #2d2d2d;
-            --table-bg: #2d2d2d;
-            --table-header-bg: #404040;
-            --table-header-text: #ffffff;
+            --bg-primary: #1a1a1a !important;
+            --bg-secondary: #2d2d2d !important;
+            --bg-sidebar: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+            --text-primary: #ffffff !important;
+            --text-secondary: #b0b0b0 !important;
+            --border-color: #404040 !important;
+            --shadow: 0 0 20px rgba(0,0,0,0.3) !important;
+            --card-bg: #2d2d2d !important;
+            --table-bg: #2d2d2d !important;
+            --table-header-bg: #404040 !important;
+            --table-header-text: #ffffff !important;
         }
 
         body {
@@ -418,8 +418,97 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Admin Theme Manager -->
-<script src="{{ asset('js/admin-theme.js') }}"></script>
+<script>
+// Theme switching functionality
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, looking for theme elements...');
+    
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
+    const html = document.documentElement;
+    
+    console.log('Theme toggle found:', themeToggle);
+    console.log('Theme icon found:', themeIcon);
+    console.log('Theme text found:', themeText);
+    
+    if (!themeToggle) {
+        console.error('Theme toggle button not found!');
+        return;
+    }
+    
+    // Get saved theme from localStorage or default to 'light'
+    const currentTheme = localStorage.getItem('admin-theme') || 'light';
+    console.log('Initial theme loaded:', currentTheme);
+    html.setAttribute('data-bs-theme', currentTheme);
+    updateThemeUI(currentTheme);
+    
+    // Theme toggle click handler
+    themeToggle.addEventListener('click', function() {
+        console.log('Theme toggle clicked!');
+        const currentTheme = html.getAttribute('data-bs-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        console.log('Switching from', currentTheme, 'to', newTheme);
+        
+        html.setAttribute('data-bs-theme', newTheme);
+        localStorage.setItem('admin-theme', newTheme);
+        updateThemeUI(newTheme);
+        
+        console.log('Theme updated to:', newTheme);
+    });
+    
+    // Update theme toggle button UI
+    function updateThemeUI(theme) {
+        console.log('Updating theme UI to:', theme);
+        if (theme === 'dark') {
+            themeIcon.className = 'bi bi-moon-fill icon';
+            themeText.textContent = 'Dark';
+            themeToggle.title = 'Switch to light mode';
+            themeToggle.classList.add('active');
+        } else {
+            themeIcon.className = 'bi bi-sun-fill icon';
+            themeText.textContent = 'Light';
+            themeToggle.title = 'Switch to dark mode';
+            themeToggle.classList.remove('active');
+        }
+    }
+    
+    // Apply theme to Bootstrap components
+    function applyBootstrapTheme() {
+        const theme = html.getAttribute('data-bs-theme');
+        console.log('Applying Bootstrap theme:', theme);
+        if (theme === 'dark') {
+            document.body.classList.add('dark-mode');
+            // Force some dark mode styles for testing
+            document.body.style.backgroundColor = '#1a1a1a';
+            document.body.style.color = '#ffffff';
+        } else {
+            document.body.classList.remove('dark-mode');
+            // Reset to light mode
+            document.body.style.backgroundColor = '';
+            document.body.style.color = '';
+        }
+    }
+    
+    // Initial theme application
+    applyBootstrapTheme();
+    
+    // Watch for theme changes and apply Bootstrap theme
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'data-bs-theme') {
+                applyBootstrapTheme();
+            }
+        });
+    });
+    
+    observer.observe(html, {
+        attributes: true,
+        attributeFilter: ['data-bs-theme']
+    });
+});
+</script>
 
 @stack('scripts')
 </body>
