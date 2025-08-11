@@ -8,17 +8,18 @@
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: #e0e0e0;
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f4f4f4;
+            background-color: #1a1a1a;
         }
         .container {
-            background-color: white;
+            background-color: #2d2d2d;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            border: 1px solid #404040;
         }
         .header {
             text-align: center;
@@ -31,41 +32,70 @@
             margin: 0;
             font-size: 24px;
         }
+        .header p {
+            color: #b0b0b0;
+            margin: 10px 0 0 0;
+        }
         .content {
             margin-bottom: 30px;
         }
+        .content p {
+            color: #e0e0e0;
+        }
         .feedback-section {
-            background-color: #f8f9fa;
+            background-color: #404040;
             padding: 20px;
             border-radius: 8px;
             margin: 20px 0;
             border-left: 4px solid #00ff41;
         }
+        .feedback-section h3 {
+            color: #00ff41;
+            margin-top: 0;
+        }
+        .feedback-section p {
+            color: #e0e0e0;
+        }
+        .feedback-section small {
+            color: #b0b0b0;
+        }
         .response-section {
-            background-color: #e8f5e8;
+            background-color: #2a4a2a;
             padding: 20px;
             border-radius: 8px;
             margin: 20px 0;
             border-left: 4px solid #28a745;
         }
+        .response-section h3 {
+            color: #28a745;
+            margin-top: 0;
+        }
+        .response-section p {
+            color: #e0e0e0;
+        }
         .footer {
             text-align: center;
             margin-top: 30px;
             padding-top: 20px;
-            border-top: 1px solid #ddd;
-            color: #666;
+            border-top: 1px solid #404040;
+            color: #b0b0b0;
         }
         .btn {
             display: inline-block;
             padding: 12px 24px;
             background-color: #00ff41;
-            color: white;
+            color: #1a1a1a;
             text-decoration: none;
             border-radius: 5px;
             margin: 10px 0;
+            font-weight: bold;
         }
         .btn:hover {
             background-color: #00cc33;
+            color: #1a1a1a;
+        }
+        strong {
+            color: #ffffff;
         }
     </style>
 </head>

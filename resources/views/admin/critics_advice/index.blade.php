@@ -120,17 +120,11 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="btn-group" role="group">
-                                                <button class="btn btn-sm btn-primary" 
-                                                        data-bs-toggle="modal" 
-                                                        data-bs-target="#responseModal{{ $feedback->id }}">
-                                                    <i class="bi bi-reply me-1"></i>Respond
-                                                </button>
-                                                <button class="btn btn-sm btn-danger" 
-                                                        onclick="deleteFeedback({{ $feedback->id }})">
-                                                    <i class="bi bi-trash me-1"></i>Delete
-                                                </button>
-                                            </div>
+                                            <button class="btn btn-sm btn-primary" 
+                                                    data-bs-toggle="modal" 
+                                                    data-bs-target="#responseModal{{ $feedback->id }}">
+                                                <i class="bi bi-reply me-1"></i>Respond
+                                            </button>
                                         </td>
                                     </tr>
 
