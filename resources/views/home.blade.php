@@ -1491,7 +1491,7 @@
         /* Volume Control Styles */
         .volume-control-container {
             position: fixed;
-            top: 20px;
+            top: 100px;
             left: 20px;
             z-index: 1050;
             background: rgba(26, 26, 26, 0.9);
@@ -1587,7 +1587,7 @@
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .volume-control-container {
-                top: 10px;
+                top: 80px;
                 left: 10px;
                 padding: 8px 12px;
             }
