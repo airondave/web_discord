@@ -5,10 +5,11 @@
 @push('styles')
 <style>
     .chat-container {
-        background: white;
+        background: var(--card-bg);
         border-radius: 15px;
-        box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+        box-shadow: var(--shadow);
         overflow: hidden;
+        border: 1px solid var(--border-color);
     }
     
     .chat-header {
@@ -20,25 +21,32 @@
     
     .chat-form {
         padding: 30px;
+        background: var(--card-bg);
+        color: var(--text-primary);
     }
     
     .channel-selector {
-        background: #f8f9fa;
-        border: 2px solid #e9ecef;
+        background: var(--bg-primary);
+        border: 2px solid var(--border-color);
         border-radius: 10px;
         padding: 20px;
         margin-bottom: 25px;
+        color: var(--text-primary);
     }
     
     .message-input {
-        border: 2px solid #e9ecef;
+        background: var(--bg-secondary);
+        border: 2px solid var(--border-color);
         border-radius: 10px;
         transition: all 0.3s ease;
+        color: var(--text-primary);
     }
     
     .message-input:focus {
         border-color: #5865f2;
         box-shadow: 0 0 0 0.2rem rgba(88, 101, 242, 0.25);
+        background: var(--bg-secondary);
+        color: var(--text-primary);
     }
     
     .send-btn {
@@ -56,35 +64,46 @@
     }
     
     .message-type-toggle {
-        background: #f8f9fa;
-        border: 1px solid #dee2e6;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
         border-radius: 8px;
         padding: 8px 16px;
         margin-bottom: 20px;
+        color: var(--text-primary);
     }
     
     .message-type-toggle .btn {
         border-radius: 6px;
         font-size: 0.9rem;
         padding: 6px 16px;
+        color: var(--text-primary);
+        border-color: var(--border-color);
+        background: var(--bg-secondary);
+    }
+    
+    .message-type-toggle .btn:hover {
+        background: var(--bg-primary);
+        border-color: var(--text-secondary);
     }
     
     .message-type-toggle .btn.active {
         background: #5865f2;
         border-color: #5865f2;
+        color: white;
     }
     
     .channel-info {
-        background: #e3f2fd;
-        border: 1px solid #bbdefb;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
         border-radius: 8px;
         padding: 15px;
         margin-bottom: 20px;
+        color: var(--text-primary);
     }
     
     .character-count {
         font-size: 0.85rem;
-        color: #6c757d;
+        color: var(--text-secondary);
         text-align: right;
         margin-top: 5px;
     }
@@ -95,6 +114,80 @@
     
     .character-count.danger {
         color: #dc3545;
+    }
+    
+    /* Dark mode specific overrides */
+    [data-bs-theme="dark"] .chat-container {
+        background: var(--card-bg);
+        border-color: var(--border-color);
+    }
+    
+    [data-bs-theme="dark"] .chat-form {
+        background: var(--card-bg);
+        color: var(--text-primary);
+    }
+    
+    [data-bs-theme="dark"] .channel-selector {
+        background: var(--bg-primary);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+    }
+    
+    [data-bs-theme="dark"] .message-type-toggle {
+        background: var(--bg-primary);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+    }
+    
+    [data-bs-theme="dark"] .channel-info {
+        background: var(--bg-primary);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+    }
+    
+    /* Form elements dark mode support */
+    .form-check-label {
+        color: var(--text-primary);
+    }
+    
+    .form-check-label small {
+        color: var(--text-secondary);
+    }
+    
+    .form-label {
+        color: var(--text-primary);
+    }
+    
+    /* Button group dark mode support */
+    .btn-outline-secondary {
+        color: var(--text-primary);
+        border-color: var(--border-color);
+        background: var(--bg-secondary);
+    }
+    
+    .btn-outline-secondary:hover {
+        background: var(--bg-primary);
+        border-color: var(--text-secondary);
+        color: var(--text-primary);
+    }
+    
+    /* Alert dark mode support */
+    .alert-warning {
+        background: var(--bg-secondary);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+    }
+    
+    /* Smooth transitions for theme switching */
+    .chat-container,
+    .chat-form,
+    .channel-selector,
+    .message-type-toggle,
+    .channel-info,
+    .form-check-label,
+    .form-label,
+    .btn-outline-secondary {
+        transition: all 0.3s ease;
     }
 </style>
 @endpush
