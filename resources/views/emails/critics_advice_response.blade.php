@@ -130,9 +130,9 @@
         </div>
 
         <div class="footer">
-            <p><strong>Ranconnity Community</strong></p>
-            <p>The Ultimate Gaming Community</p>
-            <p>Thank you for being part of our community! 🎯</p>
+            <p><strong>Ranconnity Discord Server</strong></p>
+            <p>The Ultimate Random Community</p>
+            <p>Thank you for being part of our family! 🎯</p>
         </div>
     </div>
 </body>
