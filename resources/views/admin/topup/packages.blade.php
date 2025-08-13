@@ -572,19 +572,25 @@
 document.addEventListener('DOMContentLoaded', function() {
     const addPackageForm = document.querySelector('#addPackageForm');
     if (addPackageForm) {
+        console.log('Add package form found:', addPackageForm);
+        
         addPackageForm.addEventListener('submit', function(e) {
             console.log('Form submitting...');
+            console.log('Form action:', this.action);
+            console.log('Form method:', this.method);
             
             // Check if required fields are filled
             const gameId = this.querySelector('[name="game_id"]').value;
             const name = this.querySelector('[name="name"]').value;
             const amount = this.querySelector('[name="amount"]').value;
             const price = this.querySelector('[name="price"]').value;
+            const isActive = this.querySelector('[name="is_active"]').checked;
             
             console.log('Game ID:', gameId);
             console.log('Name:', name);
             console.log('Amount:', amount);
             console.log('Price:', price);
+            console.log('Is Active:', isActive);
             
             if (!gameId || !name || !amount || !price) {
                 e.preventDefault();
@@ -603,10 +609,17 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Log form data
             const formData = new FormData(this);
+            console.log('Form data entries:');
             for (let [key, value] of formData.entries()) {
                 console.log(key + ': ' + value);
             }
+            
+            // Check CSRF token
+            const csrfToken = this.querySelector('[name="_token"]').value;
+            console.log('CSRF Token:', csrfToken ? 'Present' : 'Missing');
         });
+    } else {
+        console.error('Add package form not found!');
     }
     
     // Reset form when modal is hidden
