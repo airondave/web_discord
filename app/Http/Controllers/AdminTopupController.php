@@ -208,7 +208,6 @@ class AdminTopupController extends Controller
             'name' => 'required|string|max:100',
             'amount' => 'required|integer|min:1',
             'price' => 'required|integer|min:1000',
-            'is_active' => 'sometimes|boolean',
         ]);
         
         \Log::info('Validation passed successfully');
@@ -219,7 +218,7 @@ class AdminTopupController extends Controller
                 'name' => $request->name,
                 'amount' => $request->amount,
                 'price' => $request->price,
-                'is_active' => $request->boolean('is_active'),
+                'is_active' => true, // Always active by default
             ]);
             
             \Log::info('Package created successfully:', $package->toArray());
@@ -255,7 +254,6 @@ class AdminTopupController extends Controller
             'name' => 'required|string|max:100',
             'amount' => 'required|integer|min:1',
             'price' => 'required|integer|min:1000',
-            'is_active' => 'sometimes|boolean',
         ]);
 
         $package = TopupPackage::findOrFail($id);
@@ -264,7 +262,7 @@ class AdminTopupController extends Controller
             'name' => $request->name,
             'amount' => $request->amount,
             'price' => $request->price,
-            'is_active' => $request->boolean('is_active'),
+            'is_active' => true, // Always active by default
         ]);
 
         return redirect()->route('admin.topup.packages')

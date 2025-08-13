@@ -453,15 +453,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="is_active" id="is_active" 
-                                   {{ old('is_active', true) ? 'checked' : '' }}>
-                            <label class="form-check-label" for="is_active">
-                                Active Package
-                            </label>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -514,14 +506,7 @@
                         <label for="edit_price" class="form-label">Price (Rp)</label>
                         <input type="number" class="form-control" name="price" id="edit_price" required>
                     </div>
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="is_active" id="edit_is_active">
-                            <label class="form-check-label" for="edit_is_active">
-                                Active Package
-                            </label>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -585,13 +570,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const name = this.querySelector('[name="name"]').value;
             const amount = this.querySelector('[name="amount"]').value;
             const price = this.querySelector('[name="price"]').value;
-            const isActive = this.querySelector('[name="is_active"]').checked;
-            
-            console.log('Game ID:', gameId);
-            console.log('Name:', name);
-            console.log('Amount:', amount);
-            console.log('Price:', price);
-            console.log('Is Active:', isActive);
+                         
+             console.log('Game ID:', gameId);
+             console.log('Name:', name);
+             console.log('Amount:', amount);
+             console.log('Price:', price);
             
             if (!gameId || !name || !amount || !price) {
                 e.preventDefault();
@@ -676,7 +659,7 @@ function editPackage(packageId) {
                 document.getElementById('edit_name').value = package.name;
                 document.getElementById('edit_amount').value = package.amount;
                 document.getElementById('edit_price').value = package.price;
-                document.getElementById('edit_is_active').checked = package.is_active;
+                
                 
                 document.getElementById('editPackageForm').action = `/admin/topup/packages/${packageId}`;
                 
