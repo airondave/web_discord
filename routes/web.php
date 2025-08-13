@@ -33,6 +33,7 @@ Route::post('/submit', [SubmissionController::class, 'store']);
 // Topup routes
 Route::get('/topup', [TopupController::class, 'index'])->name('topup.index');
 Route::post('/topup', [TopupController::class, 'store'])->name('topup.store');
+Route::get('/topup/packages/{gameId}', [TopupController::class, 'getPackages'])->name('topup.packages');
 Route::get('/topup/payment/{id}', [TopupController::class, 'payment'])->name('topup.payment');
 Route::post('/topup/confirm-payment/{id}', [TopupController::class, 'confirmPayment'])->name('topup.confirm-payment');
 Route::get('/topup/success/{id}', [TopupController::class, 'success'])->name('topup.success');
@@ -89,33 +90,15 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::post('/admin/discord-chat/send', [DiscordChatController::class, 'sendMessage'])->name('admin.discord.chat.send');
     Route::get('/admin/discord-chat/channels', [DiscordChatController::class, 'getChannels'])->name('admin.discord.chat.channels');
 
-
+    // Topup Management
+    Route::get('/admin/topup', [AdminTopupController::class, 'index'])->name('admin.topup.index');
+    Route::get('/admin/topup/{id}', [AdminTopupController::class, 'show'])->name('admin.topup.show');
+    Route::post('/admin/topup/{id}/process', [AdminTopupController::class, 'process'])->name('admin.topup.process');
+    Route::post('/admin/topup/{id}/reject', [AdminTopupController::class, 'reject'])->name('admin.topup.reject');
+    Route::get('/admin/topup/games', [AdminTopupController::class, 'games'])->name('admin.topup.games');
+    Route::get('/admin/topup/packages', [AdminTopupController::class, 'packages'])->name('admin.topup.packages');
+    Route::get('/admin/topup/payment-methods', [AdminTopupController::class, 'paymentMethods'])->name('admin.topup.payment-methods');
 });
-
-// Topup Management (Without Auth)
-Route::get('/admin/topup', [AdminTopupController::class, 'index'])->name('admin.topup.index');
-Route::get('/admin/topup/{id}', [AdminTopupController::class, 'show'])->name('admin.topup.show');
-Route::post('/admin/topup/{id}/process', [AdminTopupController::class, 'process'])->name('admin.topup.process');
-Route::post('/admin/topup/{id}/reject', [AdminTopupController::class, 'reject'])->name('admin.topup.reject');
-
-// Game Management (Without Auth)
-Route::get('/admin/topup/games', [AdminTopupController::class, 'games'])->name('admin.topup.games');
-Route::post('/admin/topup/games', [AdminTopupController::class, 'storeGame'])->name('admin.topup.games.store');
-Route::put('/admin/topup/games/{id}', [AdminTopupController::class, 'updateGame'])->name('admin.topup.games.update');
-Route::delete('/admin/topup/games/{id}', [AdminTopupController::class, 'destroyGame'])->name('admin.topup.games.destroy');
-Route::get('/admin/topup/games/{id}/packages', [AdminTopupController::class, 'getGamePackages'])->name('admin.topup.games.packages');
-
-// Package Management (Without Auth)
-Route::get('/admin/topup/packages', [AdminTopupController::class, 'packages'])->name('admin.topup.packages');
-Route::post('/admin/topup/packages', [AdminTopupController::class, 'storePackage'])->name('admin.topup.packages.store');
-Route::put('/admin/topup/packages/{id}', [AdminTopupController::class, 'updatePackage'])->name('admin.topup.packages.update');
-Route::delete('/admin/topup/packages/{id}', [AdminTopupController::class, 'destroyPackage'])->name('admin.topup.packages.destroy');
-
-// Payment Method Management (Without Auth)
-Route::get('/admin/topup/payment-methods', [AdminTopupController::class, 'paymentMethods'])->name('admin.topup.payment-methods');
-Route::post('/admin/topup/payment-methods', [AdminTopupController::class, 'storePaymentMethod'])->name('admin.topup.payment-methods.store');
-Route::put('/admin/topup/payment-methods/{id}', [AdminTopupController::class, 'updatePaymentMethod'])->name('admin.topup.payment-methods.update');
-Route::delete('/admin/topup/payment-methods/{id}', [AdminTopupController::class, 'destroyPaymentMethod'])->name('admin.topup.payment-methods.destroy');
 
 // Discord API routes
 Route::prefix('api/discord')->group(function () {

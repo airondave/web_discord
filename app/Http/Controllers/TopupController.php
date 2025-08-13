@@ -91,4 +91,14 @@ class TopupController extends Controller
         $transaction = Transaction::with(['game', 'topupPackage'])->findOrFail($id);
         return view('topup.success', compact('transaction'));
     }
+
+    public function getPackages($gameId)
+    {
+        $packages = TopupPackage::where('game_id', $gameId)->get();
+        
+        return response()->json([
+            'success' => true,
+            'packages' => $packages
+        ]);
+    }
 } 

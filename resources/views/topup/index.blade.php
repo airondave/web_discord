@@ -136,8 +136,8 @@
         }
 
         .game-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 255, 65, 0.5);
+            transform: none;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
         }
 
         .game-title {
@@ -183,7 +183,7 @@
         }
 
         .package-card:hover {
-            transform: translateY(-3px);
+            transform: none;
             box-shadow: 0 5px 20px rgba(0, 255, 65, 0.4);
             border-color: var(--retro-cyan);
         }
@@ -287,7 +287,7 @@
         }
 
         .btn-topup:hover {
-            transform: translateY(-3px);
+            transform: none;
             box-shadow: 0 10px 25px rgba(255, 0, 255, 0.4);
         }
 
@@ -295,40 +295,6 @@
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
-        }
-
-        .search-container {
-            margin-bottom: 2rem;
-        }
-
-        .retro-search-input {
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid var(--retro-green);
-            border-radius: 8px;
-            color: var(--text-primary);
-            padding: 0.75rem 1rem;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 1rem;
-        }
-
-        .retro-search-input:focus {
-            background: rgba(0, 0, 0, 0.7);
-            border-color: var(--retro-cyan);
-            color: var(--text-primary);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-            outline: none;
-        }
-
-        .retro-search-icon {
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid var(--retro-green);
-            border-right: none;
-            color: var(--retro-green);
-            border-radius: 8px 0 0 8px;
-        }
-
-        .game-option.hidden {
-            display: none !important;
         }
 
         .total-section {
@@ -366,6 +332,102 @@
         .genshin-icon {
             color: #f4c2c2;
         }
+
+        /* Search Bar Styles */
+        .search-section {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(42, 42, 42, 0.9) 100%);
+            border: 2px solid var(--retro-cyan);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.3rem;
+            color: var(--retro-cyan);
+            text-shadow: 0 0 10px var(--retro-cyan);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .search-input {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--retro-cyan);
+            border-radius: 8px;
+            color: var(--text-primary);
+            padding: 0.75rem 1rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .search-input:focus {
+            background: rgba(0, 0, 0, 0.7);
+            border-color: var(--retro-green);
+            color: var(--text-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            outline: none;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .game-option {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(42, 42, 42, 0.9) 100%);
+            border: 2px solid var(--retro-green);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-option::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--retro-green), var(--retro-cyan), var(--retro-purple), var(--retro-yellow));
+            z-index: -1;
+            border-radius: 15px;
+            animation: borderGlow 3s linear infinite;
+        }
+
+        .game-option:hover {
+            transform: none;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+
+        .game-option.selected {
+            border-color: var(--retro-yellow);
+            background: rgba(255, 255, 0, 0.1);
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+        }
+
+        .game-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .valorant-icon { color: #ff4655; }
+        .genshin-icon { color: #f4c2c2; }
+        .roblox-icon { color: #ff6b6b; }
+        .zenless-icon { color: #4ecdc4; }
+        .ml-icon { color: #45b7d1; }
+        .pubg-icon { color: #96ceb4; }
+        .honkai-icon { color: #feca57; }
+        .freefire-icon { color: #ff9ff3; }
+        .cod-icon { color: #54a0ff; }
+        .magicchess-icon { color: #5f27cd; }
 
         @media (max-width: 768px) {
             .glitch-title {
@@ -436,15 +498,15 @@
                 @csrf
                 
                 <!-- Search Bar -->
-                <div class="search-container mb-4">
-                    <div class="input-group">
-                        <span class="input-group-text retro-search-icon">
-                            <i class="bi bi-search"></i>
-                        </span>
-                        <input type="text" id="gameSearch" class="form-control retro-search-input" placeholder="Search for games...">
-                    </div>
+                <div class="search-section">
+                    <h3 class="search-title">
+                        <i class="bi bi-search me-2"></i>
+                        Search Games
+                    </h3>
+                    <input type="text" class="search-input" id="gameSearch" 
+                           placeholder="Type to search for games..." autocomplete="off">
                 </div>
-
+                
                 <!-- Game Selection -->
                 <div class="game-card">
                     <h3 class="game-title text-center">
@@ -452,22 +514,20 @@
                         Select Your Game
                     </h3>
                     
-                    <div class="row">
+                    <div class="game-grid" id="gameGrid">
                         @foreach($games as $game)
-                        <div class="col-md-6 mb-3">
-                            <div class="game-option text-center p-3" data-game-id="{{ $game->id }}">
-                                <div class="game-icon">
-                                    <i class="bi bi-{{ $game->name === 'Valorant' ? 'controller' : ($game->name === 'Genshin Impact' ? 'gem' : 'diamond') }}"></i>
-                                </div>
-                                <h4 class="game-name">{{ $game->name }}</h4>
-                                <p class="text-muted">{{ $game->publisher }}</p>
-                                <div class="form-check d-flex justify-content-center">
-                                    <input class="form-check-input" type="radio" name="game_id" 
-                                           id="game_{{ $game->id }}" value="{{ $game->id }}" required>
-                                    <label class="form-check-label ms-2" for="game_{{ $game->id }}">
-                                        Select this game
-                                    </label>
-                                </div>
+                        <div class="game-option" data-game-id="{{ $game->id }}" data-game-name="{{ strtolower($game->name) }}">
+                            <div class="game-icon {{ $game->name == 'Valorant' ? 'valorant-icon' : ($game->name == 'Genshin Impact' ? 'genshin-icon' : ($game->name == 'Roblox' ? 'roblox-icon' : ($game->name == 'Zenless Zone Zero' ? 'zenless-icon' : ($game->name == 'Mobile Legends Bang Bang' ? 'ml-icon' : ($game->name == 'PUBG Mobile' ? 'pubg-icon' : ($game->name == 'Honkai Star Rail' ? 'honkai-icon' : ($game->name == 'Free Fire' ? 'freefire-icon' : ($game->name == 'Call of Duty Mobile' ? 'cod-icon' : 'magicchess-icon')))))))) }}">
+                                <i class="bi bi-{{ $game->name == 'Valorant' ? 'controller' : ($game->name == 'Genshin Impact' ? 'gem' : ($game->name == 'Roblox' ? 'box' : ($game->name == 'Zenless Zone Zero' ? 'stars' : ($game->name == 'Mobile Legends Bang Bang' ? 'phone' : ($game->name == 'PUBG Mobile' ? 'crosshair' : ($game->name == 'Honkai Star Rail' ? 'star' : ($game->name == 'Free Fire' ? 'fire' : ($game->name == 'Call of Duty Mobile' ? 'shield' : 'chess-king')))))))) }}"></i>
+                            </div>
+                            <h4 class="text-{{ $game->name == 'Valorant' ? 'danger' : ($game->name == 'Genshin Impact' ? 'warning' : ($game->name == 'Roblox' ? 'danger' : ($game->name == 'Zenless Zone Zero' ? 'info' : ($game->name == 'Mobile Legends Bang Bang' ? 'primary' : ($game->name == 'PUBG Mobile' ? 'success' : ($game->name == 'Honkai Star Rail' ? 'warning' : ($game->name == 'Free Fire' ? 'danger' : ($game->name == 'Call of Duty Mobile' ? 'primary' : 'secondary')))))))) }}">{{ $game->name }}</h4>
+                            <p class="text-muted">{{ $game->publisher }}</p>
+                            <div class="form-check d-flex justify-content-center">
+                                <input class="form-check-input" type="radio" name="game_id" 
+                                       id="game_{{ $game->id }}" value="{{ $game->id }}" required>
+                                <label class="form-check-label ms-2" for="game_{{ $game->id }}">
+                                    Select this game
+                                </label>
                             </div>
                         </div>
                         @endforeach
@@ -563,32 +623,8 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
-            <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Search functionality
-                const gameSearch = document.getElementById('gameSearch');
-                const gameOptions = document.querySelectorAll('.game-option');
-                
-                gameSearch.addEventListener('input', function() {
-                    const searchTerm = this.value.toLowerCase().trim();
-                    
-                    gameOptions.forEach(option => {
-                        const gameName = option.querySelector('h4').textContent.toLowerCase();
-                        const gamePublisher = option.querySelector('p').textContent.toLowerCase();
-                        
-                        if (gameName.includes(searchTerm) || gamePublisher.includes(searchTerm)) {
-                            option.classList.remove('hidden');
-                        } else {
-                            option.classList.add('hidden');
-                        }
-                    });
-                });
-                
-                // Clear search when form is reset
-                document.getElementById('topupForm').addEventListener('reset', function() {
-                    gameSearch.value = '';
-                    gameOptions.forEach(option => option.classList.remove('hidden'));
-                });
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
             const gameRadios = document.querySelectorAll('input[name="game_id"]');
             const packageSection = document.getElementById('packageSection');
             const paymentSection = document.getElementById('paymentSection');
@@ -597,11 +633,33 @@
             const totalSection = document.getElementById('totalSection');
             const totalAmount = document.getElementById('totalAmount');
             const submitBtn = document.getElementById('submitBtn');
+            const gameSearch = document.getElementById('gameSearch');
+            const gameGrid = document.getElementById('gameGrid');
+
+            // Search functionality
+            gameSearch.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const gameOptions = gameGrid.querySelectorAll('.game-option');
+                
+                gameOptions.forEach(option => {
+                    const gameName = option.dataset.gameName;
+                    if (gameName.includes(searchTerm)) {
+                        option.style.display = 'block';
+                    } else {
+                        option.style.display = 'none';
+                    }
+                });
+            });
 
             // Game selection
             gameRadios.forEach(radio => {
                 radio.addEventListener('change', function() {
                     if (this.checked) {
+                        // Remove previous selection styling
+                        document.querySelectorAll('.game-option').forEach(opt => opt.classList.remove('selected'));
+                        // Add selection styling to parent
+                        this.closest('.game-option').classList.add('selected');
+                        
                         loadPackages(this.value);
                         packageSection.style.display = 'block';
                         paymentSection.style.display = 'none';
@@ -614,72 +672,58 @@
 
             // Load packages for selected game
             function loadPackages(gameId) {
-                const game = @json($games);
-                const selectedGame = game.find(g => g.id == gameId);
-                
-                if (selectedGame && selectedGame.topup_packages) {
-                    let packagesHTML = '';
-                    selectedGame.topup_packages.forEach(package => {
-                        // Determine currency based on game
-                        let currency = '';
-                        if (selectedGame.name === 'Valorant') {
-                            currency = 'VP';
-                        } else if (selectedGame.name === 'Genshin Impact' || selectedGame.name === 'Zenless Zone Zero' || selectedGame.name === 'Honkai Star Rail') {
-                            currency = selectedGame.name === 'Genshin Impact' ? 'Primogems' : (selectedGame.name === 'Zenless Zone Zero' ? 'Denny' : 'Stellar Jade');
-                        } else if (selectedGame.name === 'Roblox') {
-                            currency = 'Robux';
-                        } else if (selectedGame.name === 'Mobile Legends Bang Bang' || selectedGame.name === 'Free Fire' || selectedGame.name === 'Magic Chess Go Go') {
-                            currency = 'Diamonds';
-                        } else if (selectedGame.name === 'PUBG Mobile') {
-                            currency = 'UC';
-                        } else if (selectedGame.name === 'Call of Duty Mobile') {
-                            currency = 'CP';
-                        } else {
-                            currency = 'Points';
+                fetch(`/topup/packages/${gameId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success && data.packages) {
+                            let packagesHTML = '';
+                            data.packages.forEach(package => {
+                                packagesHTML += `
+                                    <div class="package-card" data-package-id="${package.id}" data-price="${package.price}">
+                                        <div class="package-name">${package.name}</div>
+                                        <div class="package-amount">${package.amount}</div>
+                                        <div class="package-price">Rp ${package.price.toLocaleString('id-ID')}</div>
+                                    </div>
+                                `;
+                            });
+                            
+                            packageGrid.innerHTML = packagesHTML;
+                            
+                            // Add click events to packages
+                            const packageCards = packageGrid.querySelectorAll('.package-card');
+                            packageCards.forEach(card => {
+                                card.addEventListener('click', function() {
+                                    // Remove previous selection
+                                    packageCards.forEach(c => c.classList.remove('selected'));
+                                    // Select current package
+                                    this.classList.add('selected');
+                                    
+                                    // Update form
+                                    const packageId = this.dataset.packageId;
+                                    const price = this.dataset.price;
+                                    
+                                    // Add hidden input for package
+                                    let packageInput = document.querySelector('input[name="package_id"]');
+                                    if (!packageInput) {
+                                        packageInput = document.createElement('input');
+                                        packageInput.type = 'hidden';
+                                        packageInput.name = 'package_id';
+                                        document.getElementById('topupForm').appendChild(packageInput);
+                                    }
+                                    packageInput.value = packageId;
+                                    
+                                    // Show payment section
+                                    paymentSection.style.display = 'block';
+                                    playerSection.style.display = 'none';
+                                    totalSection.style.display = 'none';
+                                    submitBtn.disabled = true;
+                                });
+                            });
                         }
-                        
-                        packagesHTML += `
-                            <div class="package-card" data-package-id="${package.id}" data-price="${package.price}">
-                                <div class="package-name">${package.name}</div>
-                                <div class="package-amount">${package.amount} ${currency}</div>
-                                <div class="package-price">Rp ${package.price.toLocaleString('id-ID')}</div>
-                            </div>
-                        `;
+                    })
+                    .catch(error => {
+                        console.error('Error loading packages:', error);
                     });
-                    
-                    packageGrid.innerHTML = packagesHTML;
-                    
-                    // Add click events to packages
-                    const packageCards = packageGrid.querySelectorAll('.package-card');
-                    packageCards.forEach(card => {
-                        card.addEventListener('click', function() {
-                            // Remove previous selection
-                            packageCards.forEach(c => c.classList.remove('selected'));
-                            // Select current package
-                            this.classList.add('selected');
-                            
-                            // Update form
-                            const packageId = this.dataset.packageId;
-                            const price = this.dataset.price;
-                            
-                            // Add hidden input for package
-                            let packageInput = document.querySelector('input[name="package_id"]');
-                            if (!packageInput) {
-                                packageInput = document.createElement('input');
-                                packageInput.type = 'hidden';
-                                packageInput.name = 'package_id';
-                                document.getElementById('topupForm').appendChild(packageInput);
-                            }
-                            packageInput.value = packageId;
-                            
-                            // Show payment section
-                            paymentSection.style.display = 'block';
-                            playerSection.style.display = 'none';
-                            totalSection.style.display = 'none';
-                            submitBtn.disabled = true;
-                        });
-                    });
-                }
             }
 
             // Payment method selection

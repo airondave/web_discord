@@ -136,9 +136,9 @@ class TopupSeeder extends Seeder
         }
 
         // Create Topup Packages for Zenless Zone Zero
-        $zzz = Game::where('name', 'Zenless Zone Zero')->first();
-        if ($zzz) {
-            $zzzPackages = [
+        $zenless = Game::where('name', 'Zenless Zone Zero')->first();
+        if ($zenless) {
+            $zenlessPackages = [
                 ['name' => '60 Denny', 'amount' => 60, 'price' => 15000],
                 ['name' => '300 Denny', 'amount' => 300, 'price' => 75000],
                 ['name' => '980 Denny', 'amount' => 980, 'price' => 200000],
@@ -146,9 +146,9 @@ class TopupSeeder extends Seeder
                 ['name' => '3280 Denny', 'amount' => 3280, 'price' => 650000],
             ];
 
-            foreach ($zzzPackages as $package) {
+            foreach ($zenlessPackages as $package) {
                 TopupPackage::create([
-                    'game_id' => $zzz->id,
+                    'game_id' => $zenless->id,
                     'name' => $package['name'],
                     'amount' => $package['amount'],
                     'price' => $package['price'],
@@ -160,12 +160,11 @@ class TopupSeeder extends Seeder
         $ml = Game::where('name', 'Mobile Legends Bang Bang')->first();
         if ($ml) {
             $mlPackages = [
-                ['name' => '100 Diamonds', 'amount' => 100, 'price' => 25000],
-                ['name' => '310 Diamonds', 'amount' => 310, 'price' => 75000],
-                ['name' => '520 Diamonds', 'amount' => 520, 'price' => 120000],
-                ['name' => '830 Diamonds', 'amount' => 830, 'price' => 200000],
-                ['name' => '1060 Diamonds', 'amount' => 1060, 'price' => 250000],
-                ['name' => '2180 Diamonds', 'amount' => 2180, 'price' => 500000],
+                ['name' => '100 Diamonds', 'amount' => 100, 'price' => 20000],
+                ['name' => '310 Diamonds', 'amount' => 310, 'price' => 50000],
+                ['name' => '520 Diamonds', 'amount' => 520, 'price' => 80000],
+                ['name' => '1060 Diamonds', 'amount' => 1060, 'price' => 150000],
+                ['name' => '2180 Diamonds', 'amount' => 2180, 'price' => 300000],
             ];
 
             foreach ($mlPackages as $package) {
@@ -185,8 +184,8 @@ class TopupSeeder extends Seeder
                 ['name' => '60 UC', 'amount' => 60, 'price' => 15000],
                 ['name' => '325 UC', 'amount' => 325, 'price' => 75000],
                 ['name' => '660 UC', 'amount' => 660, 'price' => 150000],
-                ['name' => '1320 UC', 'amount' => 1320, 'price' => 300000],
-                ['name' => '2670 UC', 'amount' => 2670, 'price' => 600000],
+                ['name' => '1800 UC', 'amount' => 1800, 'price' => 400000],
+                ['name' => '3850 UC', 'amount' => 3850, 'price' => 800000],
             ];
 
             foreach ($pubgPackages as $package) {
@@ -200,9 +199,9 @@ class TopupSeeder extends Seeder
         }
 
         // Create Topup Packages for Honkai Star Rail
-        $hsr = Game::where('name', 'Honkai Star Rail')->first();
-        if ($hsr) {
-            $hsrPackages = [
+        $honkai = Game::where('name', 'Honkai Star Rail')->first();
+        if ($honkai) {
+            $honkaiPackages = [
                 ['name' => '60 Stellar Jade', 'amount' => 60, 'price' => 15000],
                 ['name' => '300 Stellar Jade', 'amount' => 300, 'price' => 75000],
                 ['name' => '980 Stellar Jade', 'amount' => 980, 'price' => 200000],
@@ -210,9 +209,9 @@ class TopupSeeder extends Seeder
                 ['name' => '3280 Stellar Jade', 'amount' => 3280, 'price' => 650000],
             ];
 
-            foreach ($hsrPackages as $package) {
+            foreach ($honkaiPackages as $package) {
                 TopupPackage::create([
-                    'game_id' => $hsr->id,
+                    'game_id' => $honkai->id,
                     'name' => $package['name'],
                     'amount' => $package['amount'],
                     'price' => $package['price'],
@@ -221,19 +220,19 @@ class TopupSeeder extends Seeder
         }
 
         // Create Topup Packages for Free Fire
-        $ff = Game::where('name', 'Free Fire')->first();
-        if ($ff) {
-            $ffPackages = [
+        $freefire = Game::where('name', 'Free Fire')->first();
+        if ($freefire) {
+            $freefirePackages = [
                 ['name' => '100 Diamonds', 'amount' => 100, 'price' => 20000],
-                ['name' => '310 Diamonds', 'amount' => 310, 'price' => 60000],
-                ['name' => '520 Diamonds', 'amount' => 520, 'price' => 100000],
-                ['name' => '1060 Diamonds', 'amount' => 1060, 'price' => 200000],
-                ['name' => '2180 Diamonds', 'amount' => 2180, 'price' => 400000],
+                ['name' => '310 Diamonds', 'amount' => 310, 'price' => 50000],
+                ['name' => '520 Diamonds', 'amount' => 520, 'price' => 80000],
+                ['name' => '1060 Diamonds', 'amount' => 1060, 'price' => 150000],
+                ['name' => '2180 Diamonds', 'amount' => 2180, 'price' => 300000],
             ];
 
-            foreach ($ffPackages as $package) {
+            foreach ($freefirePackages as $package) {
                 TopupPackage::create([
-                    'game_id' => $ff->id,
+                    'game_id' => $freefire->id,
                     'name' => $package['name'],
                     'amount' => $package['amount'],
                     'price' => $package['price'],
@@ -242,19 +241,19 @@ class TopupSeeder extends Seeder
         }
 
         // Create Topup Packages for Call of Duty Mobile
-        $codm = Game::where('name', 'Call of Duty Mobile')->first();
-        if ($codm) {
-            $codmPackages = [
-                ['name' => '100 CP', 'amount' => 100, 'price' => 25000],
-                ['name' => '220 CP', 'amount' => 220, 'price' => 50000],
-                ['name' => '500 CP', 'amount' => 500, 'price' => 100000],
-                ['name' => '1000 CP', 'amount' => 1000, 'price' => 200000],
-                ['name' => '2000 CP', 'amount' => 2000, 'price' => 400000],
+        $cod = Game::where('name', 'Call of Duty Mobile')->first();
+        if ($cod) {
+            $codPackages = [
+                ['name' => '100 CP', 'amount' => 100, 'price' => 20000],
+                ['name' => '310 CP', 'amount' => 310, 'price' => 50000],
+                ['name' => '520 CP', 'amount' => 520, 'price' => 80000],
+                ['name' => '1060 CP', 'amount' => 1060, 'price' => 150000],
+                ['name' => '2180 CP', 'amount' => 2180, 'price' => 300000],
             ];
 
-            foreach ($codmPackages as $package) {
+            foreach ($codPackages as $package) {
                 TopupPackage::create([
-                    'game_id' => $codm->id,
+                    'game_id' => $cod->id,
                     'name' => $package['name'],
                     'amount' => $package['amount'],
                     'price' => $package['price'],
@@ -263,18 +262,19 @@ class TopupSeeder extends Seeder
         }
 
         // Create Topup Packages for Magic Chess Go Go
-        $mcgg = Game::where('name', 'Magic Chess Go Go')->first();
-        if ($mcgg) {
-            $mcggPackages = [
+        $magicchess = Game::where('name', 'Magic Chess Go Go')->first();
+        if ($magicchess) {
+            $magicchessPackages = [
                 ['name' => '100 Diamonds', 'amount' => 100, 'price' => 20000],
-                ['name' => '310 Diamonds', 'amount' => 310, 'price' => 60000],
-                ['name' => '520 Diamonds', 'amount' => 520, 'price' => 100000],
-                ['name' => '1060 Diamonds', 'amount' => 1060, 'price' => 200000],
+                ['name' => '310 Diamonds', 'amount' => 310, 'price' => 50000],
+                ['name' => '520 Diamonds', 'amount' => 520, 'price' => 80000],
+                ['name' => '1060 Diamonds', 'amount' => 1060, 'price' => 150000],
+                ['name' => '2180 Diamonds', 'amount' => 2180, 'price' => 300000],
             ];
 
-            foreach ($mcggPackages as $package) {
+            foreach ($magicchessPackages as $package) {
                 TopupPackage::create([
-                    'game_id' => $mcgg->id,
+                    'game_id' => $magicchess->id,
                     'name' => $package['name'],
                     'amount' => $package['amount'],
                     'price' => $package['price'],
@@ -285,6 +285,6 @@ class TopupSeeder extends Seeder
         $this->command->info('Topup data seeded successfully!');
         $this->command->info('Created ' . count($paymentMethods) . ' payment methods');
         $this->command->info('Created ' . count($games) . ' games');
-        $this->command->info('Created ' . (count($valorantPackages) + count($genshinPackages) + count($robloxPackages) + count($zzzPackages) + count($mlPackages) + count($pubgPackages) + count($hsrPackages) + count($ffPackages) + count($codmPackages) + count($mcggPackages)) . ' topup packages');
+        $this->command->info('Created ' . (count($valorantPackages) + count($genshinPackages) + count($robloxPackages) + count($zenlessPackages) + count($mlPackages) + count($pubgPackages) + count($honkaiPackages) + count($freefirePackages) + count($codPackages) + count($magicchessPackages)) . ' topup packages');
     }
 } 
