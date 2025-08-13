@@ -594,7 +594,7 @@
                                 <input class="form-check-input" type="radio" name="game_id" 
                                        id="game_{{ $game->id }}" value="{{ $game->id }}" required>
                                 <label class="form-check-label ms-2" for="game_{{ $game->id }}">
-                                    Select this game
+                                    Select this package
                                 </label>
                             </div>
                         </div>
