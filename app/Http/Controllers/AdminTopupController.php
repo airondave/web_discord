@@ -79,27 +79,20 @@ class AdminTopupController extends Controller
             ->with('success', 'Transaction rejected successfully! Rejection email sent.');
     }
 
-    public function games()
+
+
+    // Unified Management Page
+    public function management()
     {
         $games = Game::with('topupPackages')->get();
-        return view('admin.topup.games', compact('games'));
-    }
-
-    public function packages()
-    {
         $packages = TopupPackage::with('game')->get();
-        $games = Game::all();
-        return view('admin.topup.packages', compact('packages', 'games'));
-    }
-
-    public function paymentMethods()
-    {
         $paymentMethods = PaymentMethod::all();
-        return view('admin.topup.payment_methods', compact('paymentMethods'));
+        
+        return view('admin.topup.management', compact('games', 'packages', 'paymentMethods'));
     }
 
-    // Game Management
-    public function storeGame(Request $request)
+    // Unified Management Store Methods
+    public function storeGameManagement(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -108,11 +101,10 @@ class AdminTopupController extends Controller
 
         Game::create($request->all());
 
-        return redirect()->route('admin.topup.games')
-            ->with('success', 'Game created successfully!');
+        return redirect()->route('admin.topup.management')->with('success', 'Game created successfully!');
     }
 
-    public function updateGame(Request $request, $id)
+    public function updateGameManagement(Request $request, $id)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -122,27 +114,18 @@ class AdminTopupController extends Controller
         $game = Game::findOrFail($id);
         $game->update($request->all());
 
-        return redirect()->route('admin.topup.games')
-            ->with('success', 'Game updated successfully!');
+        return redirect()->route('admin.topup.management')->with('success', 'Game updated successfully!');
     }
 
-    public function destroyGame($id)
+    public function destroyGameManagement($id)
     {
         $game = Game::findOrFail($id);
         $game->delete();
 
-        return redirect()->route('admin.topup.games')
-            ->with('success', 'Game deleted successfully!');
+        return redirect()->route('admin.topup.management')->with('success', 'Game deleted successfully!');
     }
 
-    public function getGamePackages($id)
-    {
-        $packages = TopupPackage::where('game_id', $id)->get();
-        return response()->json($packages);
-    }
-
-    // Package Management
-    public function storePackage(Request $request)
+    public function storePackageManagement(Request $request)
     {
         $request->validate([
             'game_id' => 'required|exists:games,id',
@@ -153,11 +136,10 @@ class AdminTopupController extends Controller
 
         TopupPackage::create($request->all());
 
-        return redirect()->route('admin.topup.packages')
-            ->with('success', 'Package created successfully!');
+        return redirect()->route('admin.topup.management')->with('success', 'Package created successfully!');
     }
 
-    public function updatePackage(Request $request, $id)
+    public function updatePackageManagement(Request $request, $id)
     {
         $request->validate([
             'game_id' => 'required|exists:games,id',
@@ -169,53 +151,53 @@ class AdminTopupController extends Controller
         $package = TopupPackage::findOrFail($id);
         $package->update($request->all());
 
-        return redirect()->route('admin.topup.packages')
-            ->with('success', 'Package updated successfully!');
+        return redirect()->route('admin.topup.management')->with('success', 'Package updated successfully!');
     }
 
-    public function destroyPackage($id)
+    public function destroyPackageManagement($id)
     {
         $package = TopupPackage::findOrFail($id);
         $package->delete();
 
-        return redirect()->route('admin.topup.packages')
-            ->with('success', 'Package deleted successfully!');
+        return redirect()->route('admin.topup.management')->with('success', 'Package deleted successfully!');
     }
 
-    // Payment Method Management
-    public function storePaymentMethod(Request $request)
+    public function storePaymentMethodManagement(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'type' => 'required|in:qris,bank,ewallet',
+            'type' => 'required|in:qris,bank',
         ]);
 
         PaymentMethod::create($request->all());
 
-        return redirect()->route('admin.topup.payment-methods')
-            ->with('success', 'Payment method created successfully!');
+        return redirect()->route('admin.topup.management')->with('success', 'Payment method created successfully!');
     }
 
-    public function updatePaymentMethod(Request $request, $id)
+    public function updatePaymentMethodManagement(Request $request, $id)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'type' => 'required|in:qris,bank,ewallet',
+            'type' => 'required|in:qris,bank',
         ]);
 
         $paymentMethod = PaymentMethod::findOrFail($id);
         $paymentMethod->update($request->all());
 
-        return redirect()->route('admin.topup.payment-methods')
-            ->with('success', 'Payment method updated successfully!');
+        return redirect()->route('admin.topup.management')->with('success', 'Payment method updated successfully!');
     }
 
-    public function destroyPaymentMethod($id)
+    public function destroyPaymentMethodManagement($id)
     {
         $paymentMethod = PaymentMethod::findOrFail($id);
         $paymentMethod->delete();
 
-        return redirect()->route('admin.topup.payment-methods')
-            ->with('success', 'Payment method deleted successfully!');
+        return redirect()->route('admin.topup.management')->with('success', 'Payment method deleted successfully!');
+    }
+
+    public function getGamePackagesManagement($id)
+    {
+        $packages = TopupPackage::where('game_id', $id)->get();
+        return response()->json(['packages' => $packages]);
     }
 } 

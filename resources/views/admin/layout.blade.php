@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Admin Panel') - Random Community</title>
     
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
     <!-- Favicon -->
     <link rel="icon" type="/public/image/x-icon" href="/public/image/favicon.ico">
     <link rel="icon" type="/public/image/png" sizes="32x32" href="/public/image/favicon-32x32.png">
@@ -350,27 +353,15 @@
                 </div>
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('admin.topup.*') ? 'active' : '' }}" href="{{ route('admin.topup.index') }}">
+                        <a class="nav-link {{ request()->routeIs('admin.topup.index') ? 'active' : '' }}" href="{{ route('admin.topup.index') }}">
                             <i class="bi bi-list-check me-2"></i>
                             Transactions
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('admin.topup.games') ? 'active' : '' }}" href="{{ route('admin.topup.games') }}">
-                            <i class="bi bi-controller me-2"></i>
-                            Games
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('admin.topup.packages') ? 'active' : '' }}" href="{{ route('admin.topup.packages') }}">
-                            <i class="bi bi-box me-2"></i>
-                            Packages
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('admin.topup.payment-methods') ? 'active' : '' }}" href="{{ route('admin.topup.payment-methods') }}">
-                            <i class="bi bi-credit-card me-2"></i>
-                            Payment Methods
+                        <a class="nav-link {{ request()->routeIs('admin.topup.management') ? 'active' : '' }}" href="{{ route('admin.topup.management') }}">
+                            <i class="bi bi-gear me-2"></i>
+                            Management
                         </a>
                     </li>
                 </ul>
