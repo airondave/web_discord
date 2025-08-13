@@ -563,6 +563,16 @@
                                     <img src="/public/image/games/coc.jpg" alt="Clash of Clans Gems" class="game-logo">
                                 @elseif($game->name == 'Clash Royale')
                                     <img src="/public/image/games/cr.jpg" alt="Clash Royale Gems" class="game-logo">
+                                @elseif($game->name == 'Pulsa Tri')
+                                    <img src="/public/image/games/tri.jpg" alt="Pulsa Tri" class="game-logo">
+                                @elseif($game->name == 'Pulsa XL')
+                                    <img src="/public/image/games/xl.jpg" alt="Pulsa XL" class="game-logo">
+                                @elseif($game->name == 'Pulsa Telkomsel')
+                                    <img src="/public/image/games/telkomsel.jpg" alt="Pulsa Telkomsel" class="game-logo">
+                                @elseif($game->name == 'Pulsa Smartfren')
+                                    <img src="/public/image/games/smartfren.jpg" alt="Pulsa Smartfren" class="game-logo">
+                                @elseif($game->name == 'Pulsa Indosat')
+                                    <img src="/public/image/games/indosat.jpg" alt="Pulsa Indosat" class="game-logo">
                                 @else
                                     <i class="bi bi-controller"></i>
                                 @endif
