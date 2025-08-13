@@ -575,6 +575,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Add package form found:', addPackageForm);
         
         addPackageForm.addEventListener('submit', function(e) {
+            console.log('=== FORM SUBMISSION START ===');
             console.log('Form submitting...');
             console.log('Form action:', this.action);
             console.log('Form method:', this.method);
@@ -617,6 +618,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Check CSRF token
             const csrfToken = this.querySelector('[name="_token"]').value;
             console.log('CSRF Token:', csrfToken ? 'Present' : 'Missing');
+            
+            console.log('=== FORM SUBMISSION END ===');
         });
     } else {
         console.error('Add package form not found!');

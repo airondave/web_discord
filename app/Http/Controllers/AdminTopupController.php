@@ -200,25 +200,18 @@ class AdminTopupController extends Controller
 
     public function storePackage(Request $request)
     {
-        // Log the request data for debugging
-        \Log::info('Package creation request:', $request->all());
-        \Log::info('Request method:', $request->method());
-        \Log::info('CSRF token present:', $request->has('_token'));
+        // Simple logging for debugging
+        \Log::info('Package creation request received', ['data' => $request->all()]);
         
-        try {
-            $request->validate([
-                'game_id' => 'required|exists:games,id',
-                'name' => 'required|string|max:100',
-                'amount' => 'required|integer|min:1',
-                'price' => 'required|integer|min:1000',
-                'is_active' => 'nullable|boolean',
-            ]);
-            
-            \Log::info('Validation passed successfully');
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            \Log::error('Validation failed:', $e->errors());
-            throw $e;
-        }
+        $request->validate([
+            'game_id' => 'required|exists:games,id',
+            'name' => 'required|string|max:100',
+            'amount' => 'required|integer|min:1',
+            'price' => 'required|integer|min:1000',
+            'is_active' => 'nullable|boolean',
+        ]);
+        
+        \Log::info('Validation passed successfully');
 
         try {
             $package = TopupPackage::create([

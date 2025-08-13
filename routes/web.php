@@ -129,6 +129,17 @@ Route::get('/test-db', function() {
         return response()->json(['success' => false, 'error' => $e->getMessage()]);
     }
 });
+
+// Test form submission route
+Route::post('/test-form', function(\Illuminate\Http\Request $request) {
+    return response()->json([
+        'success' => true,
+        'message' => 'Form received successfully',
+        'data' => $request->all(),
+        'method' => $request->method(),
+        'csrf_token' => $request->has('_token')
+    ]);
+});
 });
 
 // Discord API routes
