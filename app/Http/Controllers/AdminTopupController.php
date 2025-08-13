@@ -200,6 +200,9 @@ class AdminTopupController extends Controller
 
     public function storePackage(Request $request)
     {
+        // Log the request data for debugging
+        \Log::info('Package creation request:', $request->all());
+        
         $request->validate([
             'game_id' => 'required|exists:games,id',
             'name' => 'required|string|max:100',
@@ -208,16 +211,29 @@ class AdminTopupController extends Controller
             'is_active' => 'boolean',
         ]);
 
-        TopupPackage::create([
-            'game_id' => $request->game_id,
-            'name' => $request->name,
-            'amount' => $request->amount,
-            'price' => $request->price,
-            'is_active' => $request->has('is_active'),
-        ]);
-
-        return redirect()->route('admin.topup.packages')
-            ->with('success', 'Package created successfully!');
+        try {
+            $package = TopupPackage::create([
+                'game_id' => $request->game_id,
+                'name' => $request->name,
+                'amount' => $request->amount,
+                'price' => $request->price,
+                'is_active' => $request->has('is_active'),
+            ]);
+            
+            \Log::info('Package created successfully:', $package->toArray());
+            
+            return redirect()->route('admin.topup.packages')
+                ->with('success', 'Package created successfully!');
+        } catch (\Exception $e) {
+            \Log::error('Package creation failed:', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Failed to create package: ' . $e->getMessage());
+        }
     }
 
     public function editPackage($id)

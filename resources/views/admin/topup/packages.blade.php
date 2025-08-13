@@ -130,6 +130,29 @@
     opacity: 0.7;
     pointer-events: none;
 }
+
+/* Form validation styling */
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+    display: block;
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Loading button state */
+.btn-loading {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Required field indicator */
+.text-danger {
+    color: #dc3545 !important;
+}
 </style>
 @endpush
 
@@ -154,6 +177,19 @@
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <i class="bi bi-exclamation-triangle-fill me-2"></i>
         {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+@endif
+
+@if($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+        <strong>Please fix the following errors:</strong>
+        <ul class="mb-0 mt-2">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 @endif
@@ -373,33 +409,54 @@
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form action="{{ route('admin.topup.packages.store') }}" method="POST">
+            <form action="{{ route('admin.topup.packages.store') }}" method="POST" id="addPackageForm">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="game_id" class="form-label">Game</label>
-                        <select class="form-select" name="game_id" required>
+                        <label for="game_id" class="form-label">Game <span class="text-danger">*</span></label>
+                        <select class="form-select @error('game_id') is-invalid @enderror" name="game_id" required>
                             <option value="">Select a game</option>
                             @foreach($games as $game)
-                                <option value="{{ $game->id }}">{{ $game->name }}</option>
+                                <option value="{{ $game->id }}" {{ old('game_id') == $game->id ? 'selected' : '' }}>
+                                    {{ $game->name }}
+                                </option>
                             @endforeach
                         </select>
+                        @error('game_id')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="name" class="form-label">Package Name</label>
-                        <input type="text" class="form-control" name="name" required placeholder="e.g., 100 VP, 500 Diamonds">
+                        <label for="name" class="form-label">Package Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" 
+                               name="name" required placeholder="e.g., 100 VP, 500 Diamonds" 
+                               value="{{ old('name') }}">
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="amount" class="form-label">Amount</label>
-                        <input type="number" class="form-control" name="amount" required placeholder="e.g., 100, 500, 1000">
+                        <label for="amount" class="form-label">Amount <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control @error('amount') is-invalid @enderror" 
+                               name="amount" required placeholder="e.g., 100, 500, 1000" 
+                               value="{{ old('amount') }}">
+                        @error('amount')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="price" class="form-label">Price (Rp)</label>
-                        <input type="number" class="form-control" name="price" required placeholder="e.g., 25000, 50000">
+                        <label for="price" class="form-label">Price (Rp) <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control @error('price') is-invalid @enderror" 
+                               name="price" required placeholder="e.g., 25000, 50000" 
+                               value="{{ old('price') }}">
+                        @error('price')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="is_active" id="is_active" checked>
+                            <input class="form-check-input" type="checkbox" name="is_active" id="is_active" 
+                                   {{ old('is_active', true) ? 'checked' : '' }}>
                             <label class="form-check-label" for="is_active">
                                 Active Package
                             </label>
@@ -408,9 +465,13 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
                         <i class="bi bi-plus-circle me-2"></i>
-                        Add Package
+                        <span class="btn-text">Add Package</span>
+                        <span class="btn-loading d-none">
+                            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                            Adding...
+                        </span>
                     </button>
                 </div>
             </form>
@@ -507,6 +568,71 @@
 
 @push('scripts')
 <script>
+// Debug form submission
+document.addEventListener('DOMContentLoaded', function() {
+    const addPackageForm = document.querySelector('#addPackageForm');
+    if (addPackageForm) {
+        addPackageForm.addEventListener('submit', function(e) {
+            console.log('Form submitting...');
+            
+            // Check if required fields are filled
+            const gameId = this.querySelector('[name="game_id"]').value;
+            const name = this.querySelector('[name="name"]').value;
+            const amount = this.querySelector('[name="amount"]').value;
+            const price = this.querySelector('[name="price"]').value;
+            
+            console.log('Game ID:', gameId);
+            console.log('Name:', name);
+            console.log('Amount:', amount);
+            console.log('Price:', price);
+            
+            if (!gameId || !name || !amount || !price) {
+                e.preventDefault();
+                alert('Please fill in all required fields!');
+                return false;
+            }
+            
+            // Show loading state
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            
+            btnText.classList.add('d-none');
+            btnLoading.classList.remove('d-none');
+            submitBtn.disabled = true;
+            
+            // Log form data
+            const formData = new FormData(this);
+            for (let [key, value] of formData.entries()) {
+                console.log(key + ': ' + value);
+            }
+        });
+    }
+    
+    // Reset form when modal is hidden
+    const addPackageModal = document.getElementById('addPackageModal');
+    if (addPackageModal) {
+        addPackageModal.addEventListener('hidden.bs.modal', function() {
+            const form = document.getElementById('addPackageForm');
+            form.reset();
+            
+            // Reset validation states
+            form.querySelectorAll('.is-invalid').forEach(field => {
+                field.classList.remove('is-invalid');
+            });
+            
+            // Reset button state
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const btnLoading = submitBtn.querySelector('.btn-loading');
+            
+            btnText.classList.remove('d-none');
+            btnLoading.classList.add('d-none');
+            submitBtn.disabled = false;
+        });
+    }
+});
+
 // Auto-submit form when filters change
 document.getElementById('gameFilter').addEventListener('change', function() {
     document.getElementById('filterForm').submit();

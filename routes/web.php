@@ -116,9 +116,19 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::delete('/admin/topup/games/{id}', [AdminTopupController::class, 'destroyGame'])->name('admin.topup.games.destroy');
     
     // Payment Methods Management Routes
-    Route::post('/admin/topup/payment-methods', [AdminTopupController::class, 'storePaymentMethod'])->name('admin.topup.payment-methods.store');
-    Route::put('/admin/topup/payment-methods/{id}', [AdminTopupController::class, 'updatePaymentMethod'])->name('admin.topup.payment-methods.update');
-    Route::delete('/admin/topup/payment-methods/{id}', [AdminTopupController::class, 'destroyPaymentMethod'])->name('admin.topup.payment-methods.destroy');
+Route::post('/admin/topup/payment-methods', [AdminTopupController::class, 'storePaymentMethod'])->name('admin.topup.payment-methods.store');
+Route::put('/admin/topup/payment-methods/{id}', [AdminTopupController::class, 'updatePaymentMethod'])->name('admin.topup.payment-methods.update');
+Route::delete('/admin/topup/payment-methods/{id}', [AdminTopupController::class, 'destroyPaymentMethod'])->name('admin.topup.payment-methods.destroy');
+
+// Test route for debugging
+Route::get('/test-db', function() {
+    try {
+        $games = \App\Models\Game::count();
+        return response()->json(['success' => true, 'games_count' => $games]);
+    } catch (\Exception $e) {
+        return response()->json(['success' => false, 'error' => $e->getMessage()]);
+    }
+});
 });
 
 // Discord API routes
