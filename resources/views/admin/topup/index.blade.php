@@ -190,10 +190,11 @@
                         </td>
                         <td>
                             <div class="btn-group" role="group">
-                                <a href="{{ route('admin.topup.show', $transaction->id) }}" 
-                                   class="btn btn-sm btn-outline-primary" title="View Details">
+                                <button type="button" class="btn btn-sm btn-outline-primary" 
+                                        onclick="viewTransactionDetails({{ $transaction->id }})" 
+                                        title="View Details">
                                     <i class="bi bi-eye"></i>
-                                </a>
+                                </button>
                                 
                                 @if($transaction->status === 'paid')
                                     <button type="button" class="btn btn-sm btn-outline-success" 
@@ -304,6 +305,27 @@
         </div>
     </div>
 </div>
+
+<!-- Transaction Details Modal -->
+<div class="modal fade" id="transactionDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="bi bi-info-circle text-primary me-2"></i>
+                    Transaction Details
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="transactionDetailsContent">
+                <!-- Content will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @push('scripts')
@@ -320,6 +342,160 @@ function rejectTransaction(transactionId) {
     const form = document.getElementById('rejectionForm');
     form.action = `/admin/topup/${transactionId}/reject`;
     modal.show();
+}
+
+function viewTransactionDetails(transactionId) {
+    const modal = new bootstrap.Modal(document.getElementById('transactionDetailsModal'));
+    const contentDiv = document.getElementById('transactionDetailsContent');
+    contentDiv.innerHTML = '<div class="text-center"><div class="spinner-border" role="status"></div><p class="mt-2">Loading transaction details...</p></div>';
+
+    fetch(`/admin/topup/${transactionId}/details`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const t = data.transaction;
+                contentDiv.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3">
+                                <i class="bi bi-receipt me-2"></i>
+                                Transaction Information
+                            </h6>
+                            <div class="mb-3">
+                                <strong>Transaction ID:</strong> 
+                                <span class="badge bg-dark">#${t.id}</span>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Status:</strong> 
+                                <span class="badge bg-${t.status_class}">${t.status_text}</span>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Created:</strong> ${t.created_at}
+                            </div>
+                            <div class="mb-3">
+                                <strong>Last Updated:</strong> ${t.updated_at}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3">
+                                <i class="bi bi-person me-2"></i>
+                                Customer Information
+                            </h6>
+                            <div class="mb-3">
+                                <strong>Name:</strong> ${t.user ? t.user.name : t.buyer_name}
+                            </div>
+                            <div class="mb-3">
+                                <strong>Email:</strong> ${t.user ? t.user.email : t.buyer_email}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3">
+                                <i class="bi bi-controller me-2"></i>
+                                Game Details
+                            </h6>
+                            <div class="mb-3">
+                                <strong>Game:</strong> 
+                                <span class="badge bg-primary">${t.game.name}</span>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Package:</strong> ${t.topupPackage.name}
+                            </div>
+                            <div class="mb-3">
+                                <strong>Amount:</strong> ${t.topupPackage.amount}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3">
+                                <i class="bi bi-person-badge me-2"></i>
+                                Player Information
+                            </h6>
+                            <div class="mb-3">
+                                <strong>Player ID:</strong> ${t.player_id}
+                            </div>
+                            ${t.player_server ? `<div class="mb-3"><strong>Server:</strong> ${t.player_server}</div>` : ''}
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3">
+                                <i class="bi bi-credit-card me-2"></i>
+                                Payment Information
+                            </h6>
+                            <div class="mb-3">
+                                <strong>Amount:</strong> 
+                                <span class="text-success fw-bold">Rp ${t.price.toLocaleString('id-ID')}</span>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Payment Method:</strong> ${t.payment_method}
+                            </div>
+                            <div class="mb-3">
+                                <strong>Payment Status:</strong> 
+                                <span class="badge bg-${t.payment_status_class}">${t.payment_status_text}</span>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Payment Date:</strong> ${t.payment_date}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3">
+                                <i class="bi bi-truck me-2"></i>
+                                Delivery Information
+                            </h6>
+                            <div class="mb-3">
+                                <strong>Delivery Status:</strong> 
+                                <span class="badge bg-${t.delivery_status_class}">${t.delivery_status_text}</span>
+                            </div>
+                            <div class="mb-3">
+                                <strong>Delivery Date:</strong> ${t.delivery_date}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${t.notes ? `
+                    <hr>
+                    <div class="row">
+                        <div class="col-12">
+                            <h6 class="text-primary mb-3">
+                                <i class="bi bi-sticky me-2"></i>
+                                Additional Notes
+                            </h6>
+                            <div class="alert alert-info">
+                                <i class="bi bi-info-circle me-2"></i>
+                                ${t.notes}
+                            </div>
+                        </div>
+                    </div>
+                    ` : ''}
+                `;
+                modal.show();
+            } else {
+                contentDiv.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Failed to load transaction details.
+                    </div>
+                `;
+                modal.show();
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching transaction details:', error);
+            contentDiv.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    Failed to load transaction details. Please try again.
+                </div>
+            `;
+            modal.show();
+        });
 }
 
 // Auto-refresh every 30 seconds for pending transactions

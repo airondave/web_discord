@@ -93,6 +93,7 @@ Route::middleware(['admin.auth'])->group(function () {
     // Topup Management
     Route::get('/admin/topup', [AdminTopupController::class, 'index'])->name('admin.topup.index');
     Route::get('/admin/topup/{id}', [AdminTopupController::class, 'show'])->name('admin.topup.show');
+    Route::get('/admin/topup/{id}/details', [AdminTopupController::class, 'getDetails'])->name('admin.topup.details');
     Route::post('/admin/topup/{id}/process', [AdminTopupController::class, 'process'])->name('admin.topup.process');
     Route::post('/admin/topup/{id}/reject', [AdminTopupController::class, 'reject'])->name('admin.topup.reject');
     Route::get('/admin/topup/games', [AdminTopupController::class, 'games'])->name('admin.topup.games');

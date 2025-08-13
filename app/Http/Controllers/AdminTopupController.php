@@ -30,6 +30,77 @@ class AdminTopupController extends Controller
         return view('admin.topup.show', compact('transaction'));
     }
 
+    public function getDetails($id)
+    {
+        $transaction = Transaction::with(['game', 'topupPackage', 'paymentMethod', 'user'])
+            ->findOrFail($id);
+
+        // Determine status classes and text
+        $statusClass = match($transaction->status) {
+            'pending' => 'secondary',
+            'paid' => 'warning',
+            'delivered' => 'success',
+            'failed' => 'danger',
+            default => 'secondary'
+        };
+
+        $statusText = ucfirst($transaction->status);
+
+        $paymentStatusClass = $transaction->status === 'pending' ? 'secondary' : 
+                            ($transaction->status === 'paid' ? 'success' : 
+                            ($transaction->status === 'delivered' ? 'success' : 'danger'));
+
+        $paymentStatusText = $transaction->status === 'pending' ? 'Pending' : 
+                           ($transaction->status === 'paid' ? 'Paid' : 
+                           ($transaction->status === 'delivered' ? 'Completed' : 'Failed'));
+
+        $deliveryStatusClass = $transaction->status === 'delivered' ? 'success' : 
+                             ($transaction->status === 'failed' ? 'danger' : 'secondary');
+
+        $deliveryStatusText = $transaction->status === 'delivered' ? 'Delivered' : 
+                            ($transaction->status === 'failed' ? 'Failed' : 'Pending');
+
+        return response()->json([
+            'success' => true,
+            'transaction' => [
+                'id' => $transaction->id,
+                'user' => $transaction->user ? [
+                    'name' => $transaction->user->name,
+                    'email' => $transaction->user->email
+                ] : null,
+                'buyer_name' => $transaction->buyer_name,
+                'buyer_email' => $transaction->buyer_email,
+                'game' => [
+                    'name' => $transaction->game->name
+                ],
+                'topupPackage' => [
+                    'name' => $transaction->topupPackage->name,
+                    'amount' => $transaction->topupPackage->amount,
+                    'price' => $transaction->topupPackage->price
+                ],
+                'player_id' => $transaction->player_id,
+                'player_server' => $transaction->player_server,
+                'price' => $transaction->price,
+                'status' => $transaction->status,
+                'status_class' => $statusClass,
+                'status_text' => $statusText,
+                'created_at' => $transaction->created_at->format('d/m/Y H:i'),
+                'updated_at' => $transaction->updated_at->format('d/m/Y H:i'),
+                'payment_method' => $transaction->paymentMethod->name,
+                'payment_status_class' => $paymentStatusClass,
+                'payment_status_text' => $paymentStatusText,
+                'payment_date' => $transaction->status === 'paid' || $transaction->status === 'delivered' ? 
+                                $transaction->updated_at->format('d/m/Y H:i') : 'Not paid yet',
+                'delivery_status_class' => $deliveryStatusClass,
+                'delivery_status_text' => $deliveryStatusText,
+                'delivery_date' => $transaction->status === 'delivered' ? 
+                                 $transaction->updated_at->format('d/m/Y H:i') : 'Not delivered yet',
+                'notes' => $transaction->payment_reference ? 
+                          'Payment Reference: ' . $transaction->payment_reference : null
+            ]
+        ]);
+    }
+
     public function process($id)
     {
         $transaction = Transaction::findOrFail($id);
