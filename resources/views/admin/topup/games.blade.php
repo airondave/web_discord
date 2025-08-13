@@ -76,7 +76,7 @@
                         <td>
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn btn-sm btn-outline-primary" 
-                                        onclick="editGame({{ $game->id }})" 
+                                        onclick="editGame({{ $game->id }}, '{{ $game->name }}', '{{ $game->publisher }}')" 
                                         title="Edit Game">
                                     <i class="bi bi-pencil"></i>
                                 </button>
@@ -178,9 +178,17 @@
 
 @push('scripts')
 <script>
-function editGame(gameId) {
-    // For now, just show a message that editing is not implemented
-    alert('Game editing functionality will be implemented in the next update.');
+function editGame(gameId, name, publisher) {
+    // Populate the edit form
+    document.getElementById('edit_name').value = name;
+    document.getElementById('edit_publisher').value = publisher;
+    
+    // Set the form action
+    document.getElementById('editGameForm').action = `/admin/topup/games/${gameId}`;
+    
+    // Show the modal
+    const modal = new bootstrap.Modal(document.getElementById('editGameModal'));
+    modal.show();
 }
 </script>
 @endpush 

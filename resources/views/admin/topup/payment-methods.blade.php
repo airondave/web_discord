@@ -218,6 +218,9 @@
 function editPaymentMethod(methodId) {
     // For now, just show a message that editing is not implemented
     alert('Payment method editing functionality will be implemented in the next update.');
+    
+    // TODO: Implement editing functionality
+    // This would involve fetching the payment method data and populating the edit modal
 }
 
 function deletePaymentMethod(methodId) {

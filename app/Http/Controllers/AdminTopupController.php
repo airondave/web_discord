@@ -257,4 +257,104 @@ class AdminTopupController extends Controller
             'message' => 'Package status updated successfully!'
         ]);
     }
+
+    // Games Management Methods
+    public function storeGame(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:100|unique:games,name',
+            'publisher' => 'required|string|max:100',
+        ]);
+
+        Game::create([
+            'name' => $request->name,
+            'publisher' => $request->publisher,
+        ]);
+
+        return redirect()->route('admin.topup.games')
+            ->with('success', 'Game created successfully!');
+    }
+
+    public function updateGame(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:100|unique:games,name,' . $id,
+            'publisher' => 'required|string|max:100',
+        ]);
+
+        $game = Game::findOrFail($id);
+        $game->update([
+            'name' => $request->name,
+            'publisher' => $request->publisher,
+        ]);
+
+        return redirect()->route('admin.topup.games')
+            ->with('success', 'Game updated successfully!');
+    }
+
+    public function destroyGame($id)
+    {
+        $game = Game::findOrFail($id);
+        
+        // Check if game has packages
+        if ($game->topupPackages()->count() > 0) {
+            return redirect()->route('admin.topup.games')
+                ->with('error', 'Cannot delete game. It has associated packages.');
+        }
+
+        $game->delete();
+
+        return redirect()->route('admin.topup.games')
+            ->with('success', 'Game deleted successfully!');
+    }
+
+    // Payment Methods Management Methods
+    public function storePaymentMethod(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:100|unique:payment_methods,name',
+            'type' => 'required|in:qris,ewallet,bank,cash',
+        ]);
+
+        PaymentMethod::create([
+            'name' => $request->name,
+            'type' => $request->type,
+        ]);
+
+        return redirect()->route('admin.topup.payment-methods')
+            ->with('success', 'Payment method created successfully!');
+        }
+
+    public function updatePaymentMethod(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:100|unique:payment_methods,name,' . $id,
+            'type' => 'required|in:qris,ewallet,bank,cash',
+        ]);
+
+        $method = PaymentMethod::findOrFail($id);
+        $method->update([
+            'name' => $request->name,
+            'type' => $request->type,
+        ]);
+
+        return redirect()->route('admin.topup.payment-methods')
+            ->with('success', 'Payment method updated successfully!');
+    }
+
+    public function destroyPaymentMethod($id)
+    {
+        $method = PaymentMethod::findOrFail($id);
+        
+        // Check if payment method is being used in transactions
+        if ($method->transactions()->count() > 0) {
+            return redirect()->route('admin.topup.payment-methods')
+                ->with('error', 'Cannot delete payment method. It is being used in transactions.');
+        }
+
+        $method->delete();
+
+        return redirect()->route('admin.topup.payment-methods')
+            ->with('success', 'Payment method updated successfully!');
+    }
 } 
