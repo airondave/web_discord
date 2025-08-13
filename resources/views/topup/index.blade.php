@@ -325,13 +325,31 @@
             margin-bottom: 1rem;
         }
 
-        .valorant-icon {
-            color: #ff4655;
+        .game-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 2px solid var(--retro-green);
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+            transition: all 0.3s ease;
         }
 
-        .genshin-icon {
-            color: #f4c2c2;
+        .game-logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
         }
+
+        .valorant-icon { color: #ff4655; }
+        .genshin-icon { color: #f4c2c2; }
+        .roblox-icon { color: #ff6b6b; }
+        .zenless-icon { color: #4ecdc4; }
+        .ml-icon { color: #45b7d1; }
+        .pubg-icon { color: #96ceb4; }
+        .honkai-icon { color: #feca57; }
+        .freefire-icon { color: #ff9ff3; }
+        .cod-icon { color: #54a0ff; }
+        .magicchess-icon { color: #5f27cd; }
 
         /* Search Bar Styles */
         .search-section {
@@ -517,8 +535,31 @@
                     <div class="game-grid" id="gameGrid">
                         @foreach($games as $game)
                         <div class="game-option" data-game-id="{{ $game->id }}" data-game-name="{{ strtolower($game->name) }}">
-                            <div class="game-icon {{ $game->name == 'Valorant' ? 'valorant-icon' : ($game->name == 'Genshin Impact' ? 'genshin-icon' : ($game->name == 'Roblox' ? 'roblox-icon' : ($game->name == 'Zenless Zone Zero' ? 'zenless-icon' : ($game->name == 'Mobile Legends Bang Bang' ? 'ml-icon' : ($game->name == 'PUBG Mobile' ? 'pubg-icon' : ($game->name == 'Honkai Star Rail' ? 'honkai-icon' : ($game->name == 'Free Fire' ? 'freefire-icon' : ($game->name == 'Call of Duty Mobile' ? 'cod-icon' : 'magicchess-icon')))))))) }}">
-                                <i class="bi bi-{{ $game->name == 'Valorant' ? 'controller' : ($game->name == 'Genshin Impact' ? 'gem' : ($game->name == 'Roblox' ? 'box' : ($game->name == 'Zenless Zone Zero' ? 'stars' : ($game->name == 'Mobile Legends Bang Bang' ? 'phone' : ($game->name == 'PUBG Mobile' ? 'crosshair' : ($game->name == 'Honkai Star Rail' ? 'star' : ($game->name == 'Free Fire' ? 'fire' : ($game->name == 'Call of Duty Mobile' ? 'shield' : 'chess-king')))))))) }}"></i>
+                            <div class="game-icon">
+                                @if($game->name == 'Valorant')
+                                    <img src="/image/games/valorant.jpg" alt="Valorant" class="game-logo">
+                                @elseif($game->name == 'Genshin Impact')
+                                    <img src="/image/games/genshin.jpg" alt="Genshin Impact" class="game-logo">
+                                @elseif($game->name == 'Roblox')
+                                    <img src="/image/games/roblox.jpg" alt="Roblox" class="game-logo">
+                                @elseif($game->name == 'Zenless Zone Zero')
+                                    <img src="/image/games/zzz.jpg" alt="Zenless Zone Zero" class="game-logo">
+                                @elseif($game->name == 'Mobile Legends Bang Bang')
+                                    <img src="/image/games/ml.jpg" alt="Mobile Legends" class="game-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                    <i class="bi bi-phone" style="display: none; font-size: 3rem; color: #45b7d1;"></i>
+                                @elseif($game->name == 'PUBG Mobile')
+                                    <img src="/image/games/pubg.jpg" alt="PUBG Mobile" class="game-logo">
+                                @elseif($game->name == 'Honkai Star Rail')
+                                    <img src="/image/games/hsr.jpg" alt="Honkai Star Rail" class="game-logo">
+                                @elseif($game->name == 'Free Fire')
+                                    <img src="/image/games/ff.jpg" alt="Free Fire" class="game-logo">
+                                @elseif($game->name == 'Call of Duty Mobile')
+                                    <img src="/image/games/cod.jpg" alt="Call of Duty Mobile" class="game-logo">
+                                @elseif($game->name == 'Magic Chess Go Go')
+                                    <img src="/image/games/mgcc.jpg" alt="Magic Chess Go Go" class="game-logo">
+                                @else
+                                    <i class="bi bi-controller"></i>
+                                @endif
                             </div>
                             <h4 class="text-{{ $game->name == 'Valorant' ? 'danger' : ($game->name == 'Genshin Impact' ? 'warning' : ($game->name == 'Roblox' ? 'danger' : ($game->name == 'Zenless Zone Zero' ? 'info' : ($game->name == 'Mobile Legends Bang Bang' ? 'primary' : ($game->name == 'PUBG Mobile' ? 'success' : ($game->name == 'Honkai Star Rail' ? 'warning' : ($game->name == 'Free Fire' ? 'danger' : ($game->name == 'Call of Duty Mobile' ? 'primary' : 'secondary')))))))) }}">{{ $game->name }}</h4>
                             <p class="text-muted">{{ $game->publisher }}</p>
