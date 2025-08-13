@@ -8,6 +8,23 @@
         <i class="bi bi-credit-card me-2"></i>
         Topup Transactions
     </h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group me-2">
+            <a href="{{ route('admin.topup.games') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-controller me-1"></i>
+                Manage Games
+            </a>
+            <a href="{{ route('admin.topup.packages') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-box me-1"></i>
+                Manage Packages
+            </a>
+            <a href="{{ route('admin.topup.payment-methods') }}" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-credit-card me-1"></i>
+                Payment Methods
+            </a>
+        </div>
+    </div>
+</div>
 
 @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
