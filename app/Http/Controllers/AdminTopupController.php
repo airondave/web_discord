@@ -163,9 +163,31 @@ class AdminTopupController extends Controller
     }
 
     // Package Management Methods
-    public function packages()
+    public function packages(Request $request)
     {
-        $packages = TopupPackage::with('game')->orderBy('created_at', 'desc')->paginate(20);
+        $query = TopupPackage::with('game');
+        
+        // Search by package name
+        if ($request->filled('search')) {
+            $searchTerm = $request->search;
+            $query->where('name', 'like', '%' . $searchTerm . '%');
+        }
+        
+        // Filter by game
+        if ($request->filled('game')) {
+            $query->where('game_id', $request->game);
+        }
+        
+        $packages = $query->orderBy('created_at', 'desc')->paginate(20);
+        
+        // Append search and filter parameters to pagination links
+        if ($request->filled('search')) {
+            $packages->appends(['search' => $request->search]);
+        }
+        if ($request->filled('game')) {
+            $packages->appends(['game' => $request->game]);
+        }
+        
         $games = Game::all();
         return view('admin.topup.packages', compact('packages', 'games'));
     }

@@ -112,6 +112,24 @@
 .arrow, .chevron, .carousel-control {
     display: none !important;
 }
+
+/* Search form styling */
+#filterForm .form-control:focus,
+#filterForm .form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Search results info */
+.alert-info {
+    border-left: 4px solid #0d6efd;
+}
+
+/* Auto-submit indicator */
+.searching {
+    opacity: 0.7;
+    pointer-events: none;
+}
 </style>
 @endpush
 
@@ -143,29 +161,60 @@
 <!-- Game Filter -->
 <div class="card mb-4">
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-4">
-                <label for="gameFilter" class="form-label">Filter by Game</label>
-                <select class="form-select" id="gameFilter">
-                    <option value="">All Games</option>
-                    @foreach($games as $game)
-                        <option value="{{ $game->id }}">{{ $game->name }}</option>
-                    @endforeach
-                </select>
+        <form method="GET" action="{{ route('admin.topup.packages') }}" id="filterForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="game" class="form-label">Filter by Game</label>
+                    <select class="form-select" name="game" id="gameFilter">
+                        <option value="">All Games</option>
+                        @foreach($games as $game)
+                            <option value="{{ $game->id }}" {{ request('game') == $game->id ? 'selected' : '' }}>
+                                {{ $game->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="search" class="form-label">Search Package</label>
+                    <input type="text" class="form-control" name="search" id="searchPackage" 
+                           placeholder="Search package name..." 
+                           value="{{ request('search') }}">
+                </div>
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <i class="bi bi-search me-2"></i>
+                        Search
+                    </button>
+                    <a href="{{ route('admin.topup.packages') }}" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-clockwise me-2"></i>
+                        Reset Filters
+                    </a>
+                </div>
             </div>
-            <div class="col-md-4">
-                <label for="searchPackage" class="form-label">Search Package</label>
-                <input type="text" class="form-control" id="searchPackage" placeholder="Search package name...">
-            </div>
-            <div class="col-md-4 d-flex align-items-end">
-                <button type="button" class="btn btn-outline-secondary" onclick="resetFilters()">
-                    <i class="bi bi-arrow-clockwise me-2"></i>
-                    Reset Filters
-                </button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
+
+<!-- Search Results Info -->
+@if(request('search') || request('game'))
+    <div class="alert alert-info mb-3">
+        <i class="bi bi-info-circle me-2"></i>
+        <strong>Search Results:</strong>
+        @if(request('search'))
+            Searching for packages containing "<strong>{{ request('search') }}</strong>"
+        @endif
+        @if(request('search') && request('game'))
+            and
+        @endif
+        @if(request('game'))
+            filtered by game "<strong>{{ $games->find(request('game'))->name ?? 'Unknown' }}</strong>"
+        @endif
+        <a href="{{ route('admin.topup.packages') }}" class="btn btn-sm btn-outline-secondary ms-3">
+            <i class="bi bi-x-circle me-1"></i>
+            Clear All Filters
+        </a>
+    </div>
+@endif
 
 <!-- Packages Table -->
 <div class="card">
@@ -173,6 +222,9 @@
         <h5 class="mb-0">
             <i class="bi bi-box me-2"></i>
             All Packages
+            @if(request('search') || request('game'))
+                <small class="text-muted">(Filtered Results)</small>
+            @endif
         </h5>
     </div>
     <div class="card-body">
@@ -300,6 +352,9 @@
                 <div class="text-center mt-2">
                     <small class="text-muted">
                         Showing {{ $packages->firstItem() ?? 0 }} to {{ $packages->lastItem() ?? 0 }} of {{ $packages->total() }} results
+                        @if(request('search') || request('game'))
+                            <br><span class="text-info">(Filtered from total packages)</span>
+                        @endif
                     </small>
                 </div>
             </div>
@@ -452,31 +507,21 @@
 
 @push('scripts')
 <script>
-// Filter functionality
-document.getElementById('gameFilter').addEventListener('change', filterPackages);
-document.getElementById('searchPackage').addEventListener('input', filterPackages);
+// Auto-submit form when filters change
+document.getElementById('gameFilter').addEventListener('change', function() {
+    document.getElementById('filterForm').submit();
+});
 
-function filterPackages() {
-    const gameFilter = document.getElementById('gameFilter').value;
-    const searchTerm = document.getElementById('searchPackage').value.toLowerCase();
-    const rows = document.querySelectorAll('#packagesTableBody tr');
-    
-    rows.forEach(row => {
-        const gameId = row.dataset.gameId;
-        const packageName = row.dataset.packageName;
-        
-        const gameMatch = !gameFilter || gameId === gameFilter;
-        const searchMatch = !searchTerm || packageName.includes(searchTerm);
-        
-        row.style.display = gameMatch && searchMatch ? '' : 'none';
-    });
-}
-
-function resetFilters() {
-    document.getElementById('gameFilter').value = '';
-    document.getElementById('searchPackage').value = '';
-    filterPackages();
-}
+// Auto-submit form when search is entered (with delay for better UX)
+let searchTimeout;
+document.getElementById('searchPackage').addEventListener('input', function() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+        // Add loading indicator
+        document.getElementById('filterForm').classList.add('searching');
+        document.getElementById('filterForm').submit();
+    }, 500); // 500ms delay to avoid too many requests
+});
 
 // Edit package
 function editPackage(packageId) {
