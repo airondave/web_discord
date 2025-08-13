@@ -92,10 +92,8 @@ Route::middleware(['admin.auth'])->group(function () {
 
     // Topup Management
     Route::get('/admin/topup', [AdminTopupController::class, 'index'])->name('admin.topup.index');
-    Route::get('/admin/topup/{id}', [AdminTopupController::class, 'show'])->name('admin.topup.show');
-    Route::get('/admin/topup/{id}/details', [AdminTopupController::class, 'getDetails'])->name('admin.topup.details');
-    Route::post('/admin/topup/{id}/process', [AdminTopupController::class, 'process'])->name('admin.topup.process');
-    Route::post('/admin/topup/{id}/reject', [AdminTopupController::class, 'reject'])->name('admin.topup.reject');
+    
+    // Specific routes MUST come BEFORE parameterized routes
     Route::get('/admin/topup/games', [AdminTopupController::class, 'games'])->name('admin.topup.games');
     Route::get('/admin/topup/packages', [AdminTopupController::class, 'packages'])->name('admin.topup.packages');
     Route::get('/admin/topup/packages/create', [AdminTopupController::class, 'createPackage'])->name('admin.topup.packages.create');
@@ -105,6 +103,12 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::delete('/admin/topup/packages/{id}', [AdminTopupController::class, 'destroyPackage'])->name('admin.topup.packages.destroy');
     Route::post('/admin/topup/packages/{id}/toggle-status', [AdminTopupController::class, 'togglePackageStatus'])->name('admin.topup.packages.toggle-status');
     Route::get('/admin/topup/payment-methods', [AdminTopupController::class, 'paymentMethods'])->name('admin.topup.payment-methods');
+    
+    // Parameterized routes come LAST
+    Route::get('/admin/topup/{id}', [AdminTopupController::class, 'show'])->name('admin.topup.show');
+    Route::get('/admin/topup/{id}/details', [AdminTopupController::class, 'getDetails'])->name('admin.topup.details');
+    Route::post('/admin/topup/{id}/process', [AdminTopupController::class, 'process'])->name('admin.topup.process');
+    Route::post('/admin/topup/{id}/reject', [AdminTopupController::class, 'reject'])->name('admin.topup.reject');
     
     // Games Management Routes
     Route::post('/admin/topup/games', [AdminTopupController::class, 'storeGame'])->name('admin.topup.games.store');
