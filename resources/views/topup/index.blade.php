@@ -659,7 +659,7 @@
                     @guest
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Your Name</label>
+                            <label class="form-label">Your Phone Number</label>
                             <input type="text" class="form-control" name="buyer_name" 
                                    placeholder="Enter your full name" required>
                         </div>
