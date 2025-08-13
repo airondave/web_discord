@@ -537,26 +537,26 @@
                         <div class="game-option" data-game-id="{{ $game->id }}" data-game-name="{{ strtolower($game->name) }}">
                             <div class="game-icon">
                                 @if($game->name == 'Valorant')
-                                    <img src="/image/games/valorant.jpg" alt="Valorant" class="game-logo">
+                                    <img src="/public/image/games/valorant.jpg" alt="Valorant" class="game-logo">
                                 @elseif($game->name == 'Genshin Impact')
-                                    <img src="/image/games/genshin.jpg" alt="Genshin Impact" class="game-logo">
+                                    <img src="/public/image/games/genshin.jpg" alt="Genshin Impact" class="game-logo">
                                 @elseif($game->name == 'Roblox')
-                                    <img src="/image/games/roblox.jpg" alt="Roblox" class="game-logo">
+                                    <img src="/public/image/games/roblox.jpg" alt="Roblox" class="game-logo">
                                 @elseif($game->name == 'Zenless Zone Zero')
-                                    <img src="/image/games/zzz.jpg" alt="Zenless Zone Zero" class="game-logo">
+                                    <img src="/public/image/games/zzz.jpg" alt="Zenless Zone Zero" class="game-logo">
                                 @elseif($game->name == 'Mobile Legends Bang Bang')
-                                    <img src="/image/games/ml.jpg" alt="Mobile Legends" class="game-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                                    <img src="/public/image/games/ml.jpg" alt="Mobile Legends" class="game-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                                     <i class="bi bi-phone" style="display: none; font-size: 3rem; color: #45b7d1;"></i>
                                 @elseif($game->name == 'PUBG Mobile')
-                                    <img src="/image/games/pubg.jpg" alt="PUBG Mobile" class="game-logo">
+                                    <img src="/public/image/games/pubg.jpg" alt="PUBG Mobile" class="game-logo">
                                 @elseif($game->name == 'Honkai Star Rail')
-                                    <img src="/image/games/hsr.jpg" alt="Honkai Star Rail" class="game-logo">
+                                    <img src="/public/image/games/hsr.jpg" alt="Honkai Star Rail" class="game-logo">
                                 @elseif($game->name == 'Free Fire')
-                                    <img src="/image/games/ff.jpg" alt="Free Fire" class="game-logo">
+                                    <img src="/public/image/games/ff.jpg" alt="Free Fire" class="game-logo">
                                 @elseif($game->name == 'Call of Duty Mobile')
-                                    <img src="/image/games/cod.jpg" alt="Call of Duty Mobile" class="game-logo">
+                                    <img src="/public/image/games/cod.jpg" alt="Call of Duty Mobile" class="game-logo">
                                 @elseif($game->name == 'Magic Chess Go Go')
-                                    <img src="/image/games/mgcc.jpg" alt="Magic Chess Go Go" class="game-logo">
+                                    <img src="/public/image/games/mgcc.jpg" alt="Magic Chess Go Go" class="game-logo">
                                 @else
                                     <i class="bi bi-controller"></i>
                                 @endif
