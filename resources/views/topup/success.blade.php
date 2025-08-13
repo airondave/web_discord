@@ -420,22 +420,26 @@
                         <span class="detail-value">{{ $transaction->player_server }}</span>
                     </div>
                     @endif
-                    <div class="detail-row">
-                        <span class="detail-label">Payment Method:</span>
-                        <span class="detail-value">{{ $transaction->paymentMethod->name }}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Status:</span>
-                        <span class="status-badge status-paid">Paid</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Total Amount:</span>
-                        <span class="detail-value amount-highlight">Rp {{ number_format($transaction->price, 2, ',', '.') }}</span>
-                    </div>
-                    <div class="detail-row">
-                        <span class="detail-label">Payment Reference:</span>
-                        <span class="detail-value">{{ $transaction->payment_reference }}</span>
-                    </div>
+                                         <div class="detail-row">
+                         <span class="detail-label">Payment Method:</span>
+                         <span class="detail-value">{{ $transaction->paymentMethod->name }}</span>
+                     </div>
+                     <div class="detail-row">
+                         <span class="detail-label">Email:</span>
+                         <span class="detail-value">{{ $transaction->buyer_email }}</span>
+                     </div>
+                     <div class="detail-row">
+                         <span class="detail-label">Status:</span>
+                         <span class="detail-value status-badge status-paid">Paid</span>
+                     </div>
+                     <div class="detail-row">
+                         <span class="detail-label">Total Amount:</span>
+                         <span class="detail-value amount-highlight">Rp {{ number_format($transaction->price, 2, ',', '.') }}</span>
+                     </div>
+                     <div class="detail-row">
+                         <span class="detail-label">Payment Reference:</span>
+                         <span class="detail-value">{{ $transaction->payment_reference }}</span>
+                     </div>
                 </div>
             </div>
 
