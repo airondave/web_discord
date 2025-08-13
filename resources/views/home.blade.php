@@ -1694,12 +1694,9 @@
                         Our Community
                     </h3>
                     <p class="card-text text-center">
-                    Selamat datang di Random Community — server Indonesia yang terbuka untuk semua!
-                    Di sini kamu bisa main game bareng, ngobrol santai, ikut event, atau sekadar nongkrong. 
-                    Nama "Random" berarti bebas: topik apa pun bisa muncul, dari game sampai meme, dari musik sampai ngobrol serius.
-                    Cocok buat kamu yang mau memperluas circle, ketemu teman baru dari berbagai usia dan latar, dan punya suasana ramah. 
-                    Server ini banyak orang Indonesia bukan berarti kita tidak terbuka pada orang atau bahasa dari negara lain, kita bisa ngobrol bahasa lainnya.
-                    Join Now ! :'>
+                    Welcome to Ranconnity, ENJOY YOUR STAY!
+                    We also provide topup service for your game, you can topup your game with us, and we will process it for you.
+                    Join our server now, buy the most dirt cheap game items ever with no doubts.
                     </p>
                 </div>
             </div>
