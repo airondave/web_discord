@@ -92,9 +92,6 @@ Route::middleware(['admin.auth'])->group(function () {
     // Topup Management
     Route::get('/admin/topup', [AdminTopupController::class, 'index'])->name('admin.topup.index');
     
-    // Unified Management Page (NEW - single page for everything)
-    Route::get('/admin/topup/management', [AdminTopupController::class, 'management'])->name('admin.topup.management');
-    
     // Game Management (specific routes first)
     Route::get('/admin/topup/games', [AdminTopupController::class, 'games'])->name('admin.topup.games');
     Route::post('/admin/topup/games', [AdminTopupController::class, 'storeGame'])->name('admin.topup.games.store');
@@ -118,18 +115,6 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::get('/admin/topup/{id}', [AdminTopupController::class, 'show'])->name('admin.topup.show');
     Route::post('/admin/topup/{id}/process', [AdminTopupController::class, 'process'])->name('admin.topup.process');
     Route::post('/admin/topup/{id}/reject', [AdminTopupController::class, 'reject'])->name('admin.topup.reject');
-    
-    // Unified Management Routes (NEW - for the single page)
-    Route::post('/admin/topup/management/games', [AdminTopupController::class, 'storeGameManagement'])->name('admin.topup.management.storeGame');
-    Route::put('/admin/topup/management/games/{id}', [AdminTopupController::class, 'updateGameManagement'])->name('admin.topup.management.updateGame');
-    Route::delete('/admin/topup/management/games/{id}', [AdminTopupController::class, 'destroyGameManagement'])->name('admin.topup.management.destroyGame');
-    Route::post('/admin/topup/management/packages', [AdminTopupController::class, 'storePackageManagement'])->name('admin.topup.management.storePackage');
-    Route::put('/admin/topup/management/packages/{id}', [AdminTopupController::class, 'updatePackageManagement'])->name('admin.topup.management.updatePackage');
-    Route::delete('/admin/topup/management/packages/{id}', [AdminTopupController::class, 'destroyPackageManagement'])->name('admin.topup.management.destroyPackage');
-    Route::post('/admin/topup/management/payment-methods', [AdminTopupController::class, 'storePaymentMethodManagement'])->name('admin.topup.management.storePaymentMethod');
-    Route::put('/admin/topup/management/payment-methods/{id}', [AdminTopupController::class, 'updatePaymentMethodManagement'])->name('admin.topup.management.updatePaymentMethod');
-    Route::delete('/admin/topup/management/payment-methods/{id}', [AdminTopupController::class, 'destroyPaymentMethodManagement'])->name('admin.topup.management.destroyPaymentMethod');
-    Route::get('/admin/topup/management/games/{id}/packages', [AdminTopupController::class, 'getGamePackagesManagement'])->name('admin.topup.management.getGamePackages');
 });
 
 // Discord API routes
