@@ -10,6 +10,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CriticsAdviceController;
 use App\Http\Controllers\DiscordController;
 use App\Http\Controllers\DiscordChatController;
+use App\Http\Controllers\TopupController;
+use App\Http\Controllers\AdminTopupController;
 
 // Home page route
 Route::get('/', [HomeController::class, 'index']);
@@ -27,6 +29,13 @@ Route::get('/support', function () {
 // route untuk submit form
 Route::get('/submit', [SubmissionController::class, 'create']);
 Route::post('/submit', [SubmissionController::class, 'store']);
+
+// Topup routes
+Route::get('/topup', [TopupController::class, 'index'])->name('topup.index');
+Route::post('/topup', [TopupController::class, 'store'])->name('topup.store');
+Route::get('/topup/payment/{id}', [TopupController::class, 'payment'])->name('topup.payment');
+Route::post('/topup/confirm-payment/{id}', [TopupController::class, 'confirmPayment'])->name('topup.confirm-payment');
+Route::get('/topup/success/{id}', [TopupController::class, 'success'])->name('topup.success');
 
 // route untuk BUTUN submit form
 Route::get('/submit/butun', [SubmissionController::class, 'createButun']);
@@ -79,6 +88,15 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::get('/admin/discord-chat', [DiscordChatController::class, 'index'])->name('admin.discord.chat');
     Route::post('/admin/discord-chat/send', [DiscordChatController::class, 'sendMessage'])->name('admin.discord.chat.send');
     Route::get('/admin/discord-chat/channels', [DiscordChatController::class, 'getChannels'])->name('admin.discord.chat.channels');
+
+    // Topup Management
+    Route::get('/admin/topup', [AdminTopupController::class, 'index'])->name('admin.topup.index');
+    Route::get('/admin/topup/{id}', [AdminTopupController::class, 'show'])->name('admin.topup.show');
+    Route::post('/admin/topup/{id}/process', [AdminTopupController::class, 'process'])->name('admin.topup.process');
+    Route::post('/admin/topup/{id}/reject', [AdminTopupController::class, 'reject'])->name('admin.topup.reject');
+    Route::get('/admin/topup/games', [AdminTopupController::class, 'games'])->name('admin.topup.games');
+    Route::get('/admin/topup/packages', [AdminTopupController::class, 'packages'])->name('admin.topup.packages');
+    Route::get('/admin/topup/payment-methods', [AdminTopupController::class, 'paymentMethods'])->name('admin.topup.payment-methods');
 });
 
 // Discord API routes

@@ -1748,10 +1748,14 @@
                 <i class="bi bi-discord me-2"></i>
                 Join Our Server
             </a>
-            <a href="/submit" class="retro-btn retro-btn-secondary">
-                <i class="bi bi-mortarboard-fill me-2"></i>
-                Role Requestor Form
-            </a>
+                            <a href="/submit" class="retro-btn retro-btn-secondary">
+                    <i class="bi bi-mortarboard-fill me-2"></i>
+                    Role Requestor Form
+                </a>
+                <a href="/topup" class="retro-btn">
+                    <i class="bi bi-credit-card me-2"></i>
+                    Topup Game
+                </a>
         </div>
 
         <!-- Features Grid removed -->
