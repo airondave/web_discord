@@ -396,7 +396,7 @@
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">Amount:</span>
-                        <span class="detail-value">{{ number_format($transaction->topupPackage->amount) }} {{ $transaction->game->game_code == 'VALORANT' ? 'VP' : 'Primogems' }}</span>
+                        <span class="detail-value">{{ number_format($transaction->topupPackage->amount) }} {{ $transaction->game->currency_unit }}</span>
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">Player ID:</span>

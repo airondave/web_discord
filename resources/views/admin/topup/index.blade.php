@@ -147,7 +147,7 @@
                                 <div class="fw-bold">{{ $transaction->topupPackage->name }}</div>
                                 <small class="text-muted">
                                     {{ number_format($transaction->topupPackage->amount) }} 
-                                    {{ $transaction->game->game_code == 'VALORANT' ? 'VP' : 'Primogems' }}
+                                    {{ $transaction->game->currency_unit }}
                                 </small>
                             </div>
                         </td>

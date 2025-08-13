@@ -8,7 +8,7 @@ Your topup transaction has been **confirmed** and is now being processed!
 ## Transaction Details:
 - **Game:** {{ $transaction->game->name }}
 - **Package:** {{ $transaction->topupPackage->name }}
-- **Amount:** {{ number_format($transaction->topupPackage->amount) }} {{ $transaction->game->game_code == 'VALORANT' ? 'VP' : 'Primogems' }}
+- **Amount:** {{ number_format($transaction->topupPackage->amount) }} {{ $transaction->game->currency_unit }}
 - **Player ID:** {{ $transaction->player_id }}
 @if($transaction->player_server)
 - **Server:** {{ $transaction->player_server }}

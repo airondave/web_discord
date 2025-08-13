@@ -26,42 +26,52 @@ class TopupSeeder extends Seeder
             [
                 'name' => 'Valorant',
                 'publisher' => 'Riot Games',
+                'currency_unit' => 'VP',
             ],
             [
                 'name' => 'Genshin Impact',
                 'publisher' => 'miHoYo',
+                'currency_unit' => 'Primogems',
             ],
             [
                 'name' => 'Roblox',
                 'publisher' => 'Roblox Corporation',
+                'currency_unit' => 'Robux',
             ],
             [
                 'name' => 'Zenless Zone Zero',
                 'publisher' => 'miHoYo',
+                'currency_unit' => 'Denny',
             ],
             [
                 'name' => 'Mobile Legends Bang Bang',
                 'publisher' => 'Moonton',
+                'currency_unit' => 'Diamonds',
             ],
             [
                 'name' => 'PUBG Mobile',
                 'publisher' => 'PUBG Corporation',
+                'currency_unit' => 'UC',
             ],
             [
                 'name' => 'Honkai Star Rail',
                 'publisher' => 'miHoYo',
+                'currency_unit' => 'Stellar Jade',
             ],
             [
                 'name' => 'Free Fire',
                 'publisher' => 'Garena',
+                'currency_unit' => 'Diamonds',
             ],
             [
                 'name' => 'Call of Duty Mobile',
                 'publisher' => 'Activision',
+                'currency_unit' => 'CP',
             ],
             [
                 'name' => 'Magic Chess Go Go',
                 'publisher' => 'Moonton',
+                'currency_unit' => 'Diamonds',
             ],
         ];
 
