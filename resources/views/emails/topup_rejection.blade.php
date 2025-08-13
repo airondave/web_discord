@@ -25,7 +25,7 @@ Unfortunately, your topup transaction has been **rejected**.
 - If you believe this is an error, please contact our support team
 
 ## Need help?
-If you have any questions about this rejection or need assistance, please contact our support team.
+If you have any questions about this rejection or need assistance, please contact our support team on discord.
 
 We apologize for any inconvenience this may have caused.
 

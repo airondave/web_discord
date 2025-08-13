@@ -20,7 +20,7 @@ Your topup transaction has been **confirmed** and is now being processed!
 Your topup will be processed within **1x24 hours**. You will receive another notification once the items have been added to your account.
 
 ## Need help?
-If you have any questions, please contact our support team.
+If you have any questions, please contact our support team in discord
 
 Thank you for choosing our service!
 
