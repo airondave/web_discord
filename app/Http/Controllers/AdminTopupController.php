@@ -208,7 +208,7 @@ class AdminTopupController extends Controller
             'name' => 'required|string|max:100',
             'amount' => 'required|integer|min:1',
             'price' => 'required|integer|min:1000',
-            'is_active' => 'nullable|boolean',
+            'is_active' => 'sometimes|boolean',
         ]);
         
         \Log::info('Validation passed successfully');
@@ -255,7 +255,7 @@ class AdminTopupController extends Controller
             'name' => 'required|string|max:100',
             'amount' => 'required|integer|min:1',
             'price' => 'required|integer|min:1000',
-            'is_active' => 'nullable|boolean',
+            'is_active' => 'sometimes|boolean',
         ]);
 
         $package = TopupPackage::findOrFail($id);
