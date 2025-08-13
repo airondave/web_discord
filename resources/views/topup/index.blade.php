@@ -672,58 +672,56 @@
 
             // Load packages for selected game
             function loadPackages(gameId) {
-                fetch(`/topup/packages/${gameId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success && data.packages) {
-                            let packagesHTML = '';
-                            data.packages.forEach(package => {
-                                packagesHTML += `
-                                    <div class="package-card" data-package-id="${package.id}" data-price="${package.price}">
-                                        <div class="package-name">${package.name}</div>
-                                        <div class="package-amount">${package.amount}</div>
-                                        <div class="package-price">Rp ${package.price.toLocaleString('id-ID')}</div>
-                                    </div>
-                                `;
-                            });
-                            
-                            packageGrid.innerHTML = packagesHTML;
-                            
-                            // Add click events to packages
-                            const packageCards = packageGrid.querySelectorAll('.package-card');
-                            packageCards.forEach(card => {
-                                card.addEventListener('click', function() {
-                                    // Remove previous selection
-                                    packageCards.forEach(c => c.classList.remove('selected'));
-                                    // Select current package
-                                    this.classList.add('selected');
-                                    
-                                    // Update form
-                                    const packageId = this.dataset.packageId;
-                                    const price = this.dataset.price;
-                                    
-                                    // Add hidden input for package
-                                    let packageInput = document.querySelector('input[name="package_id"]');
-                                    if (!packageInput) {
-                                        packageInput = document.createElement('input');
-                                        packageInput.type = 'hidden';
-                                        packageInput.name = 'package_id';
-                                        document.getElementById('topupForm').appendChild(packageInput);
-                                    }
-                                    packageInput.value = packageId;
-                                    
-                                    // Show payment section
-                                    paymentSection.style.display = 'block';
-                                    playerSection.style.display = 'none';
-                                    totalSection.style.display = 'none';
-                                    submitBtn.disabled = true;
-                                });
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error loading packages:', error);
+                const games = @json($games);
+                const selectedGame = games.find(g => g.id == gameId);
+                
+                if (selectedGame && selectedGame.topup_packages) {
+                    let packagesHTML = '';
+                    selectedGame.topup_packages.forEach(package => {
+                        packagesHTML += `
+                            <div class="package-card" data-package-id="${package.id}" data-price="${package.price}">
+                                <div class="package-name">${package.name}</div>
+                                <div class="package-amount">${package.amount}</div>
+                                <div class="package-price">Rp ${package.price.toLocaleString('id-ID')}</div>
+                            </div>
+                        `;
                     });
+                    
+                    packageGrid.innerHTML = packagesHTML;
+                    
+                    // Add click events to packages
+                    const packageCards = packageGrid.querySelectorAll('.package-card');
+                    packageCards.forEach(card => {
+                        card.addEventListener('click', function() {
+                            // Remove previous selection
+                            packageCards.forEach(c => c.classList.remove('selected'));
+                            // Select current package
+                            this.classList.add('selected');
+                            
+                            // Update form
+                            const packageId = this.dataset.packageId;
+                            const price = this.dataset.price;
+                            
+                            // Add hidden input for package
+                            let packageInput = document.querySelector('input[name="package_id"]');
+                            if (!packageInput) {
+                                packageInput = document.createElement('input');
+                                packageInput.type = 'hidden';
+                                packageInput.name = 'package_id';
+                                document.getElementById('topupForm').appendChild(packageInput);
+                            }
+                            packageInput.value = packageId;
+                            
+                            // Show payment section
+                            paymentSection.style.display = 'block';
+                            playerSection.style.display = 'none';
+                            totalSection.style.display = 'none';
+                            submitBtn.disabled = true;
+                        });
+                    });
+                } else {
+                    packageGrid.innerHTML = '<div class="text-center text-muted">No packages available for this game.</div>';
+                }
             }
 
             // Payment method selection
