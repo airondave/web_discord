@@ -573,6 +573,17 @@
                                     <img src="/public/image/games/smartfren.jpg" alt="Pulsa Smartfren" class="game-logo">
                                 @elseif($game->name == 'Pulsa Indosat')
                                     <img src="/public/image/games/indosat.jpg" alt="Pulsa Indosat" class="game-logo">
+                                @elseif($game->name == 'Pulsa Axis')
+                                    <img src="/public/image/games/axis.jpg" alt="Pulsa Axis" class="game-logo">
+                                @elseif($game->name == 'GoPay')
+                                    <img src="/public/image/games/gojek.jpg" alt="Gopay" class="game-logo"> 
+                                @elseif($game->name == 'DANA')
+                                    <img src="/public/image/games/dana.jpg" alt="DANA" class="game-logo">
+                                @elseif($game->name == 'OVO')
+                                    <img src="/public/image/games/ovo.jpg" alt="OVO" class="game-logo">
+                                @elseif($game->name == 'ShopeePay')
+                                    <img src="/public/image/games/shopeepay.jpg" alt="ShopeePay" class="game-logo">
+                                
                                 @else
                                     <i class="bi bi-controller"></i>
                                 @endif
