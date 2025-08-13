@@ -468,21 +468,12 @@
                     </div>
                 </div>
                 
-                <div class="step-item">
-                    <div class="step-icon pending">
-                        <i class="bi bi-envelope"></i>
-                    </div>
-                    <div class="step-text">
-                        <strong>Email Confirmation:</strong> You will receive a verification email once confirmed
-                    </div>
-                </div>
-                
                                  <div class="step-item">
                      <div class="step-icon pending">
-                         <i class="bi bi-gamepad-fill"></i>
+                         <i class="bi bi-envelope"></i>
                      </div>
                      <div class="step-text">
-                         <strong>Topup Delivery:</strong> Items will be added to your account within 24 hours
+                         <strong>Email Confirmation:</strong> You will receive a verification email once confirmed
                      </div>
                  </div>
             </div>
