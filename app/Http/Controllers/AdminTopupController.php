@@ -156,15 +156,105 @@ class AdminTopupController extends Controller
         return view('admin.topup.games', compact('games'));
     }
 
-    public function packages()
-    {
-        $packages = TopupPackage::with('game')->get();
-        return view('admin.topup.packages', compact('packages'));
-    }
-
     public function paymentMethods()
     {
         $paymentMethods = PaymentMethod::all();
         return view('admin.topup.payment-methods', compact('paymentMethods'));
+    }
+
+    // Package Management Methods
+    public function packages()
+    {
+        $packages = TopupPackage::with('game')->orderBy('created_at', 'desc')->paginate(20);
+        $games = Game::all();
+        return view('admin.topup.packages', compact('packages', 'games'));
+    }
+
+    public function createPackage()
+    {
+        $games = Game::all();
+        return view('admin.topup.packages.create', compact('games'));
+    }
+
+    public function storePackage(Request $request)
+    {
+        $request->validate([
+            'game_id' => 'required|exists:games,id',
+            'name' => 'required|string|max:100',
+            'amount' => 'required|integer|min:1',
+            'price' => 'required|integer|min:1000',
+            'is_active' => 'boolean',
+        ]);
+
+        TopupPackage::create([
+            'game_id' => $request->game_id,
+            'name' => $request->name,
+            'amount' => $request->amount,
+            'price' => $request->price,
+            'is_active' => $request->has('is_active'),
+        ]);
+
+        return redirect()->route('admin.topup.packages')
+            ->with('success', 'Package created successfully!');
+    }
+
+    public function editPackage($id)
+    {
+        $package = TopupPackage::with('game')->findOrFail($id);
+        
+        return response()->json([
+            'success' => true,
+            'package' => $package
+        ]);
+    }
+
+    public function updatePackage(Request $request, $id)
+    {
+        $request->validate([
+            'game_id' => 'required|exists:games,id',
+            'name' => 'required|string|max:100',
+            'amount' => 'required|integer|min:1',
+            'price' => 'required|integer|min:1000',
+            'is_active' => 'boolean',
+        ]);
+
+        $package = TopupPackage::findOrFail($id);
+        $package->update([
+            'game_id' => $request->game_id,
+            'name' => $request->name,
+            'amount' => $request->amount,
+            'price' => $request->price,
+            'is_active' => $request->has('is_active'),
+        ]);
+
+        return redirect()->route('admin.topup.packages')
+            ->with('success', 'Package updated successfully!');
+    }
+
+    public function destroyPackage($id)
+    {
+        $package = TopupPackage::findOrFail($id);
+        
+        // Check if package is being used in transactions
+        if ($package->transactions()->count() > 0) {
+            return redirect()->route('admin.topup.packages')
+                ->with('error', 'Cannot delete package. It is being used in transactions.');
+        }
+
+        $package->delete();
+
+        return redirect()->route('admin.topup.packages')
+            ->with('success', 'Package deleted successfully!');
+    }
+
+    public function togglePackageStatus(Request $request, $id)
+    {
+        $package = TopupPackage::findOrFail($id);
+        $package->update(['is_active' => $request->is_active]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Package status updated successfully!'
+        ]);
     }
 } 

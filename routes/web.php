@@ -98,6 +98,12 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::post('/admin/topup/{id}/reject', [AdminTopupController::class, 'reject'])->name('admin.topup.reject');
     Route::get('/admin/topup/games', [AdminTopupController::class, 'games'])->name('admin.topup.games');
     Route::get('/admin/topup/packages', [AdminTopupController::class, 'packages'])->name('admin.topup.packages');
+    Route::get('/admin/topup/packages/create', [AdminTopupController::class, 'createPackage'])->name('admin.topup.packages.create');
+    Route::post('/admin/topup/packages', [AdminTopupController::class, 'storePackage'])->name('admin.topup.packages.store');
+    Route::get('/admin/topup/packages/{id}/edit', [AdminTopupController::class, 'editPackage'])->name('admin.topup.packages.edit');
+    Route::put('/admin/topup/packages/{id}', [AdminTopupController::class, 'updatePackage'])->name('admin.topup.packages.update');
+    Route::delete('/admin/topup/packages/{id}', [AdminTopupController::class, 'destroyPackage'])->name('admin.topup.packages.destroy');
+    Route::post('/admin/topup/packages/{id}/toggle-status', [AdminTopupController::class, 'togglePackageStatus'])->name('admin.topup.packages.toggle-status');
     Route::get('/admin/topup/payment-methods', [AdminTopupController::class, 'paymentMethods'])->name('admin.topup.payment-methods');
 });
 

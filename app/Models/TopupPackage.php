@@ -14,6 +14,15 @@ class TopupPackage extends Model
         'name',
         'amount',
         'price',
+        'is_active',
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
+    protected $attributes = [
+        'is_active' => true,
     ];
 
     public function game()
