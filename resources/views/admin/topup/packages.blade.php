@@ -2,6 +2,119 @@
 
 @section('title', 'Manage Topup Packages')
 
+@push('styles')
+<style>
+/* Fix for large chevron arrows and lines */
+.pagination .page-link {
+    font-size: 14px !important;
+    padding: 0.375rem 0.75rem !important;
+}
+
+.pagination .page-link .bi {
+    font-size: 14px !important;
+}
+
+/* Ensure table content is properly displayed */
+.table tbody tr {
+    display: table-row !important;
+}
+
+/* Fix any oversized icons */
+.bi {
+    font-size: inherit !important;
+}
+
+/* Remove any large display classes that might be causing issues */
+.display-4 {
+    font-size: 2.5rem !important;
+}
+
+/* Ensure proper table layout */
+.table-responsive {
+    overflow-x: auto;
+}
+
+/* Fix pagination spacing */
+.pagination {
+    margin-bottom: 0;
+}
+
+/* Ensure no large elements appear in table */
+.card-body .table {
+    position: relative;
+}
+
+.card-body .table::before,
+.card-body .table::after {
+    display: none !important;
+}
+
+/* Fix any potential large chevron or arrow elements */
+.card-body .table > *:not(tbody):not(thead):not(tfoot) {
+    display: none !important;
+}
+
+/* Ensure table body is properly displayed */
+#packagesTableBody {
+    display: table-row-group !important;
+}
+
+#packagesTableBody tr {
+    display: table-row !important;
+}
+
+/* Remove any large display elements */
+.display-1, .display-2, .display-3, .display-4, .display-5, .display-6 {
+    font-size: 1rem !important;
+}
+
+/* Fix any oversized Bootstrap icons */
+.bi-chevron-left, .bi-chevron-right {
+    font-size: 14px !important;
+}
+
+/* Ensure proper table structure */
+.table {
+    table-layout: auto;
+    width: 100%;
+}
+
+.table tbody {
+    display: table-row-group;
+}
+
+.table tbody tr {
+    display: table-row;
+}
+
+.table tbody td {
+    display: table-cell;
+}
+
+/* Debug: Hide any extremely large elements */
+* {
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+}
+
+/* Ensure no elements are larger than the viewport */
+.card-body * {
+    max-width: 100% !important;
+    max-height: 500px !important;
+}
+
+/* Fix any potential carousel or navigation elements */
+.carousel, .carousel-inner, .carousel-item {
+    display: none !important;
+}
+
+/* Remove any large arrows or chevrons */
+.arrow, .chevron, .carousel-control {
+    display: none !important;
+}
+</style>
+@endpush
+
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="mb-0">Manage Topup Packages</h2>
@@ -132,7 +245,7 @@
                     <tr>
                         <td colspan="8" class="text-center py-4">
                             <div class="text-muted">
-                                <i class="bi bi-inbox display-4"></i>
+                                <i class="bi bi-inbox" style="font-size: 2rem;"></i>
                                 <p class="mt-2">No packages found</p>
                             </div>
                         </td>
@@ -145,7 +258,50 @@
         <!-- Pagination -->
         @if($packages->hasPages())
             <div class="d-flex justify-content-center mt-4">
-                {{ $packages->links() }}
+                <nav aria-label="Packages pagination">
+                    <ul class="pagination pagination-sm">
+                        {{-- Previous Page Link --}}
+                        @if ($packages->onFirstPage())
+                            <li class="page-item disabled">
+                                <span class="page-link">Previous</span>
+                            </li>
+                        @else
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $packages->previousPageUrl() }}" rel="prev">Previous</a>
+                            </li>
+                        @endif
+
+                        {{-- Pagination Elements --}}
+                        @foreach ($packages->getUrlRange(1, $packages->lastPage()) as $page => $url)
+                            @if ($page == $packages->currentPage())
+                                <li class="page-item active">
+                                    <span class="page-link">{{ $page }}</span>
+                                </li>
+                            @else
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                </li>
+                            @endif
+                        @endforeach
+
+                        {{-- Next Page Link --}}
+                        @if ($packages->hasMorePages())
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $packages->nextPageUrl() }}" rel="next">Next</a>
+                            </li>
+                        @else
+                            <li class="page-item disabled">
+                                <span class="page-link">Next</span>
+                            </li>
+                        @endif
+                    </ul>
+                </nav>
+                
+                <div class="text-center mt-2">
+                    <small class="text-muted">
+                        Showing {{ $packages->firstItem() ?? 0 }} to {{ $packages->lastItem() ?? 0 }} of {{ $packages->total() }} results
+                    </small>
+                </div>
             </div>
         @endif
     </div>

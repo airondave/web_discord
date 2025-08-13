@@ -519,7 +519,7 @@
                 <div class="search-section">
                     <h3 class="search-title">
                         <i class="bi bi-search me-2"></i>
-                        Search Games
+                        Search Packages
                     </h3>
                     <input type="text" class="search-input" id="gameSearch" 
                            placeholder="Type to search for games..." autocomplete="off">
@@ -529,7 +529,7 @@
                 <div class="game-card">
                     <h3 class="game-title text-center">
                         <i class="bi bi-controller me-2"></i>
-                        Select Your Game
+                        Select Your Desired Packages
                     </h3>
                     
                     <div class="game-grid" id="gameGrid">
@@ -559,6 +559,10 @@
                                     <img src="/public/image/games/mgcc.jpg" alt="Magic Chess Go Go" class="game-logo">
                                 @elseif($game->name == 'Delta Force Mobile')
                                     <img src="/public/image/games/deltaforce.jpg" alt="Delta Force Mobile" class="game-logo">
+                                @elseif($game->name == 'Clash of Clans')
+                                    <img src="/public/image/games/coc.jpg" alt="Clash of Clans Gems" class="game-logo">
+                                @elseif($game->name == 'Clash Royale')
+                                    <img src="/public/image/games/cr.jpg" alt="Clash Royale Gems" class="game-logo">
                                 @else
                                     <i class="bi bi-controller"></i>
                                 @endif
