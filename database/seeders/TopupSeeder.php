@@ -13,11 +13,11 @@ class TopupSeeder extends Seeder
     {
         // Create Payment Methods
         $paymentMethods = [
-            ['name' => 'QRIS', 'type' => 'ewallet'],
-            ['name' => 'GoPay', 'type' => 'ewallet'],
-            ['name' => 'OVO', 'type' => 'ewallet'],
-            ['name' => 'DANA', 'type' => 'ewallet'],
-            ['name' => 'Bank Transfer', 'type' => 'bank'],
+            ['name' => 'QRIS', 'type' => 'qr'],
+            ['name' => 'GoPay', 'type' => 'gp'],
+            ['name' => 'OVO', 'type' => 'ov'],
+            ['name' => 'DANA', 'type' => 'dn'],
+            ['name' => 'Bank Transfer', 'type' => 'bt'],
         ];
 
         foreach ($paymentMethods as $method) {
