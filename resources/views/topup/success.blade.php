@@ -285,7 +285,7 @@
         .btn-secondary {
             background: linear-gradient(135deg, var(--retro-yellow) 0%, var(--retro-orange) 100%);
             border: 3px solid var(--retro-yellow);
-            color: var(--dark-bg);
+            color: white;
             font-family: 'Press Start 2P', monospace;
             font-size: 1rem;
             text-transform: uppercase;

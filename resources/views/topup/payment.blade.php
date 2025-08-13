@@ -249,7 +249,7 @@
         .btn-confirm {
             background: linear-gradient(135deg, var(--retro-green) 0%, var(--retro-cyan) 100%);
             border: 3px solid var(--retro-green);
-            color: var(--dark-bg);
+            color: white;
             font-family: 'Press Start 2P', monospace;
             font-size: 1rem;
             text-transform: uppercase;
