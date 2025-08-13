@@ -477,14 +477,14 @@
                     </div>
                 </div>
                 
-                <div class="step-item">
-                    <div class="step-icon pending">
-                        <i class="bi bi-gamepad"></i>
-                    </div>
-                    <div class="step-text">
-                        <strong>Topup Delivery:</strong> Items will be added to your account within 24 hours
-                    </div>
-                </div>
+                                 <div class="step-item">
+                     <div class="step-icon pending">
+                         <i class="bi bi-gamepad-fill"></i>
+                     </div>
+                     <div class="step-text">
+                         <strong>Topup Delivery:</strong> Items will be added to your account within 24 hours
+                     </div>
+                 </div>
             </div>
 
             <!-- Action Buttons -->
@@ -507,22 +507,22 @@
                     Important Information
                 </h4>
                 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <div class="text-center">
-                            <i class="bi bi-clock text-warning" style="font-size: 2rem;"></i>
-                            <h5 class="mt-2">Verification Time</h5>
-                            <p class="text-muted">Payment verification usually takes 1-2 hours during business hours</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="text-center">
-                            <i class="bi bi-envelope text-info" style="font-size: 2rem;"></i>
-                            <h5 class="mt-2">Email Notifications</h5>
-                            <p class="text-muted">Check your email for status updates and confirmations</p>
-                        </div>
-                    </div>
-                </div>
+                                 <div class="row">
+                     <div class="col-md-6 mb-3">
+                         <div class="text-center">
+                             <i class="bi bi-clock text-warning" style="font-size: 2rem;"></i>
+                             <h5 class="mt-2" style="color: var(--retro-yellow);">Verification Time</h5>
+                             <p style="color: var(--text-primary);">Payment verification usually takes 1-2 hours during business hours</p>
+                         </div>
+                     </div>
+                     <div class="col-md-6 mb-3">
+                         <div class="text-center">
+                             <i class="bi bi-envelope text-info" style="font-size: 2rem;"></i>
+                             <h5 class="mt-2" style="color: var(--retro-cyan);">Email Notifications</h5>
+                             <p style="color: var(--text-primary);">Check your email for status updates and confirmations</p>
+                         </div>
+                     </div>
+                 </div>
                 
                 <div class="alert alert-info mt-3">
                     <i class="bi bi-lightbulb me-2"></i>
