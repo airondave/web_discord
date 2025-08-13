@@ -557,6 +557,8 @@
                                     <img src="/public/image/games/cod.jpg" alt="Call of Duty Mobile" class="game-logo">
                                 @elseif($game->name == 'Magic Chess Go Go')
                                     <img src="/public/image/games/mgcc.jpg" alt="Magic Chess Go Go" class="game-logo">
+                                @elseif($game->name == 'Delta Force Mobile')
+                                    <img src="/public/image/games/deltaforce.jpg" alt="Delta Force Mobile" class="game-logo">
                                 @else
                                     <i class="bi bi-controller"></i>
                                 @endif
