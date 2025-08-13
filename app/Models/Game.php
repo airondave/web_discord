@@ -13,6 +13,7 @@ class Game extends Model
         'name',
         'game_code',
         'publisher',
+        'icon',
     ];
 
     public function topupPackages()

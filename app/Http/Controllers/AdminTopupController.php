@@ -264,12 +264,23 @@ class AdminTopupController extends Controller
         $request->validate([
             'name' => 'required|string|max:100|unique:games,name',
             'publisher' => 'required|string|max:100',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        Game::create([
+        $data = [
             'name' => $request->name,
             'publisher' => $request->publisher,
-        ]);
+        ];
+
+        // Handle icon upload
+        if ($request->hasFile('icon')) {
+            $icon = $request->file('icon');
+            $iconName = time() . '_' . $icon->getClientOriginalName();
+            $icon->move(public_path('image/games'), $iconName);
+            $data['icon'] = $iconName;
+        }
+
+        Game::create($data);
 
         return redirect()->route('admin.topup.games')
             ->with('success', 'Game created successfully!');
@@ -280,13 +291,29 @@ class AdminTopupController extends Controller
         $request->validate([
             'name' => 'required|string|max:100|unique:games,name,' . $id,
             'publisher' => 'required|string|max:100',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $game = Game::findOrFail($id);
-        $game->update([
+        $data = [
             'name' => $request->name,
             'publisher' => $request->publisher,
-        ]);
+        ];
+
+        // Handle icon upload
+        if ($request->hasFile('icon')) {
+            // Delete old icon if exists
+            if ($game->icon && file_exists(public_path('image/games/' . $game->icon))) {
+                unlink(public_path('image/games/' . $game->icon));
+            }
+            
+            $icon = $request->file('icon');
+            $iconName = time() . '_' . $icon->getClientOriginalName();
+            $icon->move(public_path('image/games'), $iconName);
+            $data['icon'] = $iconName;
+        }
+
+        $game->update($data);
 
         return redirect()->route('admin.topup.games')
             ->with('success', 'Game updated successfully!');
@@ -300,6 +327,11 @@ class AdminTopupController extends Controller
         if ($game->topupPackages()->count() > 0) {
             return redirect()->route('admin.topup.games')
                 ->with('error', 'Cannot delete game. It has associated packages.');
+        }
+
+        // Delete icon file if exists
+        if ($game->icon && file_exists(public_path('image/games/' . $game->icon))) {
+            unlink(public_path('image/games/' . $game->icon));
         }
 
         $game->delete();
