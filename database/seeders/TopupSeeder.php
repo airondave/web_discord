@@ -25,12 +25,10 @@ class TopupSeeder extends Seeder
         $games = [
             [
                 'name' => 'Valorant',
-                'game_code' => 'VALORANT',
                 'publisher' => 'Riot Games',
             ],
             [
                 'name' => 'Genshin Impact',
-                'game_code' => 'GENSHIN',
                 'publisher' => 'miHoYo',
             ],
         ];
@@ -40,7 +38,7 @@ class TopupSeeder extends Seeder
         }
 
         // Create Topup Packages for Valorant
-        $valorant = Game::where('game_code', 'VALORANT')->first();
+        $valorant = Game::where('name', 'Valorant')->first();
         if ($valorant) {
             $valorantPackages = [
                 ['name' => '125 VP', 'amount' => 125, 'price' => 15000],
@@ -63,7 +61,7 @@ class TopupSeeder extends Seeder
         }
 
         // Create Topup Packages for Genshin Impact
-        $genshin = Game::where('game_code', 'GENSHIN')->first();
+        $genshin = Game::where('name', 'Genshin Impact')->first();
         if ($genshin) {
             $genshinPackages = [
                 ['name' => '60 Primogems', 'amount' => 60, 'price' => 15000],
