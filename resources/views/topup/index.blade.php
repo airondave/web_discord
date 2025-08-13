@@ -297,6 +297,40 @@
             transform: none;
         }
 
+        .search-container {
+            margin-bottom: 2rem;
+        }
+
+        .retro-search-input {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--retro-green);
+            border-radius: 8px;
+            color: var(--text-primary);
+            padding: 0.75rem 1rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+        }
+
+        .retro-search-input:focus {
+            background: rgba(0, 0, 0, 0.7);
+            border-color: var(--retro-cyan);
+            color: var(--text-primary);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            outline: none;
+        }
+
+        .retro-search-icon {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--retro-green);
+            border-right: none;
+            color: var(--retro-green);
+            border-radius: 8px 0 0 8px;
+        }
+
+        .game-option.hidden {
+            display: none !important;
+        }
+
         .total-section {
             background: rgba(255, 255, 0, 0.1);
             border: 2px solid var(--retro-yellow);
@@ -401,6 +435,16 @@
             <form action="{{ route('topup.store') }}" method="POST" id="topupForm">
                 @csrf
                 
+                <!-- Search Bar -->
+                <div class="search-container mb-4">
+                    <div class="input-group">
+                        <span class="input-group-text retro-search-icon">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" id="gameSearch" class="form-control retro-search-input" placeholder="Search for games...">
+                    </div>
+                </div>
+
                 <!-- Game Selection -->
                 <div class="game-card">
                     <h3 class="game-title text-center">
@@ -412,10 +456,10 @@
                         @foreach($games as $game)
                         <div class="col-md-6 mb-3">
                             <div class="game-option text-center p-3" data-game-id="{{ $game->id }}">
-                                <div class="game-icon {{ $game->game_code == 'VALORANT' ? 'valorant-icon' : 'genshin-icon' }}">
-                                    <i class="bi bi-{{ $game->game_code == 'VALORANT' ? 'controller' : 'gem' }}"></i>
+                                <div class="game-icon">
+                                    <i class="bi bi-{{ $game->name === 'Valorant' ? 'controller' : ($game->name === 'Genshin Impact' ? 'gem' : 'diamond') }}"></i>
                                 </div>
-                                <h4 class="text-{{ $game->game_code == 'VALORANT' ? 'danger' : 'warning' }}">{{ $game->name }}</h4>
+                                <h4 class="game-name">{{ $game->name }}</h4>
                                 <p class="text-muted">{{ $game->publisher }}</p>
                                 <div class="form-check d-flex justify-content-center">
                                     <input class="form-check-input" type="radio" name="game_id" 
@@ -519,8 +563,32 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Search functionality
+                const gameSearch = document.getElementById('gameSearch');
+                const gameOptions = document.querySelectorAll('.game-option');
+                
+                gameSearch.addEventListener('input', function() {
+                    const searchTerm = this.value.toLowerCase().trim();
+                    
+                    gameOptions.forEach(option => {
+                        const gameName = option.querySelector('h4').textContent.toLowerCase();
+                        const gamePublisher = option.querySelector('p').textContent.toLowerCase();
+                        
+                        if (gameName.includes(searchTerm) || gamePublisher.includes(searchTerm)) {
+                            option.classList.remove('hidden');
+                        } else {
+                            option.classList.add('hidden');
+                        }
+                    });
+                });
+                
+                // Clear search when form is reset
+                document.getElementById('topupForm').addEventListener('reset', function() {
+                    gameSearch.value = '';
+                    gameOptions.forEach(option => option.classList.remove('hidden'));
+                });
             const gameRadios = document.querySelectorAll('input[name="game_id"]');
             const packageSection = document.getElementById('packageSection');
             const paymentSection = document.getElementById('paymentSection');
@@ -552,10 +620,28 @@
                 if (selectedGame && selectedGame.topup_packages) {
                     let packagesHTML = '';
                     selectedGame.topup_packages.forEach(package => {
+                        // Determine currency based on game
+                        let currency = '';
+                        if (selectedGame.name === 'Valorant') {
+                            currency = 'VP';
+                        } else if (selectedGame.name === 'Genshin Impact' || selectedGame.name === 'Zenless Zone Zero' || selectedGame.name === 'Honkai Star Rail') {
+                            currency = selectedGame.name === 'Genshin Impact' ? 'Primogems' : (selectedGame.name === 'Zenless Zone Zero' ? 'Denny' : 'Stellar Jade');
+                        } else if (selectedGame.name === 'Roblox') {
+                            currency = 'Robux';
+                        } else if (selectedGame.name === 'Mobile Legends Bang Bang' || selectedGame.name === 'Free Fire' || selectedGame.name === 'Magic Chess Go Go') {
+                            currency = 'Diamonds';
+                        } else if (selectedGame.name === 'PUBG Mobile') {
+                            currency = 'UC';
+                        } else if (selectedGame.name === 'Call of Duty Mobile') {
+                            currency = 'CP';
+                        } else {
+                            currency = 'Points';
+                        }
+                        
                         packagesHTML += `
                             <div class="package-card" data-package-id="${package.id}" data-price="${package.price}">
                                 <div class="package-name">${package.name}</div>
-                                <div class="package-amount">${package.amount} ${selectedGame.game_code === 'VALORANT' ? 'VP' : 'Primogems'}</div>
+                                <div class="package-amount">${package.amount} ${currency}</div>
                                 <div class="package-price">Rp ${package.price.toLocaleString('id-ID')}</div>
                             </div>
                         `;

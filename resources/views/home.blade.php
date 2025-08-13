@@ -1694,12 +1694,11 @@
                         Our Community
                     </h3>
                     <p class="card-text text-center">
-                    Selamat datang di Random Community — server Indonesia yang terbuka untuk semua!
-                    Di sini kamu bisa main game bareng, ngobrol santai, ikut event, atau sekadar nongkrong. 
-                    Nama "Random" berarti bebas: topik apa pun bisa muncul, dari game sampai meme, dari musik sampai ngobrol serius.
-                    Cocok buat kamu yang mau memperluas circle, ketemu teman baru dari berbagai usia dan latar, dan punya suasana ramah. 
-                    Server ini banyak orang Indonesia bukan berarti kita tidak terbuka pada orang atau bahasa dari negara lain, kita bisa ngobrol bahasa lainnya.
-                    Join Now ! :'>
+                    Selamat datang di Random Community — server Indonesia untuk semua!
+                    Main game, ngobrol, ikut event, atau sekadar nongkrong.
+                    Topik bebas: dari game, meme, musik, sampai obrolan serius.
+                    Cocok buat nambah teman dari berbagai usia & latar, ramah untuk semua bahasa.
+                    Join now! :>
                     </p>
                 </div>
             </div>
