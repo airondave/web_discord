@@ -3,27 +3,8 @@
 @section('title', 'Topup Transactions')
 
 @section('content')
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">
-        <i class="bi bi-credit-card me-2"></i>
-        Topup Transactions
-    </h1>
-    <div class="btn-toolbar mb-2 mb-md-0">
-        <div class="btn-group me-2">
-            <a href="{{ route('admin.topup.games') }}" class="btn btn-sm btn-outline-secondary">
-                <i class="bi bi-controller me-1"></i>
-                Manage Games
-            </a>
-            <a href="{{ route('admin.topup.packages') }}" class="btn btn-sm btn-outline-secondary">
-                <i class="bi bi-box me-1"></i>
-                Manage Packages
-            </a>
-            <a href="{{ route('admin.topup.payment-methods') }}" class="btn btn-sm btn-outline-secondary">
-                <i class="bi bi-credit-card me-1"></i>
-                Payment Methods
-            </a>
-        </div>
-    </div>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">Topup Transactions</h2>
 </div>
 
 @if(session('success'))
