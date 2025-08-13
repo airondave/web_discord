@@ -750,7 +750,7 @@
                             <div class="package-card" data-package-id="${package.id}" data-price="${package.price}">
                                 <div class="package-name">${package.name}</div>
                                 <div class="package-amount">${package.amount}</div>
-                                <div class="package-price">Rp ${package.price.toLocaleString('id-ID')}</div>
+                                <div class="package-price">Rp ${package.price.toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
                             </div>
                         `;
                     });
@@ -812,7 +812,7 @@
                 const selectedPackage = document.querySelector('.package-card.selected');
                 if (selectedPackage) {
                     const price = parseFloat(selectedPackage.dataset.price);
-                    totalAmount.textContent = `Rp ${price.toLocaleString('id-ID')}`;
+                    totalAmount.textContent = `Rp ${price.toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
                 }
             }
 

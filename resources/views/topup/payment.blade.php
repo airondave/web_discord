@@ -418,7 +418,7 @@
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">Total Amount:</span>
-                        <span class="detail-value amount-highlight">Rp {{ number_format($transaction->price, 0, ',', '.') }}</span>
+                                                        <span class="detail-value amount-highlight">Rp {{ number_format($transaction->price, 2, ',', '.') }}</span>
                     </div>
                 </div>
             </div>
@@ -454,7 +454,7 @@
                     
                     <div class="instruction-step">
                         <div class="step-number">3</div>
-                        <div class="step-text">Enter the amount: <strong>Rp {{ number_format($transaction->price, 0, ',', '.') }}</strong></div>
+                        <div class="step-text">Enter the amount: <strong>Rp {{ number_format($transaction->price, 2, ',', '.') }}</strong></div>
                     </div>
                     
                     <div class="instruction-step">

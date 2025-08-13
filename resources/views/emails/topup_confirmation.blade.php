@@ -13,7 +13,7 @@ Your topup transaction has been **confirmed** and is now being processed!
 @if($transaction->player_server)
 - **Server:** {{ $transaction->player_server }}
 @endif
-- **Price:** Rp {{ number_format($transaction->price, 0, ',', '.') }}
+- **Price:** Rp {{ number_format($transaction->price, 2, ',', '.') }}
 - **Transaction ID:** {{ $transaction->id }}
 
 ## What happens next?

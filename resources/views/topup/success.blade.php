@@ -430,7 +430,7 @@
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">Total Amount:</span>
-                        <span class="detail-value amount-highlight">Rp {{ number_format($transaction->price, 0, ',', '.') }}</span>
+                        <span class="detail-value amount-highlight">Rp {{ number_format($transaction->price, 2, ',', '.') }}</span>
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">Payment Reference:</span>

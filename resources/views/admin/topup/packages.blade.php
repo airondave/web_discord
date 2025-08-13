@@ -295,7 +295,7 @@
                         </td>
                         <td>
                             <span class="fw-bold text-success">
-                                Rp {{ number_format($package->price, 0, ',', '.') }}
+                                Rp {{ number_format($package->price, 2, ',', '.') }}
                             </span>
                         </td>
                         <td>

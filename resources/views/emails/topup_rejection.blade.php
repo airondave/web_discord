@@ -13,7 +13,7 @@ Unfortunately, your topup transaction has been **rejected**.
 @if($transaction->player_server)
 - **Server:** {{ $transaction->player_server }}
 @endif
-- **Price:** Rp {{ number_format($transaction->price, 0, ',', '.') }}
+- **Price:** Rp {{ number_format($transaction->price, 2, ',', '.') }}
 - **Transaction ID:** {{ $transaction->id }}
 
 ## Reason for Rejection:

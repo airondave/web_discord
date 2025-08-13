@@ -161,7 +161,7 @@
                         </td>
                         <td>
                             <span class="fw-bold text-success">
-                                Rp {{ number_format($transaction->price, 0, ',', '.') }}
+                                Rp {{ number_format($transaction->price, 2, ',', '.') }}
                             </span>
                         </td>
                         <td>
