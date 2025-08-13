@@ -29,7 +29,7 @@ If you have any questions about this rejection or need assistance, please contac
 
 We apologize for any inconvenience this may have caused.
 
-Best regards,<br>
+Best regards, Ranconnity<br>
 {{ config('app.name') }}
 
 ---

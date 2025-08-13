@@ -24,7 +24,7 @@ If you have any questions, please contact our support team.
 
 Thank you for choosing our service!
 
-Best regards,<br>
+Best regards, Ranconnity<br>
 {{ config('app.name') }}
 
 ---
